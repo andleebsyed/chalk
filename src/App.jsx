@@ -1,9 +1,16 @@
 import React from "react";
+// import ReactDOM from "react-dom";
+
+import { Header } from "./common/components/Header";
+import { useTheme } from "./common/hooks/useTheme";
 const App = () => {
   return (
-    <div className="text-center flex items-center min-h-screen justify-center container mx-auto text-white">
-      <h1>Welcome to chalk</h1>
-    </div>
+    <main className="text-black dark:text-white">
+      <Header />
+      <div className="text-center flex flex-col items-center min-h-screen justify-center container mx-auto">
+        <h1>Welcome to cfhalk</h1>
+      </div>
+    </main>
   );
 };
 
