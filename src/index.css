@@ -9,3 +9,7 @@
 .selected {
   @apply bg-selected-navitem-light hover:bg-selected-navitem-light dark:bg-selected-navitem-dark dark:hover:bg-selected-navitem-dark;
 }
+
+.button {
+  @apply w-52 h-14 rounded font-medium;
+}
