@@ -12,7 +12,6 @@ module.exports = {
         "navitem-hover": "#e8eaed",
         "selected-navitem-light": "#feefc3",
         "selected-navitem-dark": "#41331c",
-        // "navitem-hover-light": "#f1f3f4",
       },
       animation: {
         "spin-slow": "spin 3s linear infinite",
