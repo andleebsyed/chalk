@@ -5,8 +5,22 @@ import { IoMoonOutline } from "react-icons/io5";
 import { useTheme } from "../hooks/useTheme";
 import { Navbar } from "./Navbar/Navbar";
 import { Link } from "react-router-dom";
-export function Header() {
+export function ThemeToggle() {
   const [colorTheme, setTheme] = useTheme();
+  return (
+    <button
+      onClick={() => setTheme(colorTheme)}
+      className="outline-none self-center"
+    >
+      {colorTheme === "dark" ? (
+        <IoMoonOutline size={28} />
+      ) : (
+        <HiOutlineLightBulb size={28} />
+      )}
+    </button>
+  );
+}
+export function Header() {
   return (
     <div className="p-2  border-b border-opacity-10 min-w-screen flex justify-between ">
       <div className="flex justify-between">
@@ -23,17 +37,11 @@ export function Header() {
         </button>
         <input
           type="text"
-          className=" rounded-lg h-9 text-black   outline-none sm:w-[450px] "
+          className="rounded-lg h-9 text-black   outline-none sm:w-[450px] "
           placeholder="Search Notes..."
         />
       </div>
-      <button onClick={() => setTheme(colorTheme)} className="outline-none">
-        {colorTheme === "dark" ? (
-          <IoMoonOutline size={28} />
-        ) : (
-          <HiOutlineLightBulb size={28} />
-        )}
-      </button>
+      <ThemeToggle />
     </div>
   );
 }
