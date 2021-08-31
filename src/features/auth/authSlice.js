@@ -4,6 +4,7 @@ export const authSlice = createSlice({
   name: "authSlice",
   initialState: {
     // authorized: false,
+    authSetupStatus: false,
     authorized: localStorage.getItem("token") ? true : false,
   },
   reducers: {
@@ -13,9 +14,12 @@ export const authSlice = createSlice({
     removeAuth: (state) => {
       state.authorized = false;
     },
+    setAuthSetup: (state) => {
+      state.authSetupStatus = true;
+    },
   },
   extraReducers: {},
 });
 
 export default authSlice.reducer;
-export const { setAuth, removeAuth } = authSlice.actions;
+export const { setAuth, removeAuth, setAuthSetup } = authSlice.actions;

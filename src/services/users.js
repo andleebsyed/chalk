@@ -1,4 +1,5 @@
 import axios from "axios";
+import { removeAuth } from "../features/auth/authSlice";
 import { BASE_URL } from "./api";
 
 export function setUpAuthHeaderForServiceCalls(token) {
@@ -9,14 +10,15 @@ export function setUpAuthHeaderForServiceCalls(token) {
   }
 }
 
-export function setupAuthExceptionHandler(dispatch, removeToken, navigate) {
+export function setupAuthExceptionHandler(dispatch, navigate) {
   const UNAUTHORIZED = 401;
   axios.interceptors.response.use(
     (response) => response,
     (error) => {
       if (error?.response?.status === UNAUTHORIZED) {
+        console.log("not authorixed");
         localStorage.clear();
-        dispatch(removeToken());
+        dispatch(removeAuth());
         // dispatch(refreshUserPosts());
         navigate("/login");
       }
@@ -40,11 +42,9 @@ export async function UserSignUp({ name, username, password, email }) {
 
 export async function UserSignIn(userDetails) {
   try {
-    console.log({ userDetails });
     const response = await axios.post(BASE_URL + "/users/login", {
       userDetails,
     });
-    console.log(response);
     if (response.status === 200) {
       return response.data;
     }
