@@ -76,7 +76,7 @@ export function Login() {
 
               <input
                 type="submit"
-                // value={`${buttonText}`}
+                value={`Login`}
                 className=" button selected self-center"
               />
             </form>
@@ -87,7 +87,7 @@ export function Login() {
 
               <span className="pl-1 pr-1">.</span>
               <Link to="/signup">
-                <button>Sign Up</button>
+                <button className="underline">Sign Up</button>
               </Link>
             </section>
           </main>
