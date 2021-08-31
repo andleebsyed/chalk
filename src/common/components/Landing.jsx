@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import landing from "../../assets/landing.svg";
 export function Landing() {
+  const navigate = useNavigate()
   return (
     <div className="flex flex-col min-h-screen  justify-center ">
       <div className="flex flex-col-reverse sm:flex-row">
@@ -16,10 +18,10 @@ export function Landing() {
       <div className="text-center m-2">
         <p className="text-3xl">Join Now!</p>
         <div className="flex flex-col flex-wrap  items-center">
-          <button className="button selected hover:bg-opacity-100 m-2">
+          <button onClick={() => navigate('/login')} className="button selected hover:bg-opacity-100 m-2">
             Login
           </button>
-          <button className="button selected m-2">Signup</button>
+          <button className="button selected m-2" onClick={() => navigate('/signup')}>Signup</button>
         </div>
       </div>
     </div>
