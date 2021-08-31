@@ -37,3 +37,19 @@ export async function UserSignUp({ name, username, password, email }) {
     return error.response.data;
   }
 }
+
+export async function UserSignIn(userDetails) {
+  try {
+    console.log({ userDetails });
+    const response = await axios.post(BASE_URL + "/users/login", {
+      userDetails,
+    });
+    console.log(response);
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log("errror occured while signining in ", error?.message);
+    return error.response.data;
+  }
+}
