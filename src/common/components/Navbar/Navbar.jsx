@@ -2,10 +2,19 @@ import React, { useState } from "react";
 import "../Navbar/Navbar.css";
 import { FiMenu } from "react-icons/fi";
 import { ImCancelCircle } from "react-icons/im";
-import { Link, NavLink } from "react-router-dom";
+import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { removeAuth } from "../../../features/auth/authSlice";
 export function Navbar() {
   const [navbar, setNavbar] = useState(false);
-
+  const { authorized } = useSelector(state => state.auth)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  function logoutHandler() {
+    localStorage.clear()
+    dispatch(removeAuth())
+    navigate('/', { replace: true })
+  }
   return (
     <div className="self-center mt-2">
       <button className="" onClick={() => setNavbar(!navbar)}>
@@ -40,6 +49,7 @@ export function Navbar() {
           <li className="nav-item nav-item-theme">Label 2</li>
           <li className="nav-item nav-item-theme">Label 3</li>
           <li className="nav-item nav-item-theme">Account</li>
+          {authorized && <li className="nav-item nav-item-theme" onClick={() => logoutHandler()}>Logout</li>}
         </ul>
       </nav>
     </div>

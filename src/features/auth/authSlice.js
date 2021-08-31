@@ -10,9 +10,12 @@ export const authSlice = createSlice({
     setAuth: (state) => {
       state.authorized = true;
     },
+    removeAuth: (state) => {
+      state.authorized = false;
+    },
   },
   extraReducers: {},
 });
 
 export default authSlice.reducer;
-export const { setAuth } = authSlice.actions;
+export const { setAuth, removeAuth } = authSlice.actions;
