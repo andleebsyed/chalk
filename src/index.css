@@ -5,3 +5,7 @@
 .nav-item-theme {
   @apply hover:bg-navitem-hover dark:hover:bg-opacity-5;
 }
+
+.selected {
+  @apply bg-selected-navitem-light hover:bg-selected-navitem-light dark:bg-selected-navitem-dark dark:hover:bg-selected-navitem-dark;
+}
