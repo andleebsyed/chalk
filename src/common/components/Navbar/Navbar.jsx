@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../Navbar/Navbar.css";
 import { FiMenu } from "react-icons/fi";
 import { ImCancelCircle } from "react-icons/im";
-import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeAuth } from "../../../features/auth/authSlice";
 export function Navbar() {
