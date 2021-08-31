@@ -29,7 +29,7 @@ export function Navbar() {
             </button>
           </li>
           <NavLink
-            to="/notes"
+            to="/home/notes"
             className="nav-item nav-item-theme"
             activeClassName="selected"
           >
