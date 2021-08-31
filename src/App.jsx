@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import { ThemeToggle } from "./common/components/Header";
 import { Homepage } from "./common/components/Homepage";
@@ -6,10 +7,11 @@ import { Landing } from "./common/components/Landing";
 import { Login } from "./features/auth/login/Login";
 import { Signup } from "./features/auth/signup/Signup";
 const App = () => {
-  const authorized = true;
+  const { authorized } = useSelector(state => state.auth)
+  console.log(authorized)
   return (
     <main className="text-black dark:text-white">
-      {authorized && (
+      {!authorized && (
         <div className="p-2 fixed  flex   min-w-screen right-0 h-9">
           <ThemeToggle />
         </div>
