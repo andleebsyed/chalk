@@ -1,0 +1,28 @@
+.nav-menu {
+  /* background-color: #060b26; */
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+}
+
+.nav-item {
+  cursor: pointer;
+  margin: 10px;
+  padding: 1rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  border-radius: 10rem;
+}
+/* .nav-item:hover {
+  background-color: rgb(232, 234, 237);
+} */
