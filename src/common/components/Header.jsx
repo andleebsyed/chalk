@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { FiMenu, FiSearch } from "react-icons/fi";
 import { IoMoonOutline } from "react-icons/io5";
 import { useTheme } from "../hooks/useTheme";
+import { Navbar } from "./Navbar/Navbar";
 export function Header() {
   const [colorTheme, setTheme] = useTheme();
   return (
     <div className="p-2  border-b border-opacity-10 min-w-screen flex justify-between ">
       <div className="flex justify-between">
-        <button className="mr-1 sm:m-2  ">
-          <FiMenu size={28} />
-        </button>
+        <Navbar />
         <p className="ml-1 self-center text-blue-700 font-bold text-xl">
           Chalk
         </p>
@@ -25,11 +24,11 @@ export function Header() {
           placeholder="Search Notes..."
         />
       </div>
-      <button onClick={() => setTheme(colorTheme)}>
+      <button onClick={() => setTheme(colorTheme)} className="outline-none">
         {colorTheme === "dark" ? (
-          <HiOutlineLightBulb size={28} />
-        ) : (
           <IoMoonOutline size={28} />
+        ) : (
+          <HiOutlineLightBulb size={28} />
         )}
       </button>
     </div>
