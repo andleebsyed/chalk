@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { ThemeToggle } from "./common/components/Header";
 import { Homepage } from "./common/components/Homepage";
 import { Landing } from "./common/components/Landing";
+import { Login } from "./features/auth/login/Login";
 const App = () => {
   const authorized = true;
   return (
@@ -15,6 +16,7 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/home/*" element={<Homepage />} />
       </Routes>
     </main>
