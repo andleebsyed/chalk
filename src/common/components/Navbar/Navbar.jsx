@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../Navbar/Navbar.css";
 import { FiMenu } from "react-icons/fi";
 import { ImCancelCircle } from "react-icons/im";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 export function Navbar() {
   const [navbar, setNavbar] = useState(false);
 
@@ -28,9 +28,13 @@ export function Navbar() {
               <ImCancelCircle size={18} />
             </button>
           </li>
-          <Link to="/notes">
-            <li className="nav-item nav-item-theme">All Notes</li>
-          </Link>
+          <NavLink
+            to="/notes"
+            className="nav-item nav-item-theme"
+            activeClassName="selected"
+          >
+            <li>All Notes</li>
+          </NavLink>
 
           <li className="nav-item nav-item-theme ">Label 1</li>
           <li className="nav-item nav-item-theme">Label 2</li>
