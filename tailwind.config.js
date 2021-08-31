@@ -10,8 +10,9 @@ module.exports = {
         },
         "dark-1": "#202124",
         "navitem-hover": "#e8eaed",
-        "selected-navitem-light": "#feefc3",
+        "selected-navitem-light": "#FECACA",
         "selected-navitem-dark": "#41331c",
+        "yellow-main": "#fbbd06",
       },
       animation: {
         "spin-slow": "spin 3s linear infinite",
