@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { HiOutlineLightBulb } from "react-icons/hi";
-import { FiMenu, FiSearch } from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
 import { IoMoonOutline } from "react-icons/io5";
 import { useTheme } from "../hooks/useTheme";
 import { Navbar } from "./Navbar/Navbar";
