@@ -2,7 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 // import { FETCH_ACCOUNT } from "../../services/api";
 
-import { FETCH_ACCOUNT, UPDATE_ACCOUNT } from "../../services/api";
+import {
+  FETCH_ACCOUNT,
+  UPDATE_ACCOUNT,
+  UPDATE_PASSWORD,
+} from "../../services/api";
 
 export const fetchAccount = createAsyncThunk(
   "/user/account",
@@ -28,6 +32,18 @@ export const updateAccount = createAsyncThunk(
     }
   }
 );
+export const updatePassword = createAsyncThunk(
+  "user/updatepassword",
+  async (passwords, thunkAPI) => {
+    try {
+      const response = await axios.post(UPDATE_PASSWORD, passwords);
+      console.log({ response });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 export const userSlice = createSlice({
   name: "userSlice",
   initialState: {
@@ -36,6 +52,7 @@ export const userSlice = createSlice({
     updateAccountStatus: "idle",
     error: null,
     updateAccountError: null,
+    updatePasswordStatus: null,
   },
   reducers: {},
   extraReducers: {
@@ -61,6 +78,20 @@ export const userSlice = createSlice({
     [updateAccount.rejected]: (state, action) => {
       state.updateAccountStatus = "";
       state.updateAccountError = action.payload.message;
+    },
+    [updatePassword.pending]: (state) => {
+      state.error = null;
+      state.updatePasswordStatus = "Updating";
+    },
+    [updatePassword.fulfilled]: (state, action) => {
+      state.updatePasswordStatus = action.payload.message;
+      state.error = null;
+      // state.Password = action.payload.Password;
+      // state.updatePasswordError = null;
+    },
+    [updatePassword.rejected]: (state, action) => {
+      // state.updatePasswordStatus = action.payload.message;
+      state.error = action.payload.message;
     },
   },
 });

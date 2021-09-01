@@ -1,26 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { updatePassword } from '../userSlice'
 
 export function PasswordHandler() {
+    const { updatePasswordStatus, error } = useSelector(state => state.user)
+    const [passwords, setPasswords] = useState({})
+    console.log({ error })
+    const dispatch = useDispatch()
+    function PasswordResetHandler(event) {
+        event.preventDefault()
+        console.log({ passwords })
+        dispatch(updatePassword({ oldPassword: passwords.currentPassword, newPassword: passwords.newPassword }))
+
+    }
     return (
         <form className=""
-        // onSubmit={PasswordResetHandler}
+            onSubmit={(event) => PasswordResetHandler(event)}
         >
             <div className="border-4 p-2 theme-color-border flex flex-col justify-between m-4 sm:m-8 breakpoint-acc:m-4  breakpoint-acc:w-[40vw] rounded  breakpoint-acc:my-8">
                 <p className="font-bold text-lg">Reset Password</p>
-                {/* {action.isLoading && (
-                    <>
-                        <div className="account-interaction-loader">
-                            <SetLoader />
-                        </div>
-                        <div className="top-loading-bar">
-                            <TopLoadingBar />
-                        </div>
-                    </>
-                )} */}
 
-                {/* <p className={passwordUpdateMessage.styleClass}>
-                    {passwordUpdateMessage.message}
+                {/* <p className={error ? "text-red-600 font-bold" : "text-blue font-bold"} >
+                    {updatePasswordStatus}
                 </p> */}
+                {error ?
+                    <p className="text-red-600 font-bold">{error}</p> :
+                    <p className="text-blue font-bold">{updatePasswordStatus}</p>
+                }
 
                 <div className=" ">
                     <div className="flex flex-col">
@@ -32,7 +38,7 @@ export function PasswordHandler() {
                             type="password"
                             className="input-box"
                             required
-                        // onChange={(e) => setCurrentPassword(e.target.value)}
+                            onChange={(e) => setPasswords({ ...passwords, currentPassword: e.target.value })}
                         />
                     </div>
                     <div className="flex flex-col">
@@ -44,12 +50,9 @@ export function PasswordHandler() {
                             type="password"
                             className="input-box "
                             required
-                        // onChange={(e) =>
-                        //     setNewPasswords({
-                        //         ...newPasswords,
-                        //         newPassword: e.target.value,
-                        //     })
-                        // }
+                            onChange={(e) =>
+                                setPasswords({ ...passwords, newPassword: e.target.value })
+                            }
                         />
                     </div>
                 </div>
@@ -63,12 +66,9 @@ export function PasswordHandler() {
                         type="password"
                         className="input-box"
                         required
-                    // onChange={(e) =>
-                    //     setNewPasswords({
-                    //         ...newPasswords,
-                    //         confirmNewPassword: e.target.value,
-                    //     })
-                    // }
+                        onChange={(e) =>
+                            setPasswords({ ...passwords, confirmNewPassword: e.target.value })
+                        }
                     />
                 </div>
                 <button type="submit" className="my-2 p-4 selected self-start rounded ">
