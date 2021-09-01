@@ -30,7 +30,7 @@ export function setupAuthExceptionHandler(dispatch, navigate) {
 export async function UserSignUp({ name, username, password, email }) {
   try {
     const userDetails = { userDetails: { name, username, password, email } };
-    const response = await axios.post(BASE_URL + "/users/signup", userDetails);
+    const response = await axios.post(BASE_URL + "/user/signup", userDetails);
     if (response.status === 200) {
       return response.data;
     }
@@ -42,7 +42,7 @@ export async function UserSignUp({ name, username, password, email }) {
 
 export async function UserSignIn(userDetails) {
   try {
-    const response = await axios.post(BASE_URL + "/users/login", {
+    const response = await axios.post(BASE_URL + "/user/login", {
       userDetails,
     });
     if (response.status === 200) {
