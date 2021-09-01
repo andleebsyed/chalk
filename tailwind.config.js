@@ -13,6 +13,7 @@ module.exports = {
         "selected-navitem-light": "#FECACA",
         "selected-navitem-dark": "#41331c",
         "yellow-main": "#fbbd06",
+        blue: "#1d4ed8",
       },
       animation: {
         "spin-slow": "spin 3s linear infinite",
