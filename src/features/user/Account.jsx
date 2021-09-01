@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { PasswordHandler } from "./components/PasswordHandler";
 import { ProfileData } from "./components/ProfileDetails";
 import { fetchAccount } from "./userSlice";
 export function Account() {
@@ -16,9 +17,9 @@ export function Account() {
     return (
         account === null ?
             <div>loading</div> :
-            <div className="flex justify-around items-center">
+            <div className="flex flex-col breakpoint-acc:flex-row justify-around  mt-12">
                 <ProfileData account={account} />
-                {/* < */}
+                <PasswordHandler />
             </div>
     )
 }
