@@ -23,7 +23,7 @@ export function PasswordHandler() {
                 </p> */}
 
                 <div className=" ">
-                    <div className="flex flex-col internal-inline-div">
+                    <div className="flex flex-col">
                         <label className="font-bold" htmlFor="currentPassword">
                             Current Password
                         </label>
@@ -35,8 +35,8 @@ export function PasswordHandler() {
                         // onChange={(e) => setCurrentPassword(e.target.value)}
                         />
                     </div>
-                    <div className="flex flex-col internal-inline-div">
-                        <label className="labels-acc new-passsword" htmlFor="newPassword">
+                    <div className="flex flex-col">
+                        <label className="font-bold" htmlFor="newPassword">
                             New Password
                         </label>
                         <input
@@ -55,7 +55,7 @@ export function PasswordHandler() {
                 </div>
 
                 <div className="flex flex-col">
-                    <label className="labels-acc" htmlFor="confirmPassword">
+                    <label className="font-bold" htmlFor="confirmPassword">
                         Confirm New Password
                     </label>
                     <input
