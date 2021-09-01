@@ -17,7 +17,7 @@ const App = () => {
   useEffect(() => {
     console.log("auth setter up and running")
     setupAuthExceptionHandler(dispatch, navigate);
-    setUpAuthHeaderForServiceCalls(authorized);
+    setUpAuthHeaderForServiceCalls(localStorage.getItem("token"));
     dispatch(setAuthSetup());
   }, [dispatch, navigate]);
   return (
