@@ -4,10 +4,14 @@ module.exports = {
   darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {
+      screens: {
+        "breakpoint-acc": "900px",
+      },
       colors: {
         react: {
           DEFAULT: "#61dafb",
         },
+        black: "#1F2937",
         "dark-1": "#202124",
         "navitem-hover": "#e8eaed",
         "selected-navitem-light": "#FECACA",
@@ -18,9 +22,6 @@ module.exports = {
       animation: {
         "spin-slow": "spin 3s linear infinite",
       },
-    },
-    screens: {
-      "breakpoint-acc": "900px",
     },
   },
   variants: {
