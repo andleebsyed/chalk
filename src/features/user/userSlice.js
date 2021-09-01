@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { FETCH_ACCOUNT } from "../../services/api";
+// import { FETCH_ACCOUNT } from "../../services/api";
+
+import { FETCH_ACCOUNT, UPDATE_ACCOUNT } from "../../services/api";
 
 export const fetchAccount = createAsyncThunk(
   "/user/account",
@@ -13,12 +15,27 @@ export const fetchAccount = createAsyncThunk(
     }
   }
 );
-
+export const updateAccount = createAsyncThunk(
+  "/user/update",
+  async (newAccountDetails, thunkAPI) => {
+    try {
+      console.log(newAccountDetails);
+      const response = await axios.post(UPDATE_ACCOUNT, newAccountDetails);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 export const userSlice = createSlice({
   name: "userSlice",
   initialState: {
     accountStatus: "idle",
     account: null,
+    updateAccountStatus: "idle",
+    error: null,
+    updateAccountError: null,
   },
   reducers: {},
   extraReducers: {
@@ -32,6 +49,18 @@ export const userSlice = createSlice({
     [fetchAccount.rejected]: (state, action) => {
       state.accountStatus = "error";
       state.error = action.payload;
+    },
+    [updateAccount.pending]: (state) => {
+      state.updateAccountStatus = "Updating";
+    },
+    [updateAccount.fulfilled]: (state, action) => {
+      state.updateAccountStatus = "Account updated Successfully";
+      state.account = action.payload.account;
+      state.updateAccountError = null;
+    },
+    [updateAccount.rejected]: (state, action) => {
+      state.updateAccountStatus = "";
+      state.updateAccountError = action.payload.message;
     },
   },
 });
