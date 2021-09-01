@@ -18,6 +18,12 @@ module.exports = {
         "selected-navitem-dark": "#41331c",
         "yellow-main": "#fbbd06",
         blue: "#1d4ed8",
+        "shadow-color": "#6b7280",
+        white: "#f6f6f6",
+        "palette-red": "#f28b82",
+        "palette-purple": "#d7aefb",
+        "palette-yellow": "#fbbc04",
+        "palette-blue": "#aecbfa",
       },
       animation: {
         "spin-slow": "spin 3s linear infinite",
