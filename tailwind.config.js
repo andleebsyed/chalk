@@ -18,6 +18,9 @@ module.exports = {
         "spin-slow": "spin 3s linear infinite",
       },
     },
+    screens: {
+      "breakpoint-acc": "900px",
+    },
   },
   variants: {
     extend: {
