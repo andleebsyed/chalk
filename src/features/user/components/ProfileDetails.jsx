@@ -22,6 +22,7 @@ export function ProfileData({ account }) {
             <form
                 onSubmit={(event) => AccountUpdateHandler(event)}
             >
+                <h1>{account.name}</h1>
                 <div className="border-4 p-2 theme-color-border flex flex-col justify-between m-4 sm:m-8 breakpoint-acc:m-4  breakpoint-acc:w-[40vw] rounded  breakpoint-acc:my-8">
                     <p className="font-bold text-left text-lg">Account</p>
                     {updateAccountStatus !== "idle" && <p className="font-bold text-blue ">{updateAccountStatus}</p>}
@@ -38,6 +39,7 @@ export function ProfileData({ account }) {
                             placeholder="name"
                             value={newAccountDetails.newName}
                             required
+                            autoComplete="off"
                         />
                     </section>
                     <section className="flex flex-col ">
@@ -52,6 +54,7 @@ export function ProfileData({ account }) {
                             placeholder="username"
                             required
                             value={newAccountDetails.newUsername}
+                            autoComplete="off"
                         />
                     </section>
                     <section className="flex flex-col ">
@@ -66,10 +69,11 @@ export function ProfileData({ account }) {
                             placeholder="email"
                             required
                             value={newAccountDetails.newEmail}
+                            autoComplete="off"
 
                         />
                     </section>
-                    <button type="submit" className=" my-2 p-4 selected self-start rounded">
+                    <button type="submit" className=" my-2 p-4 w-44 selected self-start rounded">
                         UPDATE
                     </button>
                 </div>
