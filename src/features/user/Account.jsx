@@ -17,9 +17,13 @@ export function Account() {
     return (
         account === null ?
             <div>loading</div> :
-            <div className="flex flex-col breakpoint-acc:flex-row justify-around  mt-12">
-                <ProfileData account={account} />
-                <PasswordHandler />
+            <div>
+                <h1 className="text-blue text-2xl font-bold m-2">{account.name}</h1>
+                <div className="flex flex-col breakpoint-acc:flex-row justify-around  ">
+                    <ProfileData account={account} />
+                    <PasswordHandler />
+                </div>
             </div>
+
     )
 }
