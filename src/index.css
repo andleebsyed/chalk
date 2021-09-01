@@ -15,10 +15,13 @@
     @apply w-52 h-14 rounded font-medium;
   }
 
+  /* .input-box {
+    @apply h-12 rounded bg-white  text-black border outline-none focus:ring-2 focus:ring-offset-selected-navitem-light focus:ring-opacity-100 focus:border-selected-navitem-light dark:focus:ring-selected-navitem-dark dark:focus:ring-opacity-100 dark:focus:border-selected-navitem-dark;
+  } */
   .input-box {
-    @apply h-12 rounded  text-black border outline-none focus:ring-2 focus:ring-offset-selected-navitem-light focus:ring-opacity-100 focus:border-selected-navitem-light dark:focus:ring-selected-navitem-dark dark:focus:ring-opacity-100 dark:focus:border-selected-navitem-dark;
+    @apply h-12  border outline-none  text-black  rounded focus:ring-offset-selected-navitem-light dark:focus:ring-offset-selected-navitem-dark
+      focus:ring-opacity-100 focus:border-selected-navitem-light dark:focus:ring-selected-navitem-dark dark:focus:ring-opacity-100 dark:focus:border-selected-navitem-dark;
   }
-
   .theme-color-border {
     @apply border-selected-navitem-light dark:border-selected-navitem-dark;
   }
