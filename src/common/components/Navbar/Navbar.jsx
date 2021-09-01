@@ -48,7 +48,11 @@ export function Navbar() {
           <li className="nav-item nav-item-theme ">Label 1</li>
           <li className="nav-item nav-item-theme">Label 2</li>
           <li className="nav-item nav-item-theme">Label 3</li>
-          <li className="nav-item nav-item-theme">Account</li>
+          <NavLink to="/account" className="nav-item nav-item-theme"
+            activeClassName="selected">
+            <li>Account</li>
+          </NavLink>
+
           {authorized && <li className="nav-item nav-item-theme" onClick={() => logoutHandler()}>Logout</li>}
         </ul>
       </nav>
