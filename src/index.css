@@ -26,3 +26,11 @@
     @apply bg-selected-navitem-light dark:bg-selected-navitem-dark;
   }
 }
+
+.box-shadow-light {
+  box-shadow: 0 0 5px rgb(0 0 0 / 30%);
+}
+
+.box-shadow-dark {
+  box-shadow: 0 0 5px rgb(22 22 24 / 30%);
+}
