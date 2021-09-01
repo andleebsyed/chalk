@@ -13,7 +13,6 @@ export function ProfileData({ account }) {
 
     function AccountUpdateHandler(event) {
         event.preventDefault()
-        console.log({ newAccountDetails })
         dispatch(updateAccount(newAccountDetails))
 
     }

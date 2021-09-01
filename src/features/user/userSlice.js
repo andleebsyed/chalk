@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-// import { FETCH_ACCOUNT } from "../../services/api";
-
 import {
   FETCH_ACCOUNT,
   UPDATE_ACCOUNT,
@@ -25,7 +23,6 @@ export const updateAccount = createAsyncThunk(
     try {
       console.log(newAccountDetails);
       const response = await axios.post(UPDATE_ACCOUNT, newAccountDetails);
-      console.log(response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -86,11 +83,8 @@ export const userSlice = createSlice({
     [updatePassword.fulfilled]: (state, action) => {
       state.updatePasswordStatus = action.payload.message;
       state.error = null;
-      // state.Password = action.payload.Password;
-      // state.updatePasswordError = null;
     },
     [updatePassword.rejected]: (state, action) => {
-      // state.updatePasswordStatus = action.payload.message;
       state.error = action.payload.message;
     },
   },
