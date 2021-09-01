@@ -71,7 +71,7 @@ export function Signup() {
     <div className=" flex justify-center ">
       <main className="flex flex-col p-4 justify-between  mt-4 flex-1 max-w-sm ">
         <h1 className="font-extrabold text-2xl ">Create your account</h1>
-        <p className={`${error.status} text-red`}>{error.message}</p>
+        <p className={`${error.status} text-red-600 text-l font-bold`}>{error.message}</p>
         <form
           className="flex flex-col justify-between "
           onSubmit={SignupHandler}

@@ -41,7 +41,7 @@ export function Login() {
               onSubmit={LoginHandler}
             >
               <div className="flex flex-col mt-4">
-                <p className={`${error.status}`}>{error.message}</p>
+                <p className={`${error.status} text-red-600 text-lg font-bold`}>{error.message}</p>
                 <label>Username</label>
                 <input
                   type="text"
