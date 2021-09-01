@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ProfileData } from "./components/ProfileDetails";
 import { fetchAccount } from "./userSlice";
 export function Account() {
     const { account, accountStatus } = useSelector(state => state.user)
@@ -16,7 +17,8 @@ export function Account() {
         account === null ?
             <div>loading</div> :
             <div className="flex justify-around items-center">
-                <h1>{account.name}</h1>
+                <ProfileData account={account} />
+                {/* < */}
             </div>
     )
 }
