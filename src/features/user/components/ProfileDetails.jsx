@@ -1,84 +1,78 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useRef } from "react"
-// import { Account } from "../Account"
+import React, { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { updateAccount } from "../userSlice"
 export function ProfileData({ account }) {
-    const nameEl = useRef(null)
+    const dispatch = useDispatch()
+    const { updateAccountStatus, updateAccountError } = useSelector(state => state.user)
+    const [newAccountDetails, setNewAccountDetails] = useState({
+        newName: account?.name,
+        newUsername: account?.username,
+        newEmail: account?.email
+    })
 
-    useEffect(() => {
-        console.log("useeffect running")
-        if (nameEl.current !== null || undefined) {
-            nameEl.current.value = account.name
-        }
-    }, [nameEl.current])
-    console.log({ account })
-    // nameEl.current.value = 
+    function AccountUpdateHandler(event) {
+        event.preventDefault()
+        console.log({ newAccountDetails })
+        dispatch(updateAccount(newAccountDetails))
+
+    }
     return (
-        // <div className="" >
-        <form
-        // onSubmit={AccountUpdateHandler}
-        >
-            <div className="border-4 p-2 theme-color-border flex flex-col justify-between m-4 sm:m-8 breakpoint-acc:m-4  breakpoint-acc:w-[40vw] rounded  breakpoint-acc:my-8">
-                <p className="font-bold text-left text-lg">Account</p>
+        !account ? <h1>loading</h1> :
+            <form
+                onSubmit={(event) => AccountUpdateHandler(event)}
+            >
+                <div className="border-4 p-2 theme-color-border flex flex-col justify-between m-4 sm:m-8 breakpoint-acc:m-4  breakpoint-acc:w-[40vw] rounded  breakpoint-acc:my-8">
+                    <p className="font-bold text-left text-lg">Account</p>
+                    {updateAccountStatus !== "idle" && <p className="font-bold text-blue ">{updateAccountStatus}</p>}
+                    {<p className="font-bold text-red-600">{updateAccountError}</p>}
+                    <section className="flex flex-col ">
+                        <label className="text-left font-bold" htmlFor="name">
+                            Name
+                        </label>
+                        <input
+                            onChange={(e) => setNewAccountDetails({ ...newAccountDetails, newName: e.target.value })}
+                            name="name"
+                            type="name"
+                            className="input-box"
+                            placeholder="name"
+                            value={newAccountDetails.newName}
+                            required
+                        />
+                    </section>
+                    <section className="flex flex-col ">
+                        <label className="text-left font-bold" htmlFor="username">
+                            Username
+                        </label>
+                        <input
+                            onChange={(e) => setNewAccountDetails({ ...newAccountDetails, newUsername: e.target.value })}
+                            name="username"
+                            type="username"
+                            className="input-box"
+                            placeholder="username"
+                            required
+                            value={newAccountDetails.newUsername}
+                        />
+                    </section>
+                    <section className="flex flex-col ">
+                        <label className="text-left font-bold" htmlFor="email">
+                            Email
+                        </label>
+                        <input
+                            onChange={(e) => setNewAccountDetails({ ...newAccountDetails, newEmail: e.target.value })}
+                            name="email"
+                            type="email"
+                            className="input-box"
+                            placeholder="email"
+                            required
+                            value={newAccountDetails.newEmail}
 
-                {/* {action.isLoading && (
-                        <>
-                            <div className="account-interaction-loader">
-                                <SetLoader />
-                            </div>
-                            <div className="top-loading-bar">
-                                <TopLoadingBar />
-                            </div>
-                        </>
-                    )} */}
-                {/* <p className={updateMessage.styleClass}>{updateMessage.message}</p> */}
-                <section className="flex flex-col ">
-                    <label className="text-left font-bold" htmlFor="name">
-                        Name
-                    </label>
-                    <input
-                        ref={nameEl}
-                        // onChange={(e) => setNewUsername(e.target.value)}
-                        name="name"
-                        type="name"
-                        className="input-box"
-                        placeholder="name"
-                        required
-                    />
-                </section>
-                <section className="flex flex-col ">
-                    <label className="text-left font-bold" htmlFor="username">
-                        Username
-                    </label>
-                    <input
-                        // ref={usernameEl}
-                        // onChange={(e) => setNewUsername(e.target.value)}
-                        name="username"
-                        type="username"
-                        className="input-box"
-                        placeholder="username"
-                        required
-                    />
-                </section>
-                <section className="flex flex-col ">
-                    <label className="text-left font-bold" htmlFor="email">
-                        Email
-                    </label>
-                    <input
-                        // ref={emailEl}
-                        // onChange={(e) => setNewEmail(e.target.value)}
-                        name="email"
-                        type="email"
-                        className="input-box"
-                        placeholder="email"
-                        required
-
-                    />
-                </section>
-                <button type="submit" className=" my-2 p-4 selected self-start rounded">
-                    UPDATE
-                </button>
-            </div>
-        </form>
-        // </div>
+                        />
+                    </section>
+                    <button type="submit" className=" my-2 p-4 selected self-start rounded">
+                        UPDATE
+                    </button>
+                </div>
+            </form >
     )
 }
