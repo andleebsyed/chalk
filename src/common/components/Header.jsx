@@ -26,13 +26,13 @@ export function Header() {
       <div className="flex justify-between">
         <Navbar />
         <Link to="/" className="self-center">
-          <p className="ml-1 self-center text-blue-700 font-bold text-xl">
+          <p className="ml-1 self-center text-blue font-bold text-xl">
             Chalk
           </p>
         </Link>
       </div>
       <div className="self-center  rounded-lg flex p-1  bg-white border dark:border-opacity-0 border-black">
-        <button className=" hidden sm:inline mr-2 dark:text-black ">
+        <button className=" hidden sm:inline mr-2 dark:text-black  ">
           <FiSearch size={28} className="" />
         </button>
         <input
