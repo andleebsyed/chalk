@@ -17,7 +17,7 @@ export function ProfileData({ account }) {
         <form
         // onSubmit={AccountUpdateHandler}
         >
-            <div className="border-4 p-2 theme-color flex flex-col justify-between m-4 sm:m-8 breakpoint-acc:m-4  breakpoint-acc:w-[40vw] rounded  breakpoint-acc:my-8">
+            <div className="border-4 p-2 theme-color-border flex flex-col justify-between m-4 sm:m-8 breakpoint-acc:m-4  breakpoint-acc:w-[40vw] rounded  breakpoint-acc:my-8">
                 <p className="font-bold text-left text-lg">Account</p>
 
                 {/* {action.isLoading && (
