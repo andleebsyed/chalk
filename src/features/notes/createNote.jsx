@@ -7,7 +7,7 @@ import { RiPushpin2Fill } from 'react-icons/ri'
 export function ColorPallate() {
     const noteColors = ["palette-yellow", "palette-blue", "palette-red", "palette-purple"]
     return (
-        <div className="flex absolute">
+        <div className="flex absolute border-2 rounded border-selected-navitem-light dark:border-selected-navitem-dark">
             {noteColors.map(noteColor =>
                 <div key={noteColor} className={`bg-${noteColor} rounded-full w-8 h-8 m-1`}>
                 </div>
