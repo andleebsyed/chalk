@@ -8,10 +8,11 @@ module.exports = {
         "breakpoint-acc": "900px",
       },
       colors: {
-        react: {
-          DEFAULT: "#61dafb",
-        },
-        black: "#1F2937",
+        "palette-red": "#f28b82",
+        "palette-purple": "#d7aefb",
+        "palette-yellow": "#fbbc04",
+        "palette-blue": "#aecbfa",
+        "black-main": "#1F2937",
         "dark-1": "#202124",
         "navitem-hover": "#e8eaed",
         "selected-navitem-light": "#FECACA",
@@ -19,11 +20,7 @@ module.exports = {
         "yellow-main": "#fbbd06",
         blue: "#1d4ed8",
         "shadow-color": "#6b7280",
-        white: "#f6f6f6",
-        "palette-red": "#f28b82",
-        "palette-purple": "#d7aefb",
-        "palette-yellow": "#fbbc04",
-        "palette-blue": "#aecbfa",
+        "off-white": "#f6f6f6",
       },
       animation: {
         "spin-slow": "spin 3s linear infinite",
