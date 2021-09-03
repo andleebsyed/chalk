@@ -23,8 +23,8 @@ export function Navbar() {
       <nav
         className={
           navbar
-            ? "nav-menu active bg-white dark:bg-dark-1 border"
-            : "nav-menu bg-white dark:bg-dark-1 border"
+            ? "nav-menu active bg-white dark:bg-dark-1 border fixed"
+            : "nav-menu bg-white dark:bg-dark-1 border fixed"
         }
       >
         <ul
