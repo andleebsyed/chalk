@@ -42,21 +42,19 @@ export const notesSlice = createSlice({
   },
 
   extraReducers: {
-    // [addLabel.pending]: (state) => {
-    //   state.addLabelStatus = "Adding Label";
-    // },
-    // [addLabel.fulfilled]: (state, action) => {
-    //   state.addLabelStatus = "Label added";
-    //   state.labels.push(action.payload);
-    // },
-    // [addLabel.rejected]: (state, action) => {
-    //   state.addLabelStatus = "";
-    //   state.error = action.payload.message;
-    // },
+    [addLabel.pending]: (state) => {
+      state.addLabelStatus = "Adding Label";
+    },
+    [addLabel.fulfilled]: (state, action) => {
+      state.addLabelStatus = "Label added";
+      state.labels.push(action.payload.newLabel);
+    },
+    [addLabel.rejected]: (state, action) => {
+      state.addLabelStatus = "";
+      state.error = action.payload.message;
+    },
     [fetchNotesData.pending]: (state) => {
       state.notesFetchstatus = "pending";
-
-      // state.notes = action.payload.noteData.notes
     },
     [fetchNotesData.fulfilled]: (state, action) => {
       state.notesFetchstatus = "success";

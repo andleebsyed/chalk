@@ -8,10 +8,7 @@ import { removeAuth } from "../../../features/auth/authSlice";
 export function Navbar() {
   const [navbar, setNavbar] = useState(false);
   const { authorized } = useSelector(state => state.auth)
-  // const { account } = useSelector(state => state.user)
   const { labels } = useSelector(state => state.notes)
-  // console.log(account?.labels)
-  console.log({ labels })
   const navigate = useNavigate()
   const dispatch = useDispatch()
   function logoutHandler() {
@@ -27,8 +24,8 @@ export function Navbar() {
       <nav
         className={
           navbar
-            ? "nav-menu active bg-white dark:bg-dark-1 border fixed"
-            : "nav-menu bg-white dark:bg-dark-1 border fixed"
+            ? " overflow-y-auto nav-menu active bg-white dark:bg-dark-1 border fixed"
+            : " overflow-y-auto nav-menu bg-white dark:bg-dark-1 border fixed"
         }
       >
         <ul
