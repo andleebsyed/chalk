@@ -1,24 +1,23 @@
-import React from "react";
-// import { Route, Routes } from "react-router";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Notes } from "../../features/notes/AllNotes";
 import { CreateNote } from "../../features/notes/createNote";
+import { fetchNotesData } from "../../features/notes/notesSlice";
 export function Homepage() {
-  // function HomeContent() {
-  //   return (
-  //     <div className="text-center flex flex-col items-center min-h-screen justify-center container mx-auto">
-  //       <h1>Welcome to chalk</h1>
-  //     </div>
-  //   );
-  // }
+  const dispatch = useDispatch()
+  const { notesFetchstatus } = useSelector(state => state.notes)
+  const { authSetupStatus } = useSelector(state => state.auth)
+  useEffect(() => {
+    if (notesFetchstatus === "idle" && authSetupStatus) {
+      dispatch(fetchNotesData())
+    }
+
+  }, [notesFetchstatus, authSetupStatus])
+
   return (
     <div className="flex flex-col items-center">
       <CreateNote />
       <Notes />
-      {/* <Routes> */}
-      {/* <Route path="/" element={<HomeContent />} /> */}
-
-      {/* <Route path="/notes" element={<Notes />} /> */}
-      {/* </Routes> */}
 
     </div>
   );
