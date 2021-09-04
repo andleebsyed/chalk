@@ -8,6 +8,10 @@ import { removeAuth } from "../../../features/auth/authSlice";
 export function Navbar() {
   const [navbar, setNavbar] = useState(false);
   const { authorized } = useSelector(state => state.auth)
+  // const { account } = useSelector(state => state.user)
+  const { labels } = useSelector(state => state.notes)
+  // console.log(account?.labels)
+  console.log({ labels })
   const navigate = useNavigate()
   const dispatch = useDispatch()
   function logoutHandler() {
@@ -45,9 +49,9 @@ export function Navbar() {
             <li>All Notes</li>
           </NavLink>
 
-          <li className="nav-item nav-item-theme ">Label 1</li>
-          <li className="nav-item nav-item-theme">Label 2</li>
-          <li className="nav-item nav-item-theme">Label 3</li>
+          {labels?.map(label =>
+            <div key={label._id} className="nav-item nav-item-theme ">{label.labelName}</div>
+          )}
           <NavLink to="/account" className="nav-item nav-item-theme"
             activeClassName="selected">
             <li>Account</li>
