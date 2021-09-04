@@ -31,6 +31,7 @@ export const notesSlice = createSlice({
   initialState: {
     notesFetchstatus: "idle",
     labels: null,
+    chosenLabels: [],
     // notes: null,
     error: null,
   },
@@ -38,6 +39,16 @@ export const notesSlice = createSlice({
     setupNotes: (state, action) => {
       state.labels = action.payload.labels;
       // state.notes = action.payload.notes
+    },
+    addToChosenLabels: (state, action) => {
+      state.chosenLabels.push(action.payload.newChosenLabel);
+    },
+    removeFromChosenLabels: (state, action) => {
+      console.log("is it coming here");
+      state.chosenLabels = state.chosenLabels.filter(
+        (label) => label._id !== action.payload.removedLabel._id
+      );
+      // state.choosenLabels.push(action.payload.newChosenLabel);
     },
   },
 
@@ -66,5 +77,6 @@ export const notesSlice = createSlice({
     },
   },
 });
-export const { setupNotes } = notesSlice.actions;
+export const { setupNotes, addToChosenLabels, removeFromChosenLabels } =
+  notesSlice.actions;
 export default notesSlice.reducer;
