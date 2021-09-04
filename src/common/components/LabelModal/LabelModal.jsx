@@ -1,25 +1,47 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { MdLabel } from 'react-icons/md'
 import { GiCancel } from 'react-icons/gi'
 import { useDispatch, useSelector } from 'react-redux'
-import { addLabel } from '../../../features/notes/notesSlice'
+import { addLabel, addToChosenLabels, removeFromChosenLabels } from '../../../features/notes/notesSlice'
 export function LabelModal() {
     const [modalStatus, setModalStatus] = useState(false)
     const [labelName, setLabelName] = useState(null)
-    // const { account } = useSelector(state => state.user)
-    const { labels, addLabelStatus } = useSelector(state => state.notes
+    const inputEl = useRef(null)
+    const { labels, chosenLabels, } = useSelector(state => state.notes
     )
     const dispatch = useDispatch()
-    function keyPressHandler(e) {
-        if (e.key === "Enter") {
-            console.log({ labelName })
-            dispatch(addLabel({ labelName }))
+    async function keyPressHandler(e) {
+        if (labelName.length > 0 && labelName.trim()) {
+            if (e.key === "Enter") {
+                await dispatch(addLabel({ labelName }))
+                inputEl.current.value = ""
+            }
+        }
+
+
+    }
+    async function onClickHandler() {
+        if (labelName.length > 0 && labelName.trim()) {
+            await dispatch(addLabel({ labelName }))
+            inputEl.current.value = ""
         }
 
     }
-    function onClickHandler(e) {
 
-        console.log({ labelName }, e)
+    function checkboxHandler({ checked, clickedLabel }) {
+
+        if (checked) {
+            dispatch(addToChosenLabels({ newChosenLabel: clickedLabel }))
+        }
+        else {
+            dispatch(removeFromChosenLabels({ removedLabel: clickedLabel }))
+        }
+    }
+
+    function checkIfLabelChecked(label) {
+        const ifPresent = chosenLabels?.filter((item) => item._id === label._id);
+        return ifPresent?.length > 0 ? true : false;
+
     }
     return (
         <div>
@@ -27,10 +49,12 @@ export function LabelModal() {
                 <MdLabel size={22} />
             </button>
             <section className={`absolute bg-white dark:bg-dark-1 min-h-[13rem] p-2 box-shadow-light dark:box-shadow-dark ${modalStatus ? "block" : "hidden"} `}>
-                <div className="relative flex min-w-[14rem] p-2 overflow-y-auto">
-                    <p>Add a Label</p>
-                    <p>{addLabelStatus}</p>
-                    <button className="ml-auto hover:bg-red-600 rounded-full h-6 w-6 " onClick={() => setModalStatus(false)}>
+                <div className="relative flex min-w-[14rem] mb-1 overflow-y-auto">
+                    <div className="flex flex-col">
+                        <p className="mt-2">Add a Label</p>
+                    </div>
+
+                    <button className="ml-auto p-1  rounded-full text-gray-500 dark:text-white hover:bg-gray-500 hover:bg-opacity-40" onClick={() => setModalStatus(false)}>
                         <GiCancel size={26} />
                     </button>
                 </div>
@@ -39,26 +63,27 @@ export function LabelModal() {
                         <div className="relative" key={label._id}>
                             <input
                                 type="checkbox"
-                            // checked={checkForIdInPlaylist(playlist.videos, video.id)}
-                            // onChange={() => checkboxHandler()}
+                                checked={checkIfLabelChecked(label)}
+                                onChange={(e) => checkboxHandler({ checked: e.target.checked, clickedLabel: label })}
+
                             />
                             <label>{label.labelName}</label>
                         </div>
                     ))}
                 </div>
-                <div className=" w-full  flex justify-around ">
+                <div className=" w-full p-0 flex justify-around ">
 
                     <input
                         type="text"
                         id="input"
-                        // ref={inputEl}
+                        ref={inputEl}
                         placeholder="Add new..."
                         className="bg-white dark:bg-dark-1 border dark:border-selected-navitem-dark border-selected-navitem-light outline-none"
                         onChange={(e) => setLabelName(e.target.value)}
                         onKeyPress={(e) => keyPressHandler(e)}
                     />
                     <button
-                        className="bg-selected-navitem-light dark:bg-selected-navitem-dark p-2"
+                        className="bg-selected-navitem-light dark:bg-selected-navitem-dark p-2 outline-none"
                         onClick={(e) => onClickHandler(e)}
                     >
                         Add
