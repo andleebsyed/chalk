@@ -7,7 +7,7 @@ export function LabelModal() {
     const [modalStatus, setModalStatus] = useState(false)
     const [labelName, setLabelName] = useState(null)
     // const { account } = useSelector(state => state.user)
-    const { labels } = useSelector(state => state.notes
+    const { labels, addLabelStatus } = useSelector(state => state.notes
     )
     const dispatch = useDispatch()
     function keyPressHandler(e) {
@@ -26,26 +26,27 @@ export function LabelModal() {
             <button title="Add Label" onClick={() => setModalStatus(!modalStatus)}>
                 <MdLabel size={22} />
             </button>
-            <section className={`absolute bg-white dark:bg-dark-1 min-h-[10rem] box-shadow-light dark:box-shadow-dark ${modalStatus ? "block" : "hidden"} `}>
-                <div className="relative flex min-w-[14rem] p-2">
+            <section className={`absolute bg-white dark:bg-dark-1 min-h-[13rem] p-2 box-shadow-light dark:box-shadow-dark ${modalStatus ? "block" : "hidden"} `}>
+                <div className="relative flex min-w-[14rem] p-2 overflow-y-auto">
                     <p>Add a Label</p>
+                    <p>{addLabelStatus}</p>
                     <button className="ml-auto hover:bg-red-600 rounded-full h-6 w-6 " onClick={() => setModalStatus(false)}>
                         <GiCancel size={26} />
                     </button>
                 </div>
-                <div className="p-2">
+                <div className=" max-h-[8rem] overflow-y-auto">
                     {labels?.map((label) => (
                         <div className="relative" key={label._id}>
                             <input
                                 type="checkbox"
                             // checked={checkForIdInPlaylist(playlist.videos, video.id)}
-                            // onChange={() => checkboxHandler(playlist, video)}
+                            // onChange={() => checkboxHandler()}
                             />
                             <label>{label.labelName}</label>
                         </div>
                     ))}
                 </div>
-                <div className="absolute w-full bottom-0 flex justify-around bg-white dark:bg-dark-1 ">
+                <div className=" w-full  flex justify-around ">
 
                     <input
                         type="text"
