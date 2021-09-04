@@ -7,10 +7,12 @@ import { Landing } from "./common/components/Landing";
 import { setAuthSetup } from "./features/auth/authSlice";
 import { Login } from "./features/auth/login/Login";
 import { Signup } from "./features/auth/signup/Signup";
+import { fetchNotesData } from "./features/notes/notesSlice";
 import { Account } from "./features/user/Account";
 import { setupAuthExceptionHandler, setUpAuthHeaderForServiceCalls } from "./services/users";
 const App = () => {
-  const { authorized } = useSelector(state => state.auth)
+  const { authorized, authSetupStatus } = useSelector(state => state.auth)
+  const { notesFetchstatus } = useSelector(state => state.notes)
   console.log(authorized)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -20,6 +22,13 @@ const App = () => {
     setUpAuthHeaderForServiceCalls(localStorage.getItem("token"));
     dispatch(setAuthSetup());
   }, [dispatch, navigate]);
+
+  useEffect(() => {
+    if (notesFetchstatus === "idle" && authSetupStatus) {
+      dispatch(fetchNotesData())
+    }
+
+  }, [notesFetchstatus, authSetupStatus])
   return (
     <main className="text-black dark:text-white">
       {!authorized ? (
