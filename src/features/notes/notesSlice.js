@@ -1,6 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ADD_LABEL, ADD_NOTE, FETCH_NOTES_DATA } from "../../services/api";
+import {
+  ADD_LABEL,
+  ADD_NOTE,
+  ADD_TO_PINNED,
+  FETCH_NOTES_DATA,
+  REMOVE_FROM_PINNED,
+} from "../../services/api";
 
 export const addLabel = createAsyncThunk(
   "/note/addlabel",
@@ -44,6 +50,31 @@ export const addNote = createAsyncThunk(
     }
   }
 );
+export const removeFromPinned = createAsyncThunk(
+  "note/removefrompinned",
+  async (noteId, thunkAPI) => {
+    try {
+      const response = await axios.post(REMOVE_FROM_PINNED, noteId);
+      console.log({ response }, " pin was removed");
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const addToPinned = createAsyncThunk(
+  "/note/pinnote",
+  async (noteId, thunkAPI) => {
+    try {
+      const response = await axios.post(ADD_TO_PINNED, noteId);
+      console.log({ response }, " pin was added");
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 export const notesSlice = createSlice({
   name: "notesSlice",
   initialState: {
@@ -53,6 +84,8 @@ export const notesSlice = createSlice({
     notes: [],
     error: null,
     status: "idle",
+    removePinStatus: "idle",
+    pinNoteStatus: "idle",
   },
   reducers: {
     setupNotes: (state, action) => {
@@ -92,7 +125,12 @@ export const notesSlice = createSlice({
     [fetchNotesData.fulfilled]: (state, action) => {
       state.notesFetchstatus = "success";
       state.labels = action.payload.noteData.labels;
-      state.notes = action.payload.noteData.notes;
+      state.notes = action.payload.noteData.notes.filter(
+        (note) => note.pinned === false
+      );
+      state.pinnedNotes = action.payload.noteData.notes.filter(
+        (note) => note.pinned === true
+      );
     },
     [fetchNotesData.rejected]: (state, action) => {
       state.notesFetchstatus = "error";
@@ -110,6 +148,30 @@ export const notesSlice = createSlice({
       state.status = "failed";
       state.error = action.payload;
       // state.notes.push(action.payload.newNote);
+    },
+    [removeFromPinned.pending]: (state) => {
+      state.removePinStatus = "pending";
+    },
+    [removeFromPinned.fulfilled]: (state, action) => {
+      state.removePinStatus = "success";
+      state.pinnedNotes = state.pinnedNotes.filter(
+        (pinnedNote) => pinnedNote._id !== action.payload.unPinnedNote._id
+      );
+      state.notes.push(action.payload.unPinnedNote);
+    },
+    [removeFromPinned.rejected]: (state, action) => {
+      state.removePinStatus = "failed";
+      state.error = action.payload;
+    },
+    [addToPinned.pending]: (state) => {
+      state.pinNoteStatus = "pending";
+    },
+    [addToPinned.fulfilled]: (state, action) => {
+      state.pinNoteStatus = "success";
+      state.notes = state.notes.filter(
+        (note) => note._id !== action.payload.pinnedNote._id
+      );
+      state.pinnedNotes.push(action.payload.pinnedNote);
     },
   },
 });
