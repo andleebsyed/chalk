@@ -40,19 +40,19 @@ export function CreateNote() {
     if (error) {
         console.log({ error })
     }
+    console.log({ pinned })
     function submitNote(e) {
         e.preventDefault()
         console.log("out choosen labels ", chosenLabels)
-        setNoteData({ ...noteData, labels: chosenLabels, color: "white", pinned, image })
+        setNoteData({ ...noteData, color: "white", image })
         console.log({ noteData }, "note data")
         let formData = new FormData();
         formData.append("title", noteData.title)
         formData.append("content", noteData.content)
         formData.append("image", noteData?.image)
-        formData.append("pinned", noteData?.pinned)
+        formData.append("pinned", pinned)
         formData.append("labels", JSON.stringify(chosenLabels))
         formData.append("color", noteData?.color)
-        // console.log(formData.entries())
         dispatch(addNote({ formData }))
 
     }
@@ -83,9 +83,7 @@ export function CreateNote() {
                             :
                             <RiPushpin2Line size={28} />
                         }
-
                     </button>
-
                 </section>
                 <input type="text" placeholder="Take a note..." className={`h-[57px] p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} onChange={(e) => setNoteData({ ...noteData, content: e.target.value })} required />
                 <div className="flex flex-wrap">
