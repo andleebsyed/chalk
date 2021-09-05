@@ -2,7 +2,19 @@
 import React from "react"
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
 import { VscEdit } from 'react-icons/vsc'
+import { useDispatch } from "react-redux";
+import { addToPinned, removeFromPinned } from "./notesSlice";
 export function ShowNote({ note }) {
+    const dispatch = useDispatch()
+    async function notePinStatusHandler(note) {
+        if (note.pinned) {
+            await dispatch(removeFromPinned({ noteId: note._id }))
+        }
+        else {
+            console.log("let's pin the said note")
+            await dispatch(addToPinned({ noteId: note._id }))
+        }
+    }
     return (
         <div className={`m-8 p-2 w-[90%] bg-white dark:bg-dark-1  max-w-[300px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `}>
             {note.image && <img src={note.image} />}
@@ -13,6 +25,7 @@ export function ShowNote({ note }) {
                         readOnly
                         required />
                     <button className="ml-auto"
+                        onClick={() => notePinStatusHandler(note)}
                     >
                         {note?.pinned ?
                             <RiPushpin2Fill size={28} />
