@@ -55,14 +55,6 @@ export function CreateNote() {
         formData.append("labels", JSON.stringify(chosenLabels))
         formData.append("color", noteData?.color)
         await dispatch(addNote({ formData }))
-        // if (status === "success") {
-        //     formRef.current.reset()
-        //     setImageData({ url: null, showStatus: "hidden" })
-        //     setImage(null)
-        //     setPinned(false)
-        //     dispatch(resetChosenLabels())
-        // }
-
     }
     useEffect(() => {
         if (status === "success") {
