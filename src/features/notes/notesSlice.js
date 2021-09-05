@@ -88,6 +88,7 @@ export const notesSlice = createSlice({
     [fetchNotesData.fulfilled]: (state, action) => {
       state.notesFetchstatus = "success";
       state.labels = action.payload.noteData.labels;
+      state.notes = action.payload.noteData.notes;
     },
     [fetchNotesData.rejected]: (state, action) => {
       state.notesFetchstatus = "error";
