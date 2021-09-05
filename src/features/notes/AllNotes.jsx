@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import { ShowNote } from "./ShowNote";
 export function Notes() {
   const { notes, } = useSelector(state => state.notes)
+  // const orderedNotes = notes
+  //   ?.slice()
+  //   .sort((a, b) => b?.createdAt.localeCompare(a?.createdAt));
   return (
     <div className="flex flex-wrap">
       {notes?.map(note =>
