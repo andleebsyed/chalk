@@ -38,10 +38,6 @@ export function CreateNote() {
     // const [palatte, setPalatte] = useState(false)
     // const [noteColor, setNoteColor] = useState("white")
     // const noteColors = ["palette-blue", "palette-yellow", "palette-red", "palette-purple"]
-    if (error) {
-        console.log({ error })
-    }
-    console.log({ pinned })
     async function submitNote(e) {
         e.preventDefault()
         console.log("out choosen labels ", chosenLabels)
