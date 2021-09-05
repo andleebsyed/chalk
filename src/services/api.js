@@ -5,3 +5,5 @@ export const UPDATE_PASSWORD = `${BASE_URL}/user/updatepassword`;
 export const ADD_LABEL = `${BASE_URL}/label/addlabel`;
 export const FETCH_NOTES_DATA = `${BASE_URL}/user/fetchnotesdata`;
 export const ADD_NOTE = `${BASE_URL}/note/add`;
+export const REMOVE_FROM_PINNED = `${BASE_URL}/note/removepin`;
+export const ADD_TO_PINNED = `${BASE_URL}/note/pinnote`;
