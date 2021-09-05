@@ -32,7 +32,7 @@ const App = () => {
   return (
     <main className="text-black dark:text-white">
       {!authorized ? (
-        <div className="p-2 fixed  flex   min-w-screen right-0 h-9">
+        <div className="p-2 sticky top-0  flex self-start   min-w-screen right-0 h-9">
           <ThemeToggle />
         </div>)
         : (

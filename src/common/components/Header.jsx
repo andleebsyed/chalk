@@ -22,7 +22,7 @@ export function ThemeToggle() {
 }
 export function Header() {
   return (
-    <div className="p-2  border-b border-opacity-10 min-w-screen flex justify-between ">
+    <div className="p-2  border-b border-opacity-10 min-w-screen  flex justify-between  sticky top-0 bg-white dark:bg-dark-1">
       <div className="flex justify-between">
         <Navbar />
         <Link to="/" className="self-center">
