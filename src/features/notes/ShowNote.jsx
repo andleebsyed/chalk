@@ -5,7 +5,7 @@ import { VscEdit } from 'react-icons/vsc'
 export function ShowNote({ note }) {
     return (
         <div className={`m-8 p-2 w-[90%] bg-white dark:bg-dark-1  max-w-[300px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `}>
-
+            {note.image && <img src={note.image} />}
             <main className="flex flex-col p-2 outline-none  " >
                 <section className="flex mb-1">
                     <input type="text" placeholder="Title" className={`h-[36px] w-full p-2 outline-none bg-white dark:bg-dark-1`}
