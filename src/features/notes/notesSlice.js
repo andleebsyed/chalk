@@ -99,7 +99,7 @@ export const notesSlice = createSlice({
     },
     [addNote.fulfilled]: (state, action) => {
       state.status = "success";
-      state.notes.push(action.payload.newNote);
+      state.notes.push(action.payload.newSavedNote);
     },
     [addNote.rejected]: (state, action) => {
       state.status = "failed";
