@@ -34,12 +34,15 @@ export function CreateNote() {
     });
     const dispatch = useDispatch()
     const imageRef = useRef(null)
-    console.log({ error })
     // const [palatte, setPalatte] = useState(false)
     // const [noteColor, setNoteColor] = useState("white")
     // const noteColors = ["palette-blue", "palette-yellow", "palette-red", "palette-purple"]
+    if (error) {
+        console.log({ error })
+    }
     function submitNote(e) {
         e.preventDefault()
+        console.log("out choosen labels ", chosenLabels)
         setNoteData({ ...noteData, labels: chosenLabels, color: "white", pinned, image })
         console.log({ noteData }, "note data")
         let formData = new FormData();
@@ -47,9 +50,9 @@ export function CreateNote() {
         formData.append("content", noteData.content)
         formData.append("image", noteData?.image)
         formData.append("pinned", noteData?.pinned)
-        formData.append("labels", noteData?.labels)
+        formData.append("labels", JSON.stringify(chosenLabels))
         formData.append("color", noteData?.color)
-        console.log(formData.entries())
+        // console.log(formData.entries())
         dispatch(addNote({ formData }))
 
     }
@@ -74,7 +77,7 @@ export function CreateNote() {
             <form className="flex flex-col p-2 outline-none  " onSubmit={(e) => submitNote(e)}>
                 <section className="flex mb-1">
                     <input type="text" placeholder="Title" className={`h-[36px] w-full p-2 outline-none bg-white dark:bg-dark-1`} onChange={(e) => setNoteData({ ...noteData, title: e.target.value })} required />
-                    <button className="ml-auto" onClick={() => setPinned(!pinned)}>
+                    <button className="ml-auto" onClick={(e) => { e.preventDefault(); setPinned(!pinned) }}>
                         {pinned ?
                             <RiPushpin2Fill size={28} />
                             :
@@ -88,7 +91,7 @@ export function CreateNote() {
                 <div className="flex flex-wrap">
                     {chosenLabels?.map(chosenLabel => <div key={chosenLabel?._id} className="text-sm p-1 pt-1 flex rounded-lg m-1 bg-selected-navitem-light dark:bg-selected-navitem-dark">
                         <span className="self-center">{chosenLabel.labelName}</span>
-                        <button className="text-xs p-2 self-center" onClick={() => dispatch(removeFromChosenLabels({ removedLabel: chosenLabel }))}>X</button>
+                        <button className="text-xs p-2 self-center" onClick={(e) => { e.preventDefault(); dispatch(removeFromChosenLabels({ removedLabel: chosenLabel })) }}>X</button>
                     </div>)
                     }
                 </div>
