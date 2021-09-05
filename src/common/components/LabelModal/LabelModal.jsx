@@ -4,6 +4,7 @@ import { GiCancel } from 'react-icons/gi'
 import { useDispatch, useSelector } from 'react-redux'
 import { addLabel, addToChosenLabels, removeFromChosenLabels } from '../../../features/notes/notesSlice'
 export function LabelModal() {
+
     const [modalStatus, setModalStatus] = useState(false)
     const [labelName, setLabelName] = useState(null)
     const inputEl = useRef(null)
@@ -45,7 +46,7 @@ export function LabelModal() {
     }
     return (
         <div>
-            <button title="Add Label" onClick={() => setModalStatus(!modalStatus)}>
+            <button title="Add Label" onClick={(e) => { e.preventDefault(); setModalStatus(!modalStatus) }}>
                 <MdLabel size={22} />
             </button>
             <section className={`absolute bg-white dark:bg-dark-1 min-h-[13rem] p-2 box-shadow-light dark:box-shadow-dark ${modalStatus ? "block" : "hidden"} `}>
@@ -54,7 +55,7 @@ export function LabelModal() {
                         <p className="mt-2">Add a Label</p>
                     </div>
 
-                    <button className="ml-auto p-1  rounded-full text-gray-500 dark:text-white hover:bg-gray-500 hover:bg-opacity-40" onClick={() => setModalStatus(false)}>
+                    <button className="ml-auto p-1  rounded-full text-gray-500 dark:text-white hover:bg-gray-500 hover:bg-opacity-40" onClick={(e) => { e.preventDefault(); setModalStatus(false) }}>
                         <GiCancel size={26} />
                     </button>
                 </div>
