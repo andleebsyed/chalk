@@ -52,6 +52,7 @@ export const notesSlice = createSlice({
     chosenLabels: [],
     notes: [],
     error: null,
+    status: "idle",
   },
   reducers: {
     setupNotes: (state, action) => {
@@ -67,6 +68,9 @@ export const notesSlice = createSlice({
         (label) => label._id !== action.payload.removedLabel._id
       );
       // state.choosenLabels.push(action.payload.newChosenLabel);
+    },
+    resetChosenLabels: (state) => {
+      state.chosenLabels = [];
     },
   },
 
@@ -100,14 +104,19 @@ export const notesSlice = createSlice({
     [addNote.fulfilled]: (state, action) => {
       state.status = "success";
       state.notes.push(action.payload.newSavedNote);
+      state.error = null;
     },
     [addNote.rejected]: (state, action) => {
       state.status = "failed";
-      state.error = action.payload?.errorDetail;
+      state.error = action.payload;
       // state.notes.push(action.payload.newNote);
     },
   },
 });
-export const { setupNotes, addToChosenLabels, removeFromChosenLabels } =
-  notesSlice.actions;
+export const {
+  setupNotes,
+  addToChosenLabels,
+  removeFromChosenLabels,
+  resetChosenLabels,
+} = notesSlice.actions;
 export default notesSlice.reducer;
