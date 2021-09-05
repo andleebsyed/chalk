@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useRef, useState } from "react"
 import { RiPushpin2Line } from 'react-icons/ri'
 import { IoColorPaletteSharp } from 'react-icons/io5'
-// import { MdLabel } from 'react-icons/md'
 import { BiImageAlt } from 'react-icons/bi'
 import { RiPushpin2Fill } from 'react-icons/ri'
 import { LabelModal } from "../../common/components/LabelModal/LabelModal"
@@ -41,7 +40,7 @@ export function CreateNote() {
     // const noteColors = ["palette-blue", "palette-yellow", "palette-red", "palette-purple"]
     function submitNote(e) {
         e.preventDefault()
-        // setNoteData({ ...noteData, labels: chosenLabels, color: "white", pinned, image })
+        setNoteData({ ...noteData, labels: chosenLabels, color: "white", pinned, image })
         console.log({ noteData }, "note data")
         let formData = new FormData();
         formData.append("title", noteData.title)
@@ -50,18 +49,13 @@ export function CreateNote() {
         formData.append("pinned", noteData?.pinned)
         formData.append("labels", noteData?.labels)
         formData.append("color", noteData?.color)
-        // console.log(formData, "in component")
         console.log(formData.entries())
         dispatch(addNote({ formData }))
 
     }
-    // useEffect(() => {
-    //     console.log(noteData)
-    // }, [noteData])
     function fileUploadHandler(e) {
         if (e.target.files && e.target.files[0]) {
             setImage(e.target.files[0])
-            // setPostContent({ ...postContent, image: e.target.files[0] });
             var reader = new FileReader();
             reader.onload = function (e) {
                 setImageData({
@@ -75,9 +69,9 @@ export function CreateNote() {
     }
     return (
         // dark:bg-${noteColor === ("white" || "off-white") ? "dark-1" : noteColor}
-        <div className={`m-8 p-2 w-[90%] bg-white dark:bg-dark-1  max-w-[600px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `}>
+        <div className={`self-center m-8 p-2 w-[90%] bg-white dark:bg-dark-1  max-w-[600px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `}>
 
-            <form className="flex flex-col p-2 outline-none  " onSubmit={(e) => { setNoteData({ ...noteData, labels: chosenLabels, color: "white", pinned, image }); submitNote(e) }}>
+            <form className="flex flex-col p-2 outline-none  " onSubmit={(e) => submitNote(e)}>
                 <section className="flex mb-1">
                     <input type="text" placeholder="Title" className={`h-[36px] w-full p-2 outline-none bg-white dark:bg-dark-1`} onChange={(e) => setNoteData({ ...noteData, title: e.target.value })} required />
                     <button className="ml-auto" onClick={() => setPinned(!pinned)}>
