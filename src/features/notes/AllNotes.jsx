@@ -4,7 +4,7 @@ import { ShowNote } from "./ShowNote";
 export function Notes() {
   const { notes, } = useSelector(state => state.notes)
   return (
-    <div>
+    <div className="flex flex-wrap">
       {notes?.map(note =>
         <div key={note?._id}>
           <ShowNote note={note} />
