@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ADD_LABEL, FETCH_NOTES_DATA } from "../../services/api";
+import { ADD_LABEL, ADD_NOTE, FETCH_NOTES_DATA } from "../../services/api";
 
 export const addLabel = createAsyncThunk(
   "/note/addlabel",
@@ -26,13 +26,31 @@ export const fetchNotesData = createAsyncThunk(
     }
   }
 );
+export const addNote = createAsyncThunk(
+  "/note/add",
+  async ({ formData }, thunkAPI) => {
+    try {
+      // console.log("data coming or not ", { formData });
+      const response = await axios.post(ADD_NOTE, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("on adding a note ", { response });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 export const notesSlice = createSlice({
   name: "notesSlice",
   initialState: {
     notesFetchstatus: "idle",
     labels: null,
     chosenLabels: [],
-    // notes: null,
+    notes: [],
     error: null,
   },
   reducers: {
@@ -73,7 +91,19 @@ export const notesSlice = createSlice({
     },
     [fetchNotesData.rejected]: (state, action) => {
       state.notesFetchstatus = "error";
-      state.error = action.payload.message;
+      state.error = action.payload?.message;
+    },
+    [addNote.pending]: (state) => {
+      state.status = "pending";
+    },
+    [addNote.fulfilled]: (state, action) => {
+      state.status = "success";
+      state.notes.push(action.payload.newNote);
+    },
+    [addNote.rejected]: (state, action) => {
+      state.status = "failed";
+      state.error = action.payload?.errorDetail;
+      // state.notes.push(action.payload.newNote);
     },
   },
 });
