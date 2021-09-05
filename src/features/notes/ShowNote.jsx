@@ -16,6 +16,7 @@ export function ShowNote({ note }) {
                     <input type="text" placeholder="Title" className={`h-[36px] w-full p-2 outline-none bg-white dark:bg-dark-1`}
                         // onChange={(e) => setNoteData({ ...noteData, title: e.target.value })}
                         value={note?.title}
+                        readOnly
                         required />
                     <button className="ml-auto"
                         onClick={(e) => { e.stopPropagation(); e.preventDefault() }}
@@ -30,7 +31,7 @@ export function ShowNote({ note }) {
                     </button>
 
                 </section>
-                <input type="text" placeholder="Take a note..." className={`h-[57px] p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} value={note?.content}
+                <input type="text" placeholder="Take a note..." className={`h-[57px] p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} value={note?.content} readOnly
                     // onChange={(e) => setNoteData({ ...noteData, content: e.target.value })}
                     required />
                 <div className="flex flex-wrap">
