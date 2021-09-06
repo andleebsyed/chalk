@@ -6,7 +6,8 @@ import { useDispatch } from "react-redux";
 import { addToPinned, enableEditModal, removeFromPinned } from "./notesSlice";
 export function ShowNote({ note }) {
     const dispatch = useDispatch()
-    async function notePinStatusHandler(note) {
+    async function notePinStatusHandler(e, note) {
+        e.stopPropagation()
         if (note.pinned) {
             await dispatch(removeFromPinned({ noteId: note._id }))
         }
@@ -24,7 +25,7 @@ export function ShowNote({ note }) {
                         readOnly
                         required />
                     <button className="ml-auto"
-                        onClick={() => notePinStatusHandler(note)}
+                        onClick={(e) => notePinStatusHandler(e, note)}
                     >
                         {note?.pinned ?
                             <RiPushpin2Fill size={28} />
