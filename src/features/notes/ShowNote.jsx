@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react"
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
-import { VscEdit } from 'react-icons/vsc'
+// import { VscEdit } from 'react-icons/vsc'
 import { useDispatch } from "react-redux";
 import { addToPinned, enableEditModal, removeFromPinned } from "./notesSlice";
 export function ShowNote({ note }) {
@@ -45,7 +45,7 @@ export function ShowNote({ note }) {
                     )
                     }
                 </div>
-                <button className="ml-auto"><VscEdit size={25} /></button>
+                {/* <button className="ml-auto"><VscEdit size={25} /></button> */}
             </div>
         </div>
 
