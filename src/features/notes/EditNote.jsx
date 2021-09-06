@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useRef, useState } from "react"
 import { BiImageAlt } from "react-icons/bi";
+import { GiCancel } from "react-icons/gi";
 import { IoColorPaletteSharp } from "react-icons/io5";
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,17 +13,26 @@ export function EditNote() {
     console.log(noteToEdit, editNoteModalStatus)
     const dispatch = useDispatch()
     const formRef = useRef(null)
-    const [pinned, setPinned] = useState(false)
+    // const [pinned, setPinned] = useState(false)
     const [noteData, setNoteData] = useState(null)
-    const [image, setImage] = useState(null)
+    // const [image, setImage] = useState(null)
     const [imageData, setImageData] = useState({
         url: null,
         showStatus: "hidden",
     });
 
+    // console.log({ imageData })
     useEffect(() => {
         if (noteToEdit) {
             dispatch(setUpLabelsInEditComponent({ labels: noteToEdit.labels }))
+            if (noteToEdit.image) {
+                setImageData({
+                    url: noteToEdit.image,
+                    showStatus: "block"
+                })
+            }
+            // setPinned(noteToEdit.pinned)
+            setNoteData({ ...noteData, pinned: noteToEdit.pinned })
         }
 
     }, [noteToEdit])
@@ -31,20 +41,47 @@ export function EditNote() {
             setNoteData({
                 ...noteData, title: noteToEdit.title,
                 content: noteToEdit.content,
-                image: imageData.url ? imageData.url : noteToEdit.image,
+                // image: imageData.url ? imageData.url : noteToEdit.image,
                 pinned: noteToEdit.pinned,
                 labels: chosenLabels,
                 color: null
             })
 
         }
-    }, [noteToEdit, imageData])
-    function submitNote(e) {
+    }, [noteToEdit])
+    // useEffect(() => {
+    //     if (noteToEdit) {
+    //         setNoteData({
+    //             ...noteData,
+    //             // content: noteToEdit.content,
+    //             image: imageData.url ? imageData.url : noteToEdit.image,
+    //             // pinned: noteToEdit.pinned,
+    //             // labels: chosenLabels,
+    //             // color: null
+    //         })
+
+    //     }
+    // }, [imageData])
+    async function updateNote(e) {
         e.preventDefault()
+        console.log("out choosen labels ", chosenLabels)
+        setNoteData({ ...noteData, color: "white" })
+        console.log({ noteData }, "note data")
+        // console.log({ pinned })
+        // console.log({ image })
+        let formData = new FormData();
+        formData.append("title", noteData.title)
+        formData.append("content", noteData.content)
+        // formData.append("image", image)
+        // formData.append("pinned", pinned)
+        // formData.append("labels", JSON.stringify(chosenLabels))
+        // formData.append("color", noteData?.color)
+        // await dispatch(addNote({ formData }))
     }
     function fileUploadHandler(e) {
         if (e.target.files && e.target.files[0]) {
-            setImage(e.target.files[0])
+            // setImage(e.target.files[0])
+            setNoteData({ ...noteData, image: e.target.files[0] })
             var reader = new FileReader();
             reader.onload = function (e) {
                 setImageData({
@@ -62,26 +99,26 @@ export function EditNote() {
             url: null,
             showStatus: "hidden",
         })
+        // setImage(null)
         dispatch(disableEditModal())
     }
-    // function removeLabel(e, label) {
-    //     e.preventDefault()
-    //     const filteredLabels = noteData.labels.filter(singleLabel => singleLabel._id !== label._id)
-    //     setNoteData({ ...noteData, labels: filteredLabels })
-
-    // }
     return (
         editNoteModalStatus && noteData && <div onClick={(e) => closeModalHandler(e)} className="  fixed top-0 left-0 bottom-0 right-0  bg-dark-1 bg-opacity-50 flex items-center justify-center min-h-screen min-w-screen ">
-            <div className={`self-center m-8 p-2 w-[90%] bg-white dark:bg-dark-1  max-w-[600px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `} onClick={(e) => e.stopPropagation()}>
+            <div className={`self-center overflow-y-scroll no-scrollbar   max-h-[80%]  p-2 w-[90%] bg-white dark:bg-dark-1  max-w-[600px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `} onClick={(e) => e.stopPropagation()}>
                 {/* {error && <p className="text-red-600 font-bold pl-3">Could not save the note!! Your image size might be too big. Try changing the image or simply try again.</p>}
             {status === "success" && <p className="text-blue font-bold">Note saved successfully</p>}
             {status === "pending" && <p className="text-palette-yellow font-bold">Please wait while we save your note...</p>} */}
-                <button onClick={(e) => closeModalHandler(e)}>X</button>
-                <form ref={formRef} className="flex flex-col p-2 outline-none   " onSubmit={(e) => { e.stopPropagation(); submitNote(e) }}>
+                {/* <button onClick={(e) => closeModalHandler(e)} className="bg-red-600 dark:bg-red-600 bg-opacity-40 rounded p-2 w-12
+                    " ><GiCancel size={26} /></button> */}
+                <button className="ml-auto p-1  rounded-full text-gray-500 dark:text-white hover:text-red-600 dark:hover:text-red-600" onClick={(e) => closeModalHandler(e)}>
+                    <GiCancel size={26} />
+                </button>
+                <form ref={formRef} className="flex flex-col p-2 outline-none   " onSubmit={(e) => { e.stopPropagation(); updateNote(e) }}>
+
                     <section className="flex mb-1">
                         <input type="text" placeholder="Title" className={`h-[36px] w-full p-2 outline-none bg-white dark:bg-dark-1`} value={noteData.title} onChange={(e) => setNoteData({ ...noteData, title: e.target.value })} required />
-                        <button className="ml-auto" onClick={(e) => { e.preventDefault(); setPinned(!pinned) }}>
-                            {noteToEdit.pinned ?
+                        <button className="ml-auto" onClick={(e) => { e.preventDefault(); setNoteData({ ...noteData, pinned: !noteData.pinned }) }}>
+                            {noteData.pinned ?
                                 <RiPushpin2Fill size={28} />
                                 :
                                 <RiPushpin2Line size={28} />
@@ -90,18 +127,27 @@ export function EditNote() {
                     </section>
                     <input type="text" placeholder="Take a note..." className={`h-[57px] p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} value={noteData.content} onChange={(e) => setNoteData({ ...noteData, content: e.target.value })} required />
 
+                    <div className={`${imageData.showStatus} `}>
+                        <button className="relative top-11 left-1 bg-red-600 bg-opacity-40 rounded p-2 " onClick={(e) => { e.preventDefault(); setImageData({ url: null, showStatus: "hidden" }); setNoteData({ ...noteData, image: null }) }}> <GiCancel size={26} /></button>
 
-                    {noteData.image && <div className="overflow-y-scroll max-h-[30rem]" ><img src={noteData.image} /></div>}
+                        <img
+                            // ref={imageRef}
+                            alt="selected file"
+                            src={imageData.url}
+                            className={`${imageData.showStatus}  self-center mb-4`}
+                        />
+                    </div>
+                    {/* {imageData && <div className="overflow-y-scroll max-h-[30rem]" ><img src={imageData.url} /></div>} */}
                     <div className="flex flex-wrap">
                         {chosenLabelsComponent === "editNote" && chosenLabels?.map(chosenLabel => <div key={chosenLabel?._id} className="text-sm p-1 pt-1 flex rounded-lg m-1 bg-selected-navitem-light dark:bg-selected-navitem-dark">
                             <span className="self-center">{chosenLabel.labelName}</span>
-                            <button className="text-xs p-2 self-center" onClick={(e) => { e.preventDefault(); dispatch(removeFromChosenLabels({ removedLabel: chosenLabel })) }}>X</button>
+                            <button className="text-xs p-2 self-center" onClick={(e) => { e.preventDefault(); e.stopPropagation(); dispatch(removeFromChosenLabels({ removedLabel: chosenLabel })) }}>X</button>
                         </div>)
                         }
                     </div>
 
                     <section className="p-2 flex w-[50%] justify-between mt-1">
-                        <div title="Change color" className="group" >
+                        <div title="Change color">
                             <IoColorPaletteSharp size={22} />
                             {/* <div className=" relative hidden group-hover:block">
                           
@@ -119,6 +165,7 @@ export function EditNote() {
 
                         </div>
                         <LabelModal />
+
                         <label className="cursor-pointer" title="Choose Image">
                             <BiImageAlt size={22} />
                             <input type="file" id="img"
