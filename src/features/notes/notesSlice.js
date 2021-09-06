@@ -6,6 +6,7 @@ import {
   ADD_TO_PINNED,
   FETCH_NOTES_DATA,
   REMOVE_FROM_PINNED,
+  UPDATE_NOTE,
 } from "../../services/api";
 
 export const addLabel = createAsyncThunk(
@@ -75,20 +76,41 @@ export const addToPinned = createAsyncThunk(
     }
   }
 );
+export const updateNote = createAsyncThunk(
+  "/note/update",
+  async ({ formData }, thunkAPI) => {
+    try {
+      const response = await axios.post(UPDATE_NOTE, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("on updating a note ", { response });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 export const notesSlice = createSlice({
   name: "notesSlice",
   initialState: {
     notesFetchstatus: "idle",
+    allNotes: [],
+    notes: [],
+    pinnedNotes: [],
     labels: null,
     chosenLabels: [],
     chosenLabelsComponent: "createNote",
-    notes: [],
+
     error: null,
     status: "idle",
     removePinStatus: "idle",
     pinNoteStatus: "idle",
     editNoteModalStatus: false,
     noteToEdit: null,
+    updateNoteStatus: "idle",
   },
   reducers: {
     enableEditModal: (state, action) => {
@@ -146,6 +168,7 @@ export const notesSlice = createSlice({
     },
     [fetchNotesData.fulfilled]: (state, action) => {
       state.notesFetchstatus = "success";
+      state.allNotes = action.payload.noteData.notes;
       state.labels = action.payload.noteData.labels;
       state.notes = action.payload.noteData.notes.filter(
         (note) => note.pinned === false
@@ -194,6 +217,23 @@ export const notesSlice = createSlice({
         (note) => note._id !== action.payload.pinnedNote._id
       );
       state.pinnedNotes.push(action.payload.pinnedNote);
+    },
+    [updateNote.pending]: (state) => {
+      state.updateNoteStatus = "pending";
+    },
+    [updateNote.fulfilled]: (state, action) => {
+      state.updateNoteStatus = "success";
+      const { updatedNote } = action.payload;
+      const updatedNoteIndex = state.allNotes.findIndex(
+        (note) => note._id === updatedNote._id
+      );
+      state.allNotes[updatedNoteIndex] = updatedNote;
+      state.notes = state.allNotes.filter((note) => note.pinned === false);
+      state.pinnedNotes = state.allNotes.filter((note) => note.pinned === true);
+    },
+    [updateNote.rejected]: (state, action) => {
+      state.updateNoteStatus = "failed";
+      state.error = action.payload;
     },
   },
 });
