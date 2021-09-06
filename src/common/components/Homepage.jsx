@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Notes } from "../../features/notes/AllNotes";
 import { CreateNote } from "../../features/notes/createNote";
+import { EditNote } from "../../features/notes/EditNote";
 import { fetchNotesData } from "../../features/notes/notesSlice";
 import { PinnedNotes } from "../../features/notes/PinnedNotes";
 export function Homepage() {
@@ -20,6 +21,7 @@ export function Homepage() {
       <CreateNote />
       <PinnedNotes />
       <Notes />
+      <EditNote />
 
     </div>
   );
