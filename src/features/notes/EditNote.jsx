@@ -6,7 +6,7 @@ import { IoColorPaletteSharp } from "react-icons/io5";
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { LabelModal } from "../../common/components/LabelModal/LabelModal";
-import { disableEditModal, removeFromChosenLabels, setUpLabelsInEditComponent } from "./notesSlice";
+import { disableEditModal, removeFromChosenLabels, setUpLabelsInEditComponent, updateNote } from "./notesSlice";
 export function EditNote() {
 
     const { noteToEdit, editNoteModalStatus, chosenLabels, chosenLabelsComponent } = useSelector(state => state.notes)
@@ -62,7 +62,7 @@ export function EditNote() {
 
     //     }
     // }, [imageData])
-    async function updateNote(e) {
+    async function updateNoteHandler(e) {
         e.preventDefault()
         console.log("out choosen labels ", chosenLabels)
         setNoteData({ ...noteData, color: "white" })
@@ -72,11 +72,18 @@ export function EditNote() {
         let formData = new FormData();
         formData.append("title", noteData.title)
         formData.append("content", noteData.content)
-        // formData.append("image", image)
-        // formData.append("pinned", pinned)
-        // formData.append("labels", JSON.stringify(chosenLabels))
-        // formData.append("color", noteData?.color)
-        // await dispatch(addNote({ formData }))
+        formData.append("image", noteData.image)
+        formData.append("pinned", noteData.pinned)
+        formData.append("labels", JSON.stringify(chosenLabels))
+        formData.append("color", noteData?.color)
+        formData.append("noteId", noteToEdit._id)
+        await dispatch(updateNote({ formData }))
+        setNoteData(null)
+        setImageData({
+            url: null,
+            showStatus: "hidden",
+        })
+        dispatch(disableEditModal())
     }
     function fileUploadHandler(e) {
         if (e.target.files && e.target.files[0]) {
@@ -113,7 +120,7 @@ export function EditNote() {
                 <button className="ml-auto p-1  rounded-full text-gray-500 dark:text-white hover:text-red-600 dark:hover:text-red-600" onClick={(e) => closeModalHandler(e)}>
                     <GiCancel size={26} />
                 </button>
-                <form ref={formRef} className="flex flex-col p-2 outline-none   " onSubmit={(e) => { e.stopPropagation(); updateNote(e) }}>
+                <form ref={formRef} className="flex flex-col p-2 outline-none   " onSubmit={(e) => { e.stopPropagation(); updateNoteHandler(e) }}>
 
                     <section className="flex mb-1">
                         <input type="text" placeholder="Title" className={`h-[36px] w-full p-2 outline-none bg-white dark:bg-dark-1`} value={noteData.title} onChange={(e) => setNoteData({ ...noteData, title: e.target.value })} required />
