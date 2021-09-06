@@ -8,7 +8,7 @@ export function LabelModal() {
     const [modalStatus, setModalStatus] = useState(false)
     const [labelName, setLabelName] = useState(null)
     const inputEl = useRef(null)
-    const { labels, chosenLabels, } = useSelector(state => state.notes
+    const { labels, chosenLabels } = useSelector(state => state.notes
     )
     const dispatch = useDispatch()
     async function keyPressHandler(e) {
@@ -53,11 +53,13 @@ export function LabelModal() {
 
     }
     return (
-        <div>
-            <button title="Add Label" onClick={(e) => { e.preventDefault(); setModalStatus(!modalStatus) }}>
-                <MdLabel size={22} />
-            </button>
-            <section className={`absolute bg-white dark:bg-dark-1 min-h-[13rem] p-2 box-shadow-light dark:box-shadow-dark ${modalStatus ? "block" : "hidden"} `}>
+        <div className="flex flex-col">
+            <button title="Add Label" onClick={(e) => { e.preventDefault(); setModalStatus(!modalStatus) }} className="self - center">
+                < MdLabel size={22} />
+            </button >
+            {/* ${chosenLabelsComponent === "editNote" ? 'top-[28rem]' : 'top-[16rem]'} */}
+            < section className={` absolute   bg-white dark:bg-dark-1 min-h-[13rem] p-2 box-shadow-light dark:box-shadow-dark ${modalStatus ? "block" : "hidden"} `
+            }>
                 <div className="relative flex min-w-[14rem] mb-1 overflow-y-auto">
                     <div className="flex flex-col">
                         <p className="mt-2">Add a Label</p>
@@ -99,7 +101,7 @@ export function LabelModal() {
                     </button>
                 </div>
 
-            </section>
-        </div>
+            </section >
+        </div >
     )
 }
