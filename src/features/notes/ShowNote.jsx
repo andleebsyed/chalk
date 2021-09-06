@@ -3,18 +3,14 @@ import React from "react"
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
 import { VscEdit } from 'react-icons/vsc'
 import { useDispatch } from "react-redux";
-// import { EditNote } from "./EditNote";
 import { addToPinned, enableEditModal, removeFromPinned } from "./notesSlice";
 export function ShowNote({ note }) {
     const dispatch = useDispatch()
-    // const [showEditModal, setShowEditModal] = useState(false)
-    // console.log(showEditModal)
     async function notePinStatusHandler(note) {
         if (note.pinned) {
             await dispatch(removeFromPinned({ noteId: note._id }))
         }
         else {
-            console.log("let's pin the said note")
             await dispatch(addToPinned({ noteId: note._id }))
         }
     }
@@ -49,31 +45,8 @@ export function ShowNote({ note }) {
                     )
                     }
                 </div>
-                {/* 
-                <div className={`${imageData.showStatus} `}>
-                    <button className="relative top-11 left-1 bg-red-600 bg-opacity-40 rounded p-2 " onClick={(e) => { e.preventDefault(); setImageData({ url: null, showStatus: "hidden" }); setImage(null) }}> <GiCancel size={26} /></button>
-
-                    <img
-                        ref={imageRef}
-                        alt="selected file"
-                        src={imageData.url}
-                        className={`${imageData.showStatus}  self-center mb-4`}
-                    />
-                </div> */}
-
-
                 <button className="ml-auto"><VscEdit size={25} /></button>
             </div>
-            {/* {showEditModal &&
-                <div className="flex items-center justify-center min-h-screen min-w-screen ">
-                 <div className={`w-[90%] bg-white dark:bg-dark-1  max-w-[600px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `}>
-                    <button onClick={(e) => { e.stopPropagation(); setShowEditModal(false) }}>X</button>
-                    <EditNote note={note} showEditModal={showEditModal} setShowEditModal={setShowEditModal} />
-                 </div>
-                 </div>
-            } */}
-            {/* <EditNote note={note} showEditModal={showEditModal} setShowEditModal={setShowEditModal} /> */}
-
         </div>
 
     )
