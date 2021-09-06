@@ -18,7 +18,7 @@ import { GiCancel } from "react-icons/gi"
 export function CreateNote() {
     const { error, status } = useSelector(state => state.notes)
     const [pinned, setPinned] = useState(false)
-    const { chosenLabels } = useSelector(state => state.notes)
+    const { chosenLabels, chosenLabelsComponent } = useSelector(state => state.notes)
     const [noteData, setNoteData] = useState({
         title: null,
         content: null,
@@ -106,7 +106,7 @@ export function CreateNote() {
                     />
                 </div>
                 <div className="flex flex-wrap">
-                    {chosenLabels?.map(chosenLabel => <div key={chosenLabel?._id} className="text-sm p-1 pt-1 flex rounded-lg m-1 bg-selected-navitem-light dark:bg-selected-navitem-dark">
+                    {chosenLabelsComponent === "createNote" && chosenLabels?.map(chosenLabel => <div key={chosenLabel?._id} className="text-sm p-1 pt-1 flex rounded-lg m-1 bg-selected-navitem-light dark:bg-selected-navitem-dark">
                         <span className="self-center">{chosenLabel.labelName}</span>
                         <button className="text-xs p-2 self-center" onClick={(e) => { e.preventDefault(); dispatch(removeFromChosenLabels({ removedLabel: chosenLabel })) }}>X</button>
                     </div>)
