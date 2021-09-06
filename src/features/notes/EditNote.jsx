@@ -2,15 +2,14 @@
 import React, { useEffect, useRef, useState } from "react"
 import { BiImageAlt } from "react-icons/bi";
 import { GiCancel } from "react-icons/gi";
+import { TiDocumentDelete } from 'react-icons/ti'
 import { IoColorPaletteSharp } from "react-icons/io5";
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { LabelModal } from "../../common/components/LabelModal/LabelModal";
 import { disableEditModal, removeFromChosenLabels, setUpLabelsInEditComponent, updateNote } from "./notesSlice";
 export function EditNote() {
-
     const { noteToEdit, editNoteModalStatus, chosenLabels, chosenLabelsComponent } = useSelector(state => state.notes)
-    console.log(noteToEdit, editNoteModalStatus)
     const dispatch = useDispatch()
     const formRef = useRef(null)
     const [noteData, setNoteData] = useState(null)
@@ -92,9 +91,13 @@ export function EditNote() {
             {status === "pending" && <p className="text-palette-yellow font-bold">Please wait while we save your note...</p>} */}
                 {/* <button onClick={(e) => closeModalHandler(e)} className="bg-red-600 dark:bg-red-600 bg-opacity-40 rounded p-2 w-12
                     " ><GiCancel size={26} /></button> */}
-                <button className="ml-auto p-1  rounded-full text-gray-500 dark:text-white hover:text-red-600 dark:hover:text-red-600" onClick={(e) => closeModalHandler(e)}>
-                    <GiCancel size={26} />
-                </button>
+                <div className="flex">
+                    <button className=" p-1  rounded-full text-gray-500 dark:text-white hover:text-red-600 dark:hover:text-red-600" onClick={(e) => closeModalHandler(e)}>
+                        <GiCancel size={26} />
+                    </button>
+                    <button className="ml-auto text-red-600 p-2 hover:bg-red-600 hover:bg-opacity-40 rounded-full" title="Delete Note" ><TiDocumentDelete size={28} /></button>
+                </div>
+
                 <form ref={formRef} className="flex flex-col p-2 outline-none   " onSubmit={(e) => { e.stopPropagation(); updateNoteHandler(e) }}>
 
                     <section className="flex mb-1">
