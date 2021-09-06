@@ -81,6 +81,7 @@ export const notesSlice = createSlice({
     notesFetchstatus: "idle",
     labels: null,
     chosenLabels: [],
+    chosenLabelsComponent: "createNote",
     notes: [],
     error: null,
     status: "idle",
@@ -93,11 +94,15 @@ export const notesSlice = createSlice({
     enableEditModal: (state, action) => {
       state.editNoteModalStatus = true;
       state.noteToEdit = action.payload.note;
+      state.chosenLabelsComponent = "editNote";
+      state.chosenLabels = [];
     },
     disableEditModal: (state) => {
       console.log("coming to diable n=moal");
       state.editNoteModalStatus = false;
       state.noteToEdit = null;
+      state.chosenLabelsComponent = "createNote";
+      state.chosenLabels = [];
     },
     setupNotes: (state, action) => {
       state.labels = action.payload.labels;
@@ -116,6 +121,12 @@ export const notesSlice = createSlice({
     resetChosenLabels: (state) => {
       state.chosenLabels = [];
     },
+    setUpLabelsInEditComponent: (state, action) => {
+      state.chosenLabels = action.payload.labels;
+    },
+    // setChosenLabelComponent: (state, action) => {
+    //   state.chosenLabelsComponent = action.payload.component;
+    // },
   },
 
   extraReducers: {
@@ -193,5 +204,7 @@ export const {
   resetChosenLabels,
   enableEditModal,
   disableEditModal,
+  setChosenLabelComponent,
+  setUpLabelsInEditComponent,
 } = notesSlice.actions;
 export default notesSlice.reducer;
