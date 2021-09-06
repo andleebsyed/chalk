@@ -13,15 +13,11 @@ export function EditNote() {
     console.log(noteToEdit, editNoteModalStatus)
     const dispatch = useDispatch()
     const formRef = useRef(null)
-    // const [pinned, setPinned] = useState(false)
     const [noteData, setNoteData] = useState(null)
-    // const [image, setImage] = useState(null)
     const [imageData, setImageData] = useState({
         url: null,
         showStatus: "hidden",
     });
-
-    // console.log({ imageData })
     useEffect(() => {
         if (noteToEdit) {
             dispatch(setUpLabelsInEditComponent({ labels: noteToEdit.labels }))
@@ -31,7 +27,6 @@ export function EditNote() {
                     showStatus: "block"
                 })
             }
-            // setPinned(noteToEdit.pinned)
             setNoteData({ ...noteData, pinned: noteToEdit.pinned })
         }
 
@@ -41,7 +36,6 @@ export function EditNote() {
             setNoteData({
                 ...noteData, title: noteToEdit.title,
                 content: noteToEdit.content,
-                // image: imageData.url ? imageData.url : noteToEdit.image,
                 pinned: noteToEdit.pinned,
                 labels: chosenLabels,
                 color: null
@@ -49,26 +43,9 @@ export function EditNote() {
 
         }
     }, [noteToEdit])
-    // useEffect(() => {
-    //     if (noteToEdit) {
-    //         setNoteData({
-    //             ...noteData,
-    //             // content: noteToEdit.content,
-    //             image: imageData.url ? imageData.url : noteToEdit.image,
-    //             // pinned: noteToEdit.pinned,
-    //             // labels: chosenLabels,
-    //             // color: null
-    //         })
-
-    //     }
-    // }, [imageData])
     async function updateNoteHandler(e) {
         e.preventDefault()
-        console.log("out choosen labels ", chosenLabels)
         setNoteData({ ...noteData, color: "white" })
-        console.log({ noteData }, "note data")
-        // console.log({ pinned })
-        // console.log({ image })
         let formData = new FormData();
         formData.append("title", noteData.title)
         formData.append("content", noteData.content)
@@ -87,7 +64,6 @@ export function EditNote() {
     }
     function fileUploadHandler(e) {
         if (e.target.files && e.target.files[0]) {
-            // setImage(e.target.files[0])
             setNoteData({ ...noteData, image: e.target.files[0] })
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -106,7 +82,6 @@ export function EditNote() {
             url: null,
             showStatus: "hidden",
         })
-        // setImage(null)
         dispatch(disableEditModal())
     }
     return (
