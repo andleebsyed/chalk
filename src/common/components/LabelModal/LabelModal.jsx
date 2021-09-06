@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { MdLabel } from 'react-icons/md'
 import { GiCancel } from 'react-icons/gi'
 import { useDispatch, useSelector } from 'react-redux'
-import { addLabel, addToChosenLabels, removeFromChosenLabels } from '../../../features/notes/notesSlice'
+import { addLabel, addToChosenLabels, removeFromChosenLabels, } from '../../../features/notes/notesSlice'
 export function LabelModal() {
 
     const [modalStatus, setModalStatus] = useState(false)
@@ -30,13 +30,21 @@ export function LabelModal() {
     }
 
     function checkboxHandler({ checked, clickedLabel }) {
-
+        // if (chosenLabelComponent !== "editNote") {
+        //     dispatch(setChosenLabelComponent({ component: "createNote" }))
+        // }
+        // else {
+        //     dispatch(setChosenLabelComponent({ component: "editNote" }))
+        // }
         if (checked) {
             dispatch(addToChosenLabels({ newChosenLabel: clickedLabel }))
         }
         else {
             dispatch(removeFromChosenLabels({ removedLabel: clickedLabel }))
         }
+
+
+
     }
 
     function checkIfLabelChecked(label) {
