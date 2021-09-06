@@ -86,8 +86,19 @@ export const notesSlice = createSlice({
     status: "idle",
     removePinStatus: "idle",
     pinNoteStatus: "idle",
+    editNoteModalStatus: false,
+    noteToEdit: null,
   },
   reducers: {
+    enableEditModal: (state, action) => {
+      state.editNoteModalStatus = true;
+      state.noteToEdit = action.payload.note;
+    },
+    disableEditModal: (state) => {
+      console.log("coming to diable n=moal");
+      state.editNoteModalStatus = false;
+      state.noteToEdit = null;
+    },
     setupNotes: (state, action) => {
       state.labels = action.payload.labels;
       // state.notes = action.payload.notes
@@ -180,5 +191,7 @@ export const {
   addToChosenLabels,
   removeFromChosenLabels,
   resetChosenLabels,
+  enableEditModal,
+  disableEditModal,
 } = notesSlice.actions;
 export default notesSlice.reducer;
