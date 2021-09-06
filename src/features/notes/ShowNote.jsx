@@ -3,9 +3,12 @@ import React from "react"
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
 import { VscEdit } from 'react-icons/vsc'
 import { useDispatch } from "react-redux";
-import { addToPinned, removeFromPinned } from "./notesSlice";
+// import { EditNote } from "./EditNote";
+import { addToPinned, enableEditModal, removeFromPinned } from "./notesSlice";
 export function ShowNote({ note }) {
     const dispatch = useDispatch()
+    // const [showEditModal, setShowEditModal] = useState(false)
+    // console.log(showEditModal)
     async function notePinStatusHandler(note) {
         if (note.pinned) {
             await dispatch(removeFromPinned({ noteId: note._id }))
@@ -16,9 +19,9 @@ export function ShowNote({ note }) {
         }
     }
     return (
-        <div className={`m-8 p-2 w-[90%] bg-white dark:bg-dark-1  max-w-[300px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `}>
+        <div onClick={() => dispatch(enableEditModal({ note }))} className={`m-2 p-3 w-[90%] bg-white dark:bg-dark-1  max-w-[300px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `}>
             {note.image && <img src={note.image} />}
-            <main className="flex flex-col p-2 outline-none  " >
+            <div className="flex flex-col p-2 outline-none  " >
                 <section className="flex mb-1">
                     <input type="text" placeholder="Title" className={`h-[36px] w-full p-2 outline-none bg-white dark:bg-dark-1`}
                         value={note?.title}
@@ -60,7 +63,17 @@ export function ShowNote({ note }) {
 
 
                 <button className="ml-auto"><VscEdit size={25} /></button>
-            </main>
+            </div>
+            {/* {showEditModal &&
+                <div className="flex items-center justify-center min-h-screen min-w-screen ">
+                 <div className={`w-[90%] bg-white dark:bg-dark-1  max-w-[600px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `}>
+                    <button onClick={(e) => { e.stopPropagation(); setShowEditModal(false) }}>X</button>
+                    <EditNote note={note} showEditModal={showEditModal} setShowEditModal={setShowEditModal} />
+                 </div>
+                 </div>
+            } */}
+            {/* <EditNote note={note} showEditModal={showEditModal} setShowEditModal={setShowEditModal} /> */}
+
         </div>
 
     )
