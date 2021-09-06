@@ -8,3 +8,4 @@ export const ADD_NOTE = `${BASE_URL}/note/add`;
 export const REMOVE_FROM_PINNED = `${BASE_URL}/note/removepin`;
 export const ADD_TO_PINNED = `${BASE_URL}/note/pinnote`;
 export const UPDATE_NOTE = `${BASE_URL}/note/update`;
+export const DELETE_NOTE = `${BASE_URL}/note/delete`;
