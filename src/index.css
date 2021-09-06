@@ -34,3 +34,11 @@
 .box-shadow-dark {
   box-shadow: 0 0 5px rgb(22 22 24 / 30%);
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
