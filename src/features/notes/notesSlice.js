@@ -4,6 +4,7 @@ import {
   ADD_LABEL,
   ADD_NOTE,
   ADD_TO_PINNED,
+  DELETE_NOTE,
   FETCH_NOTES_DATA,
   REMOVE_FROM_PINNED,
   UPDATE_NOTE,
@@ -93,6 +94,19 @@ export const updateNote = createAsyncThunk(
     }
   }
 );
+export const deleteNote = createAsyncThunk(
+  "/note/delete",
+  async (noteId, thunkAPI) => {
+    try {
+      console.log(noteId);
+      const response = await axios.post(DELETE_NOTE, noteId);
+      console.log({ response }, " on deleting a note");
+      return { data: response.data, noteId };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 export const notesSlice = createSlice({
   name: "notesSlice",
   initialState: {
@@ -111,6 +125,7 @@ export const notesSlice = createSlice({
     editNoteModalStatus: false,
     noteToEdit: null,
     updateNoteStatus: "idle",
+    deleteNoteStatus: "idle",
   },
   reducers: {
     enableEditModal: (state, action) => {
@@ -234,6 +249,24 @@ export const notesSlice = createSlice({
     [updateNote.rejected]: (state, action) => {
       state.updateNoteStatus = "failed";
       state.error = action.payload;
+    },
+    [deleteNote.pending]: (state) => {
+      state.deleteNoteStatus = "idle";
+    },
+    [deleteNote.fulfilled]: (state, action) => {
+      state.deleteNoteStatus = "success";
+      console.log(action.payload);
+      const noteId = action.payload.noteId.noteId;
+      console.log(noteId);
+      state.allNotes = state.allNotes.filter((note) => note._id !== noteId);
+      state.notes = state.notes.filter((note) => note._id !== noteId);
+      state.pinnedNotes = state.pinnedNotes.filter(
+        (note) => note._id !== noteId
+      );
+    },
+    [deleteNote.rejected]: (state, action) => {
+      state.deleteNoteStatus = "failed";
+      state.error = action.payload.errorDetail;
     },
   },
 });
