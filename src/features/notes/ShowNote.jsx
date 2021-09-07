@@ -5,6 +5,7 @@ import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { addToPinned, enableEditModal, removeFromPinned } from "./notesSlice";
 export function ShowNote({ note }) {
+    // if (note.image)
     const dispatch = useDispatch()
     async function notePinStatusHandler(e, note) {
         e.stopPropagation()
@@ -36,7 +37,7 @@ export function ShowNote({ note }) {
                     </button>
 
                 </section>
-                {note.image && <img src={note.image} />}
+                {note.image && note.image !== "undefined" && <img src={note.image} />}
                 <input type="text" placeholder="Take a note..." className={`h-[57px] p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} value={note?.content} readOnly
                     required />
                 <div className="flex flex-wrap">

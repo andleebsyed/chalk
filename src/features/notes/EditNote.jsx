@@ -21,7 +21,7 @@ export function EditNote() {
     useEffect(() => {
         if (noteToEdit) {
             dispatch(setUpLabelsInEditComponent({ labels: noteToEdit.labels }))
-            if (noteToEdit.image) {
+            if (noteToEdit.image && noteToEdit.image !== "undefined") {
                 setImageData({
                     url: noteToEdit.image,
                     showStatus: "block"
