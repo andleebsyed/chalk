@@ -7,9 +7,9 @@ import { IoColorPaletteSharp } from "react-icons/io5";
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { LabelModal } from "../../common/components/LabelModal/LabelModal";
-import { disableEditModal, removeFromChosenLabels, setUpLabelsInEditComponent, updateNote } from "./notesSlice";
+import { deleteNote, disableEditModal, removeFromChosenLabels, setUpLabelsInEditComponent, updateNote } from "./notesSlice";
 export function EditNote() {
-    const { noteToEdit, editNoteModalStatus, chosenLabels, chosenLabelsComponent } = useSelector(state => state.notes)
+    const { noteToEdit, editNoteModalStatus, chosenLabels, chosenLabelsComponent, error } = useSelector(state => state.notes)
     const dispatch = useDispatch()
     const formRef = useRef(null)
     const [noteData, setNoteData] = useState(null)
@@ -17,6 +17,7 @@ export function EditNote() {
         url: null,
         showStatus: "hidden",
     });
+    console.log({ error })
     useEffect(() => {
         if (noteToEdit) {
             dispatch(setUpLabelsInEditComponent({ labels: noteToEdit.labels }))
@@ -83,6 +84,12 @@ export function EditNote() {
         })
         dispatch(disableEditModal())
     }
+    async function deleteNoteHandler(e) {
+        e.preventDefault()
+        await dispatch(deleteNote({ noteId: noteToEdit._id }))
+        dispatch(disableEditModal())
+
+    }
     return (
         editNoteModalStatus && noteData && <div onClick={(e) => closeModalHandler(e)} className="  fixed top-0 left-0 bottom-0 right-0  bg-dark-1 bg-opacity-50 flex items-center justify-center min-h-screen min-w-screen ">
             <div className={`self-center overflow-y-scroll no-scrollbar   max-h-[80%]  p-2 w-[90%] bg-white dark:bg-dark-1  max-w-[600px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `} onClick={(e) => e.stopPropagation()}>
@@ -95,7 +102,7 @@ export function EditNote() {
                     <button className=" p-1  rounded-full text-gray-500 dark:text-white hover:text-red-600 dark:hover:text-red-600" onClick={(e) => closeModalHandler(e)}>
                         <GiCancel size={26} />
                     </button>
-                    <button className="ml-auto text-red-600 p-2 hover:bg-red-600 hover:bg-opacity-40 rounded-full" title="Delete Note" ><TiDocumentDelete size={28} /></button>
+                    <button onClick={(e) => deleteNoteHandler(e)} className="ml-auto text-red-600 p-2 hover:bg-red-600 hover:bg-opacity-40 rounded-full" title="Delete Note" ><TiDocumentDelete size={28} /></button>
                 </div>
 
                 <form ref={formRef} className="flex flex-col p-2 outline-none   " onSubmit={(e) => { e.stopPropagation(); updateNoteHandler(e) }}>
