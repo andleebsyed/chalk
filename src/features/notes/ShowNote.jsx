@@ -17,10 +17,10 @@ export function ShowNote({ note }) {
     }
     return (
         <div onClick={() => dispatch(enableEditModal({ note }))} className={`m-2 p-3  bg-white dark:bg-dark-1  max-w-[300px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `}>
-            {note.image && <img src={note.image} />}
+
             <div className="flex flex-col p-2 outline-none  " >
                 <section className="flex mb-1">
-                    <input type="text" placeholder="Title" className={`h-[36px] w-full p-2 outline-none bg-white dark:bg-dark-1`}
+                    <input type="text" placeholder="Title" className={`h-[36px] w-full p-2 outline-none font-bold bg-white dark:bg-dark-1`}
                         value={note?.title}
                         readOnly
                         required />
@@ -36,6 +36,7 @@ export function ShowNote({ note }) {
                     </button>
 
                 </section>
+                {note.image && <img src={note.image} />}
                 <input type="text" placeholder="Take a note..." className={`h-[57px] p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} value={note?.content} readOnly
                     required />
                 <div className="flex flex-wrap">
