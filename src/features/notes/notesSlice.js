@@ -112,6 +112,7 @@ export const notesSlice = createSlice({
   initialState: {
     notesFetchstatus: "idle",
     allNotes: [],
+    allNotesBackup: [],
     notes: [],
     pinnedNotes: [],
     labels: null,
@@ -126,6 +127,7 @@ export const notesSlice = createSlice({
     noteToEdit: null,
     updateNoteStatus: "idle",
     deleteNoteStatus: "idle",
+    searchTitle: "",
   },
   reducers: {
     enableEditModal: (state, action) => {
@@ -161,6 +163,14 @@ export const notesSlice = createSlice({
     setUpLabelsInEditComponent: (state, action) => {
       state.chosenLabels = action.payload.labels;
     },
+    searchNotes: (state, action) => {
+      const { searchTitle } = action.payload;
+      state.allNotes = state.allNotesBackup.filter((notes) =>
+        notes.title.includes(searchTitle)
+      );
+
+      // state.searchTitle = action.payload.searchTitle;
+    },
     // setChosenLabelComponent: (state, action) => {
     //   state.chosenLabelsComponent = action.payload.component;
     // },
@@ -184,6 +194,7 @@ export const notesSlice = createSlice({
     [fetchNotesData.fulfilled]: (state, action) => {
       state.notesFetchstatus = "success";
       state.allNotes = action.payload.noteData.notes;
+      state.allNotesBackup = action.payload.noteData.notes;
       state.labels = action.payload.noteData.labels;
       // state.notes = action.payload.noteData.notes.filter(
       //   (note) => note.pinned === false
@@ -288,5 +299,6 @@ export const {
   disableEditModal,
   setChosenLabelComponent,
   setUpLabelsInEditComponent,
+  searchNotes,
 } = notesSlice.actions;
 export default notesSlice.reducer;
