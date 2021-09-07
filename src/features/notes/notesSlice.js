@@ -202,6 +202,7 @@ export const notesSlice = createSlice({
     [addNote.fulfilled]: (state, action) => {
       state.status = "success";
       state.notes.push(action.payload.newSavedNote);
+      state.allNotes.push(action.payload.newSavedNote);
       state.error = null;
     },
     [addNote.rejected]: (state, action) => {
