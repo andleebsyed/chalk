@@ -8,6 +8,7 @@ import { setAuthSetup } from "./features/auth/authSlice";
 import { Login } from "./features/auth/login/Login";
 import { Signup } from "./features/auth/signup/Signup";
 import { fetchNotesData } from "./features/notes/notesSlice";
+import { SingleLabelNotes } from "./features/notes/SingleLabelNotes";
 import { Account } from "./features/user/Account";
 import { setupAuthExceptionHandler, setUpAuthHeaderForServiceCalls } from "./services/users";
 const App = () => {
@@ -45,6 +46,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/account" element={<Account />} />
+        <Route path="/label/:labelId" element={<SingleLabelNotes />} />
       </Routes>
     </main>
   );
