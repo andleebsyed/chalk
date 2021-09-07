@@ -214,6 +214,10 @@ export const notesSlice = createSlice({
     },
     [removeFromPinned.fulfilled]: (state, action) => {
       state.removePinStatus = "success";
+      const unPinnedIndex = state.allNotes.findIndex(
+        (note) => note._id === action.payload.unPinnedNote._id
+      );
+      state.allNotes[unPinnedIndex] = action.payload.unPinnedNote;
       state.pinnedNotes = state.pinnedNotes.filter(
         (pinnedNote) => pinnedNote._id !== action.payload.unPinnedNote._id
       );
@@ -228,6 +232,10 @@ export const notesSlice = createSlice({
     },
     [addToPinned.fulfilled]: (state, action) => {
       state.pinNoteStatus = "success";
+      const pinnedIndex = state.allNotes.findIndex(
+        (note) => note._id === action.payload.pinnedNote._id
+      );
+      state.allNotes[pinnedIndex] = action.payload.pinnedNote;
       state.notes = state.notes.filter(
         (note) => note._id !== action.payload.pinnedNote._id
       );
