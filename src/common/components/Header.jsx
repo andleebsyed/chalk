@@ -5,6 +5,8 @@ import { IoMoonOutline } from "react-icons/io5";
 import { useTheme } from "../hooks/useTheme";
 import { Navbar } from "./Navbar/Navbar";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { searchNotes } from "../../features/notes/notesSlice";
 export function ThemeToggle() {
   const [colorTheme, setTheme] = useTheme();
   return (
@@ -21,6 +23,13 @@ export function ThemeToggle() {
   );
 }
 export function Header() {
+  // const {allNotes} = useSelector(state => state.notes)
+  const dispatch = useDispatch()
+  function searchHandler(e) {
+    const searchTitle = e.target.value;
+    // const matchedNotes = allNotes.filter(note => note.title.includes(noteToMatch))
+    dispatch(searchNotes({ searchTitle }))
+  }
   return (
     <div className="p-2  border-b border-opacity-10 min-w-screen  flex justify-between  sticky top-0 bg-white dark:bg-dark-1">
       <div className="flex justify-between">
@@ -32,13 +41,17 @@ export function Header() {
         </Link>
       </div>
       <div className="self-center  rounded-lg flex p-1  bg-white border dark:border-opacity-0 border-black">
-        <button className=" hidden sm:inline mr-2 dark:text-black  ">
-          <FiSearch size={28} className="" />
-        </button>
+        {/* <button className=" hidden sm:inline mr-2 dark:text-black  "> */}
+        <div>
+          <FiSearch size={28} className=" hidden sm:inline mr-2 dark:text-black  " />
+        </div>
+
+        {/* </button> */}
         <input
           type="text"
           className="rounded-lg h-9 text-black   outline-none sm:w-[450px] "
           placeholder="Search Notes..."
+          onChange={(e) => searchHandler(e)}
         />
       </div>
       <ThemeToggle />
