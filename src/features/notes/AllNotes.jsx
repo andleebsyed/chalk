@@ -9,7 +9,7 @@ export function Notes() {
   return (
     <>
       <h1 className="text-blue font-bold text-lg self-center">Others</h1>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap items-center justify-center">
         {notes?.map(note =>
           <div key={note?._id}>
             <ShowNote note={note} />

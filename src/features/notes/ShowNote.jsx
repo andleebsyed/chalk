@@ -16,7 +16,7 @@ export function ShowNote({ note }) {
         }
     }
     return (
-        <div onClick={() => dispatch(enableEditModal({ note }))} className={`m-2 p-3 w-[90%] bg-white dark:bg-dark-1  max-w-[300px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `}>
+        <div onClick={() => dispatch(enableEditModal({ note }))} className={`m-2 p-3  bg-white dark:bg-dark-1  max-w-[300px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `}>
             {note.image && <img src={note.image} />}
             <div className="flex flex-col p-2 outline-none  " >
                 <section className="flex mb-1">

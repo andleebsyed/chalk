@@ -17,7 +17,7 @@ export function Homepage() {
   }, [notesFetchstatus, authSetupStatus])
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col items-center ">
       <CreateNote />
       <PinnedNotes />
       <Notes />
