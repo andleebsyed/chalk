@@ -22,11 +22,7 @@ export function Navbar() {
         <FiMenu size={28} />
       </button>
       <nav
-        className={
-          navbar
-            ? " overflow-y-auto nav-menu active bg-white dark:bg-dark-1 border fixed"
-            : " overflow-y-auto nav-menu bg-white dark:bg-dark-1 border fixed"
-        }
+        className={`overflow-y-auto nav-menu bg-white dark:bg-dark-1 border-r border-selected-navitem-light dark:border-selected-navitem-dark fixed no-scrollbar ${navbar ? "active" : ""}`}
       >
         <ul
           className="w-full flex flex-col items-center"
