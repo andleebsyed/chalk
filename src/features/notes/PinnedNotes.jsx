@@ -4,9 +4,10 @@ import { ShowNote } from "./ShowNote"
 export function PinnedNotes() {
     const { pinnedNotes } = useSelector(state => state.notes)
     return (
+        pinnedNotes.length !== 0 &&
         <>
-            <h1 className="text-blue font-bold text-lg self-center">Pinned</h1>
-            <div className="flex flex-wrap">
+            <h1 className="text-blue font-bold self-center">Pinned Notes</h1>
+            <div className="flex flex-wrap justify-center sm:justify-start">
                 {pinnedNotes?.map(note =>
                     <div key={note?._id}>
                         <ShowNote note={note} />

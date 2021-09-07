@@ -7,15 +7,18 @@ export function Notes() {
   //   ?.slice()
   //   .sort((a, b) => b?.createdAt.localeCompare(a?.createdAt));
   return (
-    <>
-      <h1 className="text-blue font-bold text-lg self-center">Others</h1>
-      <div className="flex flex-wrap items-center justify-center">
+    notes.length !== 0 &&
+    <div className="flex flex-col">
+      <h1 className="self-center text-blue font-bold ml-4">Others</h1>
+      <div className="flex flex-wrap  justify-center sm:justify-start">
+
+
         {notes?.map(note =>
           <div key={note?._id}>
             <ShowNote note={note} />
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
