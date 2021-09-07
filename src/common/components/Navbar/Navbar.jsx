@@ -43,7 +43,12 @@ export function Navbar() {
           </NavLink>
 
           {labels?.map(label =>
-            <div key={label._id} className="nav-item nav-item-theme ">{label.labelName}</div>
+            <NavLink to={`/label/${label._id}`} key={label._id}
+              className="nav-item nav-item-theme"
+              activeClassName="selected">
+              <div key={label._id} >{label.labelName}</div>
+            </NavLink>
+
           )}
           <NavLink to="/account" className="nav-item nav-item-theme"
             activeClassName="selected">
