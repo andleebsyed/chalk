@@ -185,12 +185,12 @@ export const notesSlice = createSlice({
       state.notesFetchstatus = "success";
       state.allNotes = action.payload.noteData.notes;
       state.labels = action.payload.noteData.labels;
-      state.notes = action.payload.noteData.notes.filter(
-        (note) => note.pinned === false
-      );
-      state.pinnedNotes = action.payload.noteData.notes.filter(
-        (note) => note.pinned === true
-      );
+      // state.notes = action.payload.noteData.notes.filter(
+      //   (note) => note.pinned === false
+      // );
+      // state.pinnedNotes = action.payload.noteData.notes.filter(
+      //   (note) => note.pinned === true
+      // );
     },
     [fetchNotesData.rejected]: (state, action) => {
       state.notesFetchstatus = "error";
@@ -201,7 +201,7 @@ export const notesSlice = createSlice({
     },
     [addNote.fulfilled]: (state, action) => {
       state.status = "success";
-      state.notes.push(action.payload.newSavedNote);
+      // state.notes.push(action.payload.newSavedNote);
       state.allNotes.push(action.payload.newSavedNote);
       state.error = null;
     },
@@ -219,10 +219,10 @@ export const notesSlice = createSlice({
         (note) => note._id === action.payload.unPinnedNote._id
       );
       state.allNotes[unPinnedIndex] = action.payload.unPinnedNote;
-      state.pinnedNotes = state.pinnedNotes.filter(
-        (pinnedNote) => pinnedNote._id !== action.payload.unPinnedNote._id
-      );
-      state.notes.push(action.payload.unPinnedNote);
+      // state.pinnedNotes = state.pinnedNotes.filter(
+      //   (pinnedNote) => pinnedNote._id !== action.payload.unPinnedNote._id
+      // );
+      // state.notes.push(action.payload.unPinnedNote);
     },
     [removeFromPinned.rejected]: (state, action) => {
       state.removePinStatus = "failed";
@@ -237,10 +237,10 @@ export const notesSlice = createSlice({
         (note) => note._id === action.payload.pinnedNote._id
       );
       state.allNotes[pinnedIndex] = action.payload.pinnedNote;
-      state.notes = state.notes.filter(
-        (note) => note._id !== action.payload.pinnedNote._id
-      );
-      state.pinnedNotes.push(action.payload.pinnedNote);
+      // state.notes = state.notes.filter(
+      //   (note) => note._id !== action.payload.pinnedNote._id
+      // );
+      // state.pinnedNotes.push(action.payload.pinnedNote);
     },
     [updateNote.pending]: (state) => {
       state.updateNoteStatus = "pending";
@@ -252,8 +252,8 @@ export const notesSlice = createSlice({
         (note) => note._id === updatedNote._id
       );
       state.allNotes[updatedNoteIndex] = updatedNote;
-      state.notes = state.allNotes.filter((note) => note.pinned === false);
-      state.pinnedNotes = state.allNotes.filter((note) => note.pinned === true);
+      // state.notes = state.allNotes.filter((note) => note.pinned === false);
+      // state.pinnedNotes = state.allNotes.filter((note) => note.pinned === true);
     },
     [updateNote.rejected]: (state, action) => {
       state.updateNoteStatus = "failed";
@@ -266,12 +266,12 @@ export const notesSlice = createSlice({
       state.deleteNoteStatus = "success";
       console.log(action.payload);
       const noteId = action.payload.noteId.noteId;
-      console.log(noteId);
+      // console.log(noteId);
       state.allNotes = state.allNotes.filter((note) => note._id !== noteId);
-      state.notes = state.notes.filter((note) => note._id !== noteId);
-      state.pinnedNotes = state.pinnedNotes.filter(
-        (note) => note._id !== noteId
-      );
+      // state.notes = state.notes.filter((note) => note._id !== noteId);
+      // state.pinnedNotes = state.pinnedNotes.filter(
+      //   (note) => note._id !== noteId
+      // );
     },
     [deleteNote.rejected]: (state, action) => {
       state.deleteNoteStatus = "failed";
