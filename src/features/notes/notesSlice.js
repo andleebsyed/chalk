@@ -7,6 +7,7 @@ import {
   DELETE_NOTE,
   FETCH_NOTES_DATA,
   REMOVE_FROM_PINNED,
+  REMOVE_LABEL,
   UPDATE_NOTE,
 } from "../../services/api";
 
@@ -103,6 +104,21 @@ export const deleteNote = createAsyncThunk(
       console.log({ response }, " on deleting a note");
       return { data: response.data, noteId };
     } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const removeLabel = createAsyncThunk(
+  "/label/remove",
+  async (labelId, thunkAPI) => {
+    try {
+      console.log({ labelId }, "in thunk before op");
+      const response = await axios.post(REMOVE_LABEL, labelId);
+      console.log({ response }, "on removing label");
+      return { labelId };
+    } catch (error) {
+      console.log({ error });
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -287,6 +303,28 @@ export const notesSlice = createSlice({
     [deleteNote.rejected]: (state, action) => {
       state.deleteNoteStatus = "failed";
       state.error = action.payload.errorDetail;
+    },
+    [removeLabel.pending]: (state) => {
+      state.removeLabelStatus = "pending";
+    },
+    [removeLabel.fulfilled]: (state, action) => {
+      const { labelId } = action.payload.labelId;
+      console.log(action.payload, " whole payload");
+      console.log({ labelId }, " fulfilled");
+      state.removeLabelStatus = "success";
+
+      state.labels = state.labels.filter((label) => label._id !== labelId);
+      state.allNotes = state.allNotes.map((note) => {
+        note.labels = note.labels.filter(
+          (noteLabel) => noteLabel._id !== labelId
+        );
+        return note;
+      });
+    },
+    [removeLabel.rejected]: (state, action) => {
+      console.log("is error occuring");
+      state.removeLabelStatus = "failed";
+      state.error = action.payload;
     },
   },
 });
