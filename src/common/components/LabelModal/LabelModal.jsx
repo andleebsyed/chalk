@@ -12,8 +12,11 @@ export function LabelModal() {
     )
     const dispatch = useDispatch()
     async function keyPressHandler(e) {
+
         if (labelName?.length > 0 && labelName.trim()) {
             if (e.key === "Enter") {
+                e.preventDefault()
+                e.stopPropagation()
                 await dispatch(addLabel({ labelName }))
                 inputEl.current.value = ""
             }
@@ -32,6 +35,7 @@ export function LabelModal() {
     }
 
     function checkboxHandler({ checked, clickedLabel }) {
+
         // if (chosenLabelComponent !== "editNote") {
         //     dispatch(setChosenLabelComponent({ component: "createNote" }))
         // }
