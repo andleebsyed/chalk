@@ -1,11 +1,12 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router"
 import { EditNote } from "./EditNote"
-import { removeLabel } from "./notesSlice"
+import { fetchNotesData, removeLabel } from "./notesSlice"
 import { ShowNote } from "./ShowNote"
 export function SingleLabelNotes() {
-    const { allNotes, labels } = useSelector(state => state.notes)
+    const { allNotes, labels, notesFetchstatus } = useSelector(state => state.notes)
+    const { authSetupStatus } = useSelector(state => state.auth)
     const { labelId } = useParams()
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -16,23 +17,46 @@ export function SingleLabelNotes() {
         navigate('/home')
 
     }
+    useEffect(() => {
+        if (notesFetchstatus === "idle" && authSetupStatus) {
+            dispatch(fetchNotesData())
+        }
+
+    }, [notesFetchstatus, authSetupStatus])
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
             {label &&
                 <div className="flex my-2">
-                    <p className="m-2 self-start text-lg font-bold text-blue">{label.labelName}</p>
-                    <button onClick={deleteLabelHandler} className="ml-auto mr-2 p-2 rounded bg-red-600 bg-opacity-50 hover:bg-opacity-100 font-bold">Delete Label</button>
+                    <p className="m-2 self-start text-lg font-medium p-2 rounded bg-selected-navitem-light dark:bg-selected-navitem-dark">{label.labelName}</p>
+                    <button onClick={deleteLabelHandler} className="ml-auto mr-2 p-2 rounded bg-red-600 font-medium">Delete Label</button>
 
                 </div>
             }
-            <div className="flex flex-wrap justify-center sm:justify-start">
+            {notesFetchstatus === "success" &&
+                <div className="">
+                    {thisLabelNotes.length > 0 ?
+                        <div className="flex flex-wrap justify-center sm:justify-start">
 
-                {thisLabelNotes.map(singleLabelNote =>
-                    <div key={singleLabelNote?._id}>
-                        <ShowNote note={singleLabelNote} />
-                    </div>
-                )}
-            </div>
+                            {thisLabelNotes.map(singleLabelNote =>
+                                <div key={singleLabelNote?._id}>
+                                    <ShowNote note={singleLabelNote} />
+                                </div>
+                            )
+
+                            }
+                        </div> :
+
+                        <div className="flex justify-center items-center min-h-[50vh]">
+                            <h1 className="s text-lg font-medium ">No notes in this label</h1>
+
+                        </div>
+                    }
+
+
+                </div>
+
+            }
+
             <EditNote />
         </div>
     )
