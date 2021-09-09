@@ -12,7 +12,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(colorTheme)}
-      className="outline-none self-center ml-auto"
+      className="outline-none self-center"
     >
       {colorTheme === "dark" ? (
         <IoMoonOutline size={28} />
@@ -33,12 +33,12 @@ export function Header() {
       <div className="flex justify-between">
         <Navbar />
         <Link to="/home" className="self-center">
-          <p className="ml-1 self-center text-blue font-bold text-xl">
+          <p className="m-1 self-center text-blue font-bold text-xl">
             Chalk
           </p>
         </Link>
       </div>
-      <div className="self-center  rounded-lg flex p-1  bg-white border dark:border-opacity-0 border-black">
+      <div className="self-center rounded-lg flex p-1  bg-white border dark:border-opacity-0 border-black">
         <div>
           <FiSearch size={28} className=" hidden sm:inline mr-2 dark:text-black  " />
         </div>

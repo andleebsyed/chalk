@@ -23,7 +23,10 @@ const App = () => {
     <main className="text-black dark:text-white">
       {!authorized ? (
         <div className="p-2  flex    min-w-screen h-9">
-          <ThemeToggle />
+          <div className="ml-auto">
+            <ThemeToggle />
+          </div>
+
         </div>)
         : (
           <Header />
