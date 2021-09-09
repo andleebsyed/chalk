@@ -19,10 +19,32 @@ const App = () => {
     setUpAuthHeaderForServiceCalls(localStorage.getItem("token"));
     dispatch(setAuthSetup());
   }, [dispatch, navigate]);
+
+  function Redirector(props) {
+    if (authorized) {
+      return (
+        <Route
+          {...props}
+          element={
+            <Homepage />
+          }
+        />
+      );
+    } else {
+      return (
+        <Route
+          {...props}
+          element={
+            <Login />
+          }
+        />
+      );
+    }
+  }
   return (
     <main className="text-black dark:text-white">
       {!authorized ? (
-        <div className="p-2  flex    min-w-screen h-9">
+        <div className="p-2  flex min-w-screen h-9">
           <div className="ml-auto">
             <ThemeToggle />
           </div>
@@ -35,8 +57,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={authorized ? <Homepage /> : <Landing />} />
         <Route path="/home" element={<Homepage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Redirector path="/login" element={<Login />} />
+        <Redirector path="/signup" element={<Signup />} />
         <Route path="/account" element={<Account />} />
         <Route path="/label/:labelId" element={<SingleLabelNotes />} />
       </Routes>
