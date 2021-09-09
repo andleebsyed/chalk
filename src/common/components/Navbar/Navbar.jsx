@@ -5,7 +5,7 @@ import { ImCancelCircle } from "react-icons/im";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeAuth } from "../../../features/auth/authSlice";
-import { MdLabel } from "react-icons/md";
+import { MdLabelOutline } from "react-icons/md";
 export function Navbar() {
   const [navbar, setNavbar] = useState(false);
   const { authorized } = useSelector(state => state.auth)
@@ -44,10 +44,13 @@ export function Navbar() {
           </NavLink>
           {labels?.map(label =>
             <NavLink to={`/label/${label._id}`} key={label._id}
-              className="nav-item nav-item-theme flex"
+              className="nav-item nav-item-theme"
               activeClassName="label-selected">
-              < MdLabel size={22} />
-              <p className="ml-2 text-center">{label.labelName}</p>
+              <div className="flex items-start">
+                < MdLabelOutline size={22} />
+                <p className="ml-2 text-center">{label.labelName}</p>
+              </div>
+
 
             </NavLink>
 
