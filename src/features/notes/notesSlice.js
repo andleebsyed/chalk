@@ -125,7 +125,7 @@ export const notesSlice = createSlice({
   name: "notesSlice",
   initialState: {
     notesFetchstatus: "idle",
-    allNotes: [],
+    allNotes: null,
     allNotesBackup: [],
     notes: [],
     pinnedNotes: [],
