@@ -220,7 +220,7 @@ export const notesSlice = createSlice({
       // );
     },
     [fetchNotesData.rejected]: (state, action) => {
-      state.notesFetchstatus = "error";
+      state.notesFetchstatus = "idle";
       state.error = action.payload?.message;
     },
     [addNote.pending]: (state) => {
