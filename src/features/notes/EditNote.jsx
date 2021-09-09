@@ -17,7 +17,6 @@ export function EditNote() {
         url: null,
         showStatus: "hidden",
     });
-    console.log({ error })
     useEffect(() => {
         if (noteToEdit) {
             dispatch(setUpLabelsInEditComponent({ labels: noteToEdit.labels }))
