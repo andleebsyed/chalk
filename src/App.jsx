@@ -7,18 +7,14 @@ import { Landing } from "./common/components/Landing";
 import { setAuthSetup } from "./features/auth/authSlice";
 import { Login } from "./features/auth/login/Login";
 import { Signup } from "./features/auth/signup/Signup";
-import { fetchNotesData } from "./features/notes/notesSlice";
 import { SingleLabelNotes } from "./features/notes/SingleLabelNotes";
 import { Account } from "./features/user/Account";
 import { setupAuthExceptionHandler, setUpAuthHeaderForServiceCalls } from "./services/users";
 const App = () => {
-  const { authorized, authSetupStatus } = useSelector(state => state.auth)
-  const { notesFetchstatus } = useSelector(state => state.notes)
-  console.log(authorized)
+  const { authorized } = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   useEffect(() => {
-    console.log("auth setter up and running")
     setupAuthExceptionHandler(dispatch, navigate);
     setUpAuthHeaderForServiceCalls(localStorage.getItem("token"));
     dispatch(setAuthSetup());
