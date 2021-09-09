@@ -159,7 +159,6 @@ export const notesSlice = createSlice({
     },
     setupNotes: (state, action) => {
       state.labels = action.payload.labels;
-      // state.notes = action.payload.notes
     },
     addToChosenLabels: (state, action) => {
       state.chosenLabels.push(action.payload.newChosenLabel);
@@ -169,7 +168,6 @@ export const notesSlice = createSlice({
       state.chosenLabels = state.chosenLabels.filter(
         (label) => label._id !== action.payload.removedLabel._id
       );
-      // state.choosenLabels.push(action.payload.newChosenLabel);
     },
     resetChosenLabels: (state) => {
       state.chosenLabels = [];
@@ -179,16 +177,10 @@ export const notesSlice = createSlice({
     },
     searchNotes: (state, action) => {
       const { searchTitle } = action.payload;
-      // state.allNotesBackup = state.allNotes;
       state.allNotes = state.allNotesBackup.filter((notes) =>
         notes.title.includes(searchTitle)
       );
-
-      // state.searchTitle = action.payload.searchTitle;
     },
-    // setChosenLabelComponent: (state, action) => {
-    //   state.chosenLabelsComponent = action.payload.component;
-    // },
   },
 
   extraReducers: {
@@ -220,12 +212,6 @@ export const notesSlice = createSlice({
         ?.slice()
         .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
       state.labels = sortedLabels;
-      // state.notes = action.payload.noteData.notes.filter(
-      //   (note) => note.pinned === false
-      // );
-      // state.pinnedNotes = action.payload.noteData.notes.filter(
-      //   (note) => note.pinned === true
-      // );
     },
     [fetchNotesData.rejected]: (state, action) => {
       state.notesFetchstatus = "idle";
@@ -236,7 +222,6 @@ export const notesSlice = createSlice({
     },
     [addNote.fulfilled]: (state, action) => {
       state.status = "success";
-      // state.notes.push(action.payload.newSavedNote);
       state.allNotes.push(action.payload.newSavedNote);
       state.allNotes = state.allNotes
         ?.slice()
@@ -247,7 +232,6 @@ export const notesSlice = createSlice({
     [addNote.rejected]: (state, action) => {
       state.status = "failed";
       state.error = action.payload;
-      // state.notes.push(action.payload.newNote);
     },
     [removeFromPinned.pending]: (state) => {
       state.removePinStatus = "pending";
@@ -258,10 +242,6 @@ export const notesSlice = createSlice({
         (note) => note._id === action.payload.unPinnedNote._id
       );
       state.allNotes[unPinnedIndex] = action.payload.unPinnedNote;
-      // state.pinnedNotes = state.pinnedNotes.filter(
-      //   (pinnedNote) => pinnedNote._id !== action.payload.unPinnedNote._id
-      // );
-      // state.notes.push(action.payload.unPinnedNote);
     },
     [removeFromPinned.rejected]: (state, action) => {
       state.removePinStatus = "failed";
@@ -276,10 +256,6 @@ export const notesSlice = createSlice({
         (note) => note._id === action.payload.pinnedNote._id
       );
       state.allNotes[pinnedIndex] = action.payload.pinnedNote;
-      // state.notes = state.notes.filter(
-      //   (note) => note._id !== action.payload.pinnedNote._id
-      // );
-      // state.pinnedNotes.push(action.payload.pinnedNote);
     },
     [updateNote.pending]: (state) => {
       state.updateNoteStatus = "pending";
@@ -291,8 +267,6 @@ export const notesSlice = createSlice({
         (note) => note._id === updatedNote._id
       );
       state.allNotes[updatedNoteIndex] = updatedNote;
-      // state.notes = state.allNotes.filter((note) => note.pinned === false);
-      // state.pinnedNotes = state.allNotes.filter((note) => note.pinned === true);
     },
     [updateNote.rejected]: (state, action) => {
       state.updateNoteStatus = "failed";
@@ -305,16 +279,8 @@ export const notesSlice = createSlice({
       state.deleteNoteStatus = "success";
       console.log(action.payload);
       const noteId = action.payload.noteId.noteId;
-      // console.log(noteId);
       state.allNotes = state.allNotes.filter((note) => note._id !== noteId);
-      // state.allNotes = state.filteredNotes
-      //   ?.slice()
-      //   .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
       state.allNotesBackup = state.allNotes;
-      // state.notes = state.notes.filter((note) => note._id !== noteId);
-      // state.pinnedNotes = state.pinnedNotes.filter(
-      //   (note) => note._id !== noteId
-      // );
     },
     [deleteNote.rejected]: (state, action) => {
       state.deleteNoteStatus = "failed";
