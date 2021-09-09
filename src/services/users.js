@@ -16,10 +16,9 @@ export function setupAuthExceptionHandler(dispatch, navigate) {
     (response) => response,
     (error) => {
       if (error?.response?.status === UNAUTHORIZED) {
-        console.log("not authorixed");
-        localStorage.clear();
+        localStorage.removeItem("userId");
+        localStorage.removeItem("token");
         dispatch(removeAuth());
-        // dispatch(refreshUserPosts());
         navigate("/login");
       }
       return Promise.reject(error);
