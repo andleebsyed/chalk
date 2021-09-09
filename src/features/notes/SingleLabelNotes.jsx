@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router"
+import { Link } from "react-router-dom"
 import { EditNote } from "./EditNote"
 import { fetchNotesData, removeLabel } from "./notesSlice"
 import { ShowNote } from "./ShowNote"
@@ -24,6 +25,10 @@ export function SingleLabelNotes() {
 
     }, [notesFetchstatus, authSetupStatus])
     return (
+        // labelPresent === false ?
+        //     <div>
+        //         <p>Label not found</p>
+        //     </div> :
         <div className="flex flex-col ">
             {label &&
                 <div className="flex my-2">
@@ -47,7 +52,16 @@ export function SingleLabelNotes() {
                         </div> :
 
                         <div className="flex justify-center items-center min-h-[50vh]">
-                            <h1 className="s text-lg font-medium ">No notes in this label</h1>
+
+                            {label ? <h1 className="s text-lg font-medium ">No notes in this label</h1> :
+                                <div>
+                                    <h1 className="text-lg font-medium text-center">Label not found</h1>
+                                    <Link to="/">
+                                        <p className="p-4 m-4 bg-selected-navitem-light dark:bg-selected-navitem-dark rounded">Go Back to Homepage</p>
+                                    </Link>
+                                </div>
+
+                            }
 
                         </div>
                     }
