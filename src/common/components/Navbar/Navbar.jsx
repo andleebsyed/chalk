@@ -19,7 +19,7 @@ export function Navbar() {
   }
   return (
     <div className="self-center mt-2">
-      <button className="" onClick={() => setNavbar(!navbar)}>
+      <button onClick={() => setNavbar(!navbar)}>
         <FiMenu size={28} />
       </button>
       <nav

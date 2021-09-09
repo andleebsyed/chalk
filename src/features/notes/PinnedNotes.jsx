@@ -7,8 +7,8 @@ export function PinnedNotes() {
 
     return (
         pinnedNotes?.length !== 0 &&
-        <>
-            <h1 className="text-blue font-bold self-center">Pinned Notes</h1>
+        <div className="flex flex-col">
+            <h1 className="self-center font-bold text-yellow-main">Pinned</h1>
             <div className="flex flex-wrap justify-center sm:justify-start">
                 {
                     pinnedNotes?.map(note =>
@@ -18,6 +18,6 @@ export function PinnedNotes() {
                     )
                 }
             </div>
-        </>
+        </div>
     )
 }
