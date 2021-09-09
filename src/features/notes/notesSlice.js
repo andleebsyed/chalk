@@ -198,6 +198,9 @@ export const notesSlice = createSlice({
     [addLabel.fulfilled]: (state, action) => {
       state.addLabelStatus = "Label added";
       state.labels.push(action.payload.newLabel);
+      state.labels = state.labels
+        ?.slice()
+        .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
     },
     [addLabel.rejected]: (state, action) => {
       state.addLabelStatus = "";
@@ -235,6 +238,9 @@ export const notesSlice = createSlice({
       state.status = "success";
       // state.notes.push(action.payload.newSavedNote);
       state.allNotes.push(action.payload.newSavedNote);
+      state.allNotes = state.allNotes
+        ?.slice()
+        .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
       state.error = null;
       state.allNotesBackup = state.allNotes;
     },
@@ -301,6 +307,9 @@ export const notesSlice = createSlice({
       const noteId = action.payload.noteId.noteId;
       // console.log(noteId);
       state.allNotes = state.allNotes.filter((note) => note._id !== noteId);
+      // state.allNotes = state.filteredNotes
+      //   ?.slice()
+      //   .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
       state.allNotesBackup = state.allNotes;
       // state.notes = state.notes.filter((note) => note._id !== noteId);
       // state.pinnedNotes = state.pinnedNotes.filter(
