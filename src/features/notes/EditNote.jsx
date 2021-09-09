@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LabelModal } from "../../common/components/LabelModal/LabelModal";
 import { deleteNote, disableEditModal, removeFromChosenLabels, setUpLabelsInEditComponent, updateNote } from "./notesSlice";
 export function EditNote() {
-    const { noteToEdit, editNoteModalStatus, chosenLabels, chosenLabelsComponent, error } = useSelector(state => state.notes)
+    const { noteToEdit, editNoteModalStatus, chosenLabels, chosenLabelsComponent } = useSelector(state => state.notes)
     const dispatch = useDispatch()
     const formRef = useRef(null)
     const [noteData, setNoteData] = useState(null)
