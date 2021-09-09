@@ -5,9 +5,10 @@ import { CreateNote } from "../../features/notes/createNote";
 import { EditNote } from "../../features/notes/EditNote";
 import { fetchNotesData } from "../../features/notes/notesSlice";
 import { PinnedNotes } from "../../features/notes/PinnedNotes";
+import { SpinLoader } from "./Loader";
 export function Homepage() {
   const dispatch = useDispatch()
-  const { notesFetchstatus } = useSelector(state => state.notes)
+  const { notesFetchstatus, allNotes } = useSelector(state => state.notes)
   const { authSetupStatus } = useSelector(state => state.auth)
   useEffect(() => {
     if (notesFetchstatus === "idle" && authSetupStatus) {
@@ -19,9 +20,15 @@ export function Homepage() {
   return (
     <div className="flex flex-col ">
       <CreateNote />
-      <PinnedNotes />
-      <Notes />
-      <EditNote />
+      {allNotes ?
+        <div>
+          <PinnedNotes />
+          <Notes />
+          <EditNote />
+        </div>
+        :
+        <SpinLoader />
+      }
 
     </div>
   );
