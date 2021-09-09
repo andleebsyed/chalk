@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { SpinLoader } from "../../common/components/Loader";
 import { PasswordHandler } from "./components/PasswordHandler";
 import { ProfileData } from "./components/ProfileDetails";
 import { fetchAccount } from "./userSlice";
@@ -14,7 +15,9 @@ export function Account() {
     }, [accountStatus, authSetupStatus])
     return (
         account === null ?
-            <div>loading</div> :
+            <div className="mt-40">
+                <SpinLoader />
+            </div> :
             <div>
                 <h1 className="text-blue text-2xl font-bold m-2">{account.name}</h1>
                 <div className="flex flex-col breakpoint-acc:flex-row justify-around  ">
