@@ -67,7 +67,7 @@ export function LabelModal() {
                         <p className="mt-2">Add a Label</p>
                     </div>
 
-                    <button className="ml-auto p-1  rounded-full text-gray-500 dark:text-white hover:bg-gray-500 hover:bg-opacity-40" onClick={(e) => { e.preventDefault(); setModalStatus(false) }}>
+                    <button className="ml-auto p-1  rounded-full text-gray-500  hover:text-red-600 " onClick={(e) => { e.preventDefault(); setModalStatus(false) }}>
                         <GiCancel size={26} />
                     </button>
                 </div>

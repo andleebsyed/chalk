@@ -21,7 +21,7 @@ export function ShowNote({ note }) {
 
             <div className="flex flex-col p-2 outline-none  " >
                 <section className="flex mb-1">
-                    <input type="text" placeholder="Title" className={`h-[36px] w-full p-2 outline-none font-bold bg-white dark:bg-dark-1`}
+                    <input type="text" placeholder="Title" className={`h-[36px] w-full p-2   outline-none font-medium bg-white dark:bg-dark-1`}
                         value={note?.title}
                         readOnly
                         required />
