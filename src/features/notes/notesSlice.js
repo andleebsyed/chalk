@@ -28,7 +28,6 @@ export const fetchNotesData = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const response = await axios.post(FETCH_NOTES_DATA);
-      console.log({ response });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -39,7 +38,6 @@ export const addNote = createAsyncThunk(
   "/note/add",
   async ({ formData }, thunkAPI) => {
     try {
-      // console.log("data coming or not ", { formData });
       const response = await axios.post(ADD_NOTE, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -181,6 +179,7 @@ export const notesSlice = createSlice({
     },
     searchNotes: (state, action) => {
       const { searchTitle } = action.payload;
+      // state.allNotesBackup = state.allNotes;
       state.allNotes = state.allNotesBackup.filter((notes) =>
         notes.title.includes(searchTitle)
       );
@@ -209,9 +208,15 @@ export const notesSlice = createSlice({
     },
     [fetchNotesData.fulfilled]: (state, action) => {
       state.notesFetchstatus = "success";
-      state.allNotes = action.payload.noteData.notes;
-      state.allNotesBackup = action.payload.noteData.notes;
-      state.labels = action.payload.noteData.labels;
+      const sortedNotes = action.payload.noteData.notes
+        ?.slice()
+        .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+      state.allNotesBackup = sortedNotes;
+      state.allNotes = sortedNotes;
+      const sortedLabels = action.payload.noteData.labels
+        ?.slice()
+        .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+      state.labels = sortedLabels;
       // state.notes = action.payload.noteData.notes.filter(
       //   (note) => note.pinned === false
       // );
@@ -231,6 +236,7 @@ export const notesSlice = createSlice({
       // state.notes.push(action.payload.newSavedNote);
       state.allNotes.push(action.payload.newSavedNote);
       state.error = null;
+      state.allNotesBackup = state.allNotes;
     },
     [addNote.rejected]: (state, action) => {
       state.status = "failed";
@@ -295,6 +301,7 @@ export const notesSlice = createSlice({
       const noteId = action.payload.noteId.noteId;
       // console.log(noteId);
       state.allNotes = state.allNotes.filter((note) => note._id !== noteId);
+      state.allNotesBackup = state.allNotes;
       // state.notes = state.notes.filter((note) => note._id !== noteId);
       // state.pinnedNotes = state.pinnedNotes.filter(
       //   (note) => note._id !== noteId
