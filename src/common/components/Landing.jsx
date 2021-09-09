@@ -4,14 +4,14 @@ import landing from "../../assets/landing.svg";
 export function Landing() {
   const navigate = useNavigate()
   return (
-    <div className="flex flex-col min-h-screen  justify-center ">
-      <div className="flex flex-col-reverse sm:flex-row">
-        <img src={landing} className="mr-4 sm:w-[50%] sm:h-[50%] self-start" />
-        <div className="m-2">
-          <h1 className=" font-extrabold text-4xl  text-yellow-main self-end">
+    <div className="flex flex-col min-h-[100vh-36px] sm:justify-center ">
+      <div className="flex flex-col-reverse sm:flex-row ">
+        <img src={landing} className="mr-4 sm:w-[40%] sm:h-[40%] self-start" />
+        <div className="m-2  sm:ml-32">
+          <h1 className=" font-extrabold text-4xl lg:text-7xl  text-yellow-main self-end">
             Chalk
           </h1>
-          <h1 className="font-medium text-2xl">All notes at one place</h1>
+          <h1 className="font-medium text-2xl lg:text-3xl">All notes at one place</h1>
         </div>
       </div>
 
