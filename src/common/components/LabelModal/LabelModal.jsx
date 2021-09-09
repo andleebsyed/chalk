@@ -12,7 +12,7 @@ export function LabelModal() {
     )
     const dispatch = useDispatch()
     async function keyPressHandler(e) {
-        if (labelName.length > 0 && labelName.trim()) {
+        if (labelName?.length > 0 && labelName.trim()) {
             if (e.key === "Enter") {
                 await dispatch(addLabel({ labelName }))
                 inputEl.current.value = ""
