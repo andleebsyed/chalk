@@ -21,7 +21,9 @@ export function LabelModal() {
 
 
     }
-    async function onClickHandler() {
+    async function onClickHandler(e) {
+        e.preventDefault()
+        e.stopPropagation()
         if (labelName.length > 0 && labelName.trim()) {
             await dispatch(addLabel({ labelName }))
             inputEl.current.value = ""
@@ -69,7 +71,7 @@ export function LabelModal() {
                         <GiCancel size={26} />
                     </button>
                 </div>
-                <div className=" max-h-[8rem] overflow-y-auto">
+                <div className=" max-h-[8rem] overflow-y-auto no-scrollbar">
                     {labels?.map((label) => (
                         <div className="relative" key={label._id}>
                             <input
@@ -82,19 +84,19 @@ export function LabelModal() {
                         </div>
                     ))}
                 </div>
-                <div className=" w-full p-0 flex justify-around ">
+                <div className="w-full  absolute bottom-0 right-0 left-0  flex">
 
                     <input
                         type="text"
                         id="input"
                         ref={inputEl}
                         placeholder="Add new..."
-                        className="bg-white dark:bg-dark-1 border dark:border-selected-navitem-dark border-selected-navitem-light outline-none"
+                        className="w-full bg-white dark:bg-dark-1 border dark:border-selected-navitem-dark border-selected-navitem-light outline-none"
                         onChange={(e) => setLabelName(e.target.value)}
                         onKeyPress={(e) => keyPressHandler(e)}
                     />
                     <button
-                        className="bg-selected-navitem-light dark:bg-selected-navitem-dark p-2 outline-none"
+                        className="bg-selected-navitem-light dark:bg-selected-navitem-dark p-1  ml-auto outline-none"
                         onClick={(e) => onClickHandler(e)}
                     >
                         Add
