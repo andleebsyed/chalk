@@ -4,6 +4,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { Header, ThemeToggle } from "./common/components/Header";
 import { Homepage } from "./common/components/Homepage";
 import { Landing } from "./common/components/Landing";
+import { PageNotFound } from "./common/components/PageNotFound";
 import { setAuthSetup } from "./features/auth/authSlice";
 import { Login } from "./features/auth/login/Login";
 import { Signup } from "./features/auth/signup/Signup";
@@ -61,6 +62,7 @@ const App = () => {
         <Redirector path="/signup" element={<Signup />} />
         <Route path="/account" element={<Account />} />
         <Route path="/label/:labelId" element={<SingleLabelNotes />} />
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </main>
   );
