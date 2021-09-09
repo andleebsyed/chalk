@@ -61,7 +61,7 @@ export const userSlice = createSlice({
       state.account = action.payload.account;
     },
     [fetchAccount.rejected]: (state, action) => {
-      state.accountStatus = "error";
+      state.accountStatus = "idle";
       state.error = action.payload;
     },
     [updateAccount.pending]: (state) => {
