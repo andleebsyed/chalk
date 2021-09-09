@@ -42,7 +42,6 @@ export function Navbar() {
           >
             <li>Home</li>
           </NavLink>
-          {/* <li className="nav-item nav-item-theme">Labels</li> */}
           {labels?.map(label =>
             <NavLink to={`/label/${label._id}`} key={label._id}
               className="nav-item nav-item-theme flex"

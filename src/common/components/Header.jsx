@@ -12,7 +12,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(colorTheme)}
-      className="outline-none self-center"
+      className="outline-none self-center ml-auto"
     >
       {colorTheme === "dark" ? (
         <IoMoonOutline size={28} />
@@ -23,30 +23,25 @@ export function ThemeToggle() {
   );
 }
 export function Header() {
-  // const {allNotes} = useSelector(state => state.notes)
   const dispatch = useDispatch()
   function searchHandler(e) {
     const searchTitle = e.target.value;
-    // const matchedNotes = allNotes.filter(note => note.title.includes(noteToMatch))
     dispatch(searchNotes({ searchTitle }))
   }
   return (
     <div className="p-2  border-b border-opacity-10 min-w-screen  flex justify-between  sticky top-0 bg-white dark:bg-dark-1">
       <div className="flex justify-between">
         <Navbar />
-        <Link to="/" className="self-center">
+        <Link to="/home" className="self-center">
           <p className="ml-1 self-center text-blue font-bold text-xl">
             Chalk
           </p>
         </Link>
       </div>
       <div className="self-center  rounded-lg flex p-1  bg-white border dark:border-opacity-0 border-black">
-        {/* <button className=" hidden sm:inline mr-2 dark:text-black  "> */}
         <div>
           <FiSearch size={28} className=" hidden sm:inline mr-2 dark:text-black  " />
         </div>
-
-        {/* </button> */}
         <input
           type="text"
           className="rounded-lg h-9 text-black   outline-none sm:w-[450px] "
