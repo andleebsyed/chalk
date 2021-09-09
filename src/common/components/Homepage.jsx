@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Notes } from "../../features/notes/AllNotes";
+import { UnPinnedNotes } from "../../features/notes/UnPinnedNotes";
 import { CreateNote } from "../../features/notes/createNote";
 import { EditNote } from "../../features/notes/EditNote";
 import { fetchNotesData } from "../../features/notes/notesSlice";
@@ -23,7 +23,7 @@ export function Homepage() {
       {allNotes ?
         <div>
           <PinnedNotes />
-          <Notes />
+          <UnPinnedNotes />
           <EditNote />
         </div>
         :

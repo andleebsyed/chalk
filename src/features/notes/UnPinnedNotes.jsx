@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { ShowNote } from "./ShowNote";
-export function Notes() {
+export function UnPinnedNotes() {
   const { allNotes } = useSelector(state => state.notes)
   const unPinnedNotes = allNotes.filter(note => note.pinned === false)
   return (
