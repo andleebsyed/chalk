@@ -156,6 +156,7 @@ export const notesSlice = createSlice({
       state.noteToEdit = null;
       state.chosenLabelsComponent = "createNote";
       state.chosenLabels = [];
+      state.updateNoteStatus = "idle";
     },
     setupNotes: (state, action) => {
       state.labels = action.payload.labels;
