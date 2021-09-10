@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import { RiPushpin2Line } from 'react-icons/ri'
-import { IoColorPaletteSharp } from 'react-icons/io5'
+// import { IoColorPaletteSharp } from 'react-icons/io5'
 import { BiImageAlt } from 'react-icons/bi'
 import { RiPushpin2Fill } from 'react-icons/ri'
 import { LabelModal } from "../../common/components/LabelModal/LabelModal"
@@ -40,9 +40,7 @@ export function CreateNote() {
     // const noteColors = ["palette-blue", "palette-yellow", "palette-red", "palette-purple"]
     async function submitNote(e) {
         e.preventDefault()
-        console.log("out choosen labels ", chosenLabels)
         setNoteData({ ...noteData, color: "white" })
-        console.log({ noteData }, "note data")
         let formData = new FormData();
         formData.append("title", noteData.title)
         formData.append("content", noteData.content)
@@ -114,9 +112,9 @@ export function CreateNote() {
                 </div>
 
                 <section className="p-2 flex w-[50%] justify-between mt-1">
-                    <div title="Change color" className="group" >
+                    {/* <div title="Change color" className="group" >
                         <IoColorPaletteSharp size={22} />
-                        {/* <div className=" relative hidden group-hover:block">
+                        <div className=" relative hidden group-hover:block">
                           
                             <div className="flex absolute border-2 rounded border-selected-navitem-light dark:border-selected-navitem-dark">
                                 <div onClick={() => setNoteColor(() => localStorage.getItem("theme") === "dark" ? "black" : "white")} className={`${localStorage.getItem("theme") === "dark" ? "text-black" : "text-white"} border border-black dark:border-white rounded-full w-8 h-8 m-1`}>
@@ -128,9 +126,9 @@ export function CreateNote() {
                         
                                 )}
                             </div>
-                        </div> */}
+                        </div>
 
-                    </div>
+                    </div> */}
 
                     {/* <button title="Add Label">
                         <MdLabel size={22} />
