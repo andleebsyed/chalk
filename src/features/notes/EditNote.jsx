@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LabelModal } from "../../common/components/LabelModal/LabelModal";
 import { deleteNote, disableEditModal, removeFromChosenLabels, setUpLabelsInEditComponent, updateNote } from "./notesSlice";
 export function EditNote() {
-    const { noteToEdit, editNoteModalStatus, chosenLabels, chosenLabelsComponent, updateNoteStatus } = useSelector(state => state.notes)
+    const { noteToEdit, editNoteModalStatus, chosenLabels, chosenLabelsComponent, updateNoteStatus, updateNoteError } = useSelector(state => state.notes)
     const dispatch = useDispatch()
     const formRef = useRef(null)
     const [noteData, setNoteData] = useState(null)
@@ -92,11 +92,7 @@ export function EditNote() {
     return (
         editNoteModalStatus && noteData && <div onClick={(e) => closeModalHandler(e)} className="  fixed top-0 left-0 bottom-0 right-0  bg-dark-1 bg-opacity-50 flex items-center justify-center min-h-screen min-w-screen ">
             <div className={`self-center overflow-y-scroll no-scrollbar   max-h-[80%]  p-2 w-[90%] bg-white dark:bg-dark-1  max-w-[600px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `} onClick={(e) => e.stopPropagation()}>
-                {/* {error && <p className="text-red-600 font-bold pl-3">Could not save the note!! Your image size might be too big. Try changing the image or simply try again.</p>} */}
-                {updateNoteStatus === "success" && <p className="text-blue font-bold">Note updated successfully</p>}
-                {updateNoteStatus === "pending" && <p className="text-palette-yellow font-bold">Please wait while we update the note...</p>}
-                {/* <button onClick={(e) => closeModalHandler(e)} className="bg-red-600 dark:bg-red-600 bg-opacity-40 rounded p-2 w-12
-                    " ><GiCancel size={26} /></button> */}
+                {updateNoteError && <p className="text-red-600 font-bold pl-3">Could not update the note!! Your image size might be too big. Try changing the image or simply try again.</p>}
                 <div className="flex">
                     <button className=" p-1  rounded-full text-gray-500 dark:text-white hover:text-red-600 dark:hover:text-red-600" onClick={(e) => closeModalHandler(e)}>
                         <GiCancel size={26} />
@@ -169,7 +165,13 @@ export function EditNote() {
 
 
                     </section>
-                    <input type="submit" value="Edit Note" className="ml-auto bg-selected-navitem-light dark:bg-selected-navitem-dark rounded p-2 cursor-pointer" />
+                    <div className="flex">
+                        {updateNoteStatus === "success" && <p className="text-blue font-bold">Updated successfully</p>}
+
+                        {updateNoteStatus === "pending" && <p className="text-palette-yellow font-bold">Updating your note...</p>}
+                        <input type="submit" value="Edit Note" className="ml-auto bg-selected-navitem-light dark:bg-selected-navitem-dark rounded p-2 cursor-pointer" />
+
+                    </div>
                 </form>
             </div>
         </div>

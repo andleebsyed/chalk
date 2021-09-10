@@ -77,8 +77,6 @@ export function CreateNote() {
         // dark:bg-${noteColor === ("white" || "off-white") ? "dark-1" : noteColor}
         <div className={`self-center m-8 p-2 w-[90%] bg-white dark:bg-dark-1  max-w-[600px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `}>
             {error && <p className="text-red-600 font-bold pl-3">Could not save the note!! Your image size might be too big. Try changing the image or simply try again.</p>}
-            {status === "success" && <p className="text-blue font-bold">Note saved successfully</p>}
-            {status === "pending" && <p className="text-palette-yellow font-bold">Please wait while we save your note...</p>}
             <form ref={formRef} className="flex flex-col p-2 outline-none  " onSubmit={(e) => submitNote(e)}>
                 <section className="flex mb-1">
                     <input type="text" placeholder="Title" className={`h-[36px] w-full p-2 outline-none bg-white dark:bg-dark-1`} onChange={(e) => setNoteData({ ...noteData, title: e.target.value })} required />
@@ -145,7 +143,17 @@ export function CreateNote() {
 
 
                 </section>
-                <input type="submit" value="Add Note" className="ml-auto bg-selected-navitem-light dark:bg-selected-navitem-dark rounded p-2 cursor-pointer" />
+                {/* {status === "success" && <p className="text-blue font-bold">Note saved successfully</p>}
+
+                {status === "pending" && <p className="text-palette-yellow font-bold">Please wait while we save your note...</p>} */}
+
+                <div className="flex">
+                    {status === "success" && <p className="text-blue font-bold">Note saved successfully</p>}
+
+                    {status === "pending" && <p className="text-palette-yellow font-bold">Please wait while we save your note...</p>}
+                    <input type="submit" value="Add Note" className="ml-auto bg-selected-navitem-light dark:bg-selected-navitem-dark rounded p-2 cursor-pointer" />
+
+                </div>
             </form>
         </div>
     )

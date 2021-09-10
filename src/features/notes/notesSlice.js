@@ -142,6 +142,7 @@ export const notesSlice = createSlice({
     updateNoteStatus: "idle",
     deleteNoteStatus: "idle",
     searchTitle: "",
+    updateNoteError: null,
   },
   reducers: {
     enableEditModal: (state, action) => {
@@ -271,7 +272,7 @@ export const notesSlice = createSlice({
     },
     [updateNote.rejected]: (state, action) => {
       state.updateNoteStatus = "failed";
-      state.error = action.payload;
+      state.updateNoteError = action.payload;
     },
     [deleteNote.pending]: (state) => {
       state.deleteNoteStatus = "idle";
