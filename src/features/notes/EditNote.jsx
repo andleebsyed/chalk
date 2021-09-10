@@ -3,13 +3,13 @@ import React, { useEffect, useRef, useState } from "react"
 import { BiImageAlt } from "react-icons/bi";
 import { GiCancel } from "react-icons/gi";
 import { TiDocumentDelete } from 'react-icons/ti'
-import { IoColorPaletteSharp } from "react-icons/io5";
+// import { IoColorPaletteSharp } from "react-icons/io5";
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { LabelModal } from "../../common/components/LabelModal/LabelModal";
 import { deleteNote, disableEditModal, removeFromChosenLabels, setUpLabelsInEditComponent, updateNote } from "./notesSlice";
 export function EditNote() {
-    const { noteToEdit, editNoteModalStatus, chosenLabels, chosenLabelsComponent } = useSelector(state => state.notes)
+    const { noteToEdit, editNoteModalStatus, chosenLabels, chosenLabelsComponent, updateNoteStatus } = useSelector(state => state.notes)
     const dispatch = useDispatch()
     const formRef = useRef(null)
     const [noteData, setNoteData] = useState(null)
@@ -92,9 +92,9 @@ export function EditNote() {
     return (
         editNoteModalStatus && noteData && <div onClick={(e) => closeModalHandler(e)} className="  fixed top-0 left-0 bottom-0 right-0  bg-dark-1 bg-opacity-50 flex items-center justify-center min-h-screen min-w-screen ">
             <div className={`self-center overflow-y-scroll no-scrollbar   max-h-[80%]  p-2 w-[90%] bg-white dark:bg-dark-1  max-w-[600px] min-h-[152px] rounded-lg  box-shadow-light dark:box-shadow-dark `} onClick={(e) => e.stopPropagation()}>
-                {/* {error && <p className="text-red-600 font-bold pl-3">Could not save the note!! Your image size might be too big. Try changing the image or simply try again.</p>}
-            {status === "success" && <p className="text-blue font-bold">Note saved successfully</p>}
-            {status === "pending" && <p className="text-palette-yellow font-bold">Please wait while we save your note...</p>} */}
+                {/* {error && <p className="text-red-600 font-bold pl-3">Could not save the note!! Your image size might be too big. Try changing the image or simply try again.</p>} */}
+                {updateNoteStatus === "success" && <p className="text-blue font-bold">Note updated successfully</p>}
+                {updateNoteStatus === "pending" && <p className="text-palette-yellow font-bold">Please wait while we update the note...</p>}
                 {/* <button onClick={(e) => closeModalHandler(e)} className="bg-red-600 dark:bg-red-600 bg-opacity-40 rounded p-2 w-12
                     " ><GiCancel size={26} /></button> */}
                 <div className="flex">
@@ -138,9 +138,9 @@ export function EditNote() {
                     </div>
 
                     <section className="p-2 flex w-[50%] justify-between mt-1">
-                        <div title="Change color">
+                        {/* <div title="Change color">
                             <IoColorPaletteSharp size={22} />
-                            {/* <div className=" relative hidden group-hover:block">
+                            <div className=" relative hidden group-hover:block">
                           
                             <div className="flex absolute border-2 rounded border-selected-navitem-light dark:border-selected-navitem-dark">
                                 <div onClick={() => setNoteColor(() => localStorage.getItem("theme") === "dark" ? "black" : "white")} className={`${localStorage.getItem("theme") === "dark" ? "text-black" : "text-white"} border border-black dark:border-white rounded-full w-8 h-8 m-1`}>
@@ -152,10 +152,11 @@ export function EditNote() {
                         
                                 )}
                             </div>
-                        </div> */}
-
                         </div>
+
+                        </div> */}
                         <LabelModal />
+
 
                         <label className="cursor-pointer" title="Choose Image">
                             <BiImageAlt size={22} />
