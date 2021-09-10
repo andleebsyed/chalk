@@ -178,7 +178,7 @@ export const notesSlice = createSlice({
     searchNotes: (state, action) => {
       const { searchTitle } = action.payload;
       state.allNotes = state.allNotesBackup.filter((notes) =>
-        notes.title.includes(searchTitle)
+        notes.title.toLowerCase().includes(searchTitle.toLowerCase())
       );
     },
     resetNotes: (state) => {

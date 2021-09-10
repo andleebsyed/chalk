@@ -136,8 +136,7 @@ export function CreateNote() {
                         <BiImageAlt size={22} />
                         <input type="file" id="img"
                             name="img"
-                            // accept="image/*"
-                            accept="image/gif,image/jpeg,image/jpg,image/png"
+                            accept="image/*"
                             className="hidden" onChange={fileUploadHandler} />
                     </label>
 
