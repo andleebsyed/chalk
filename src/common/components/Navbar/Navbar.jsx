@@ -6,15 +6,20 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeAuth } from "../../../features/auth/authSlice";
 import { MdLabelOutline } from "react-icons/md";
+import { resetNotes } from "../../../features/notes/notesSlice";
+import { resetUser } from "../../../features/user/userSlice";
 export function Navbar() {
   const [navbar, setNavbar] = useState(false);
   const { authorized } = useSelector(state => state.auth)
   const { labels } = useSelector(state => state.notes)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  function logoutHandler() {
-    localStorage.clear()
+  async function logoutHandler() {
+    localStorage.removeItem("userId")
+    localStorage.removeItem("token")
     dispatch(removeAuth())
+    dispatch(resetNotes())
+    dispatch(resetUser())
     navigate('/', { replace: true })
   }
   return (

@@ -10,7 +10,6 @@ import {
   REMOVE_LABEL,
   UPDATE_NOTE,
 } from "../../services/api";
-
 export const addLabel = createAsyncThunk(
   "/note/addlabel",
   async (labelName, thunkAPI) => {
@@ -132,7 +131,6 @@ export const notesSlice = createSlice({
     labels: null,
     chosenLabels: [],
     chosenLabelsComponent: "createNote",
-
     error: null,
     status: "idle",
     removePinStatus: "idle",
@@ -182,6 +180,26 @@ export const notesSlice = createSlice({
       state.allNotes = state.allNotesBackup.filter((notes) =>
         notes.title.includes(searchTitle)
       );
+    },
+    resetNotes: (state) => {
+      state.notesFetchstatus = "idle";
+      state.allNotes = null;
+      state.allNotesBackup = [];
+      state.notes = [];
+      state.pinnedNotes = [];
+      state.labels = null;
+      state.chosenLabels = [];
+      state.chosenLabelsComponent = "createNote";
+      state.error = null;
+      state.status = "idle";
+      state.removePinStatus = "idle";
+      state.pinNoteStatus = "idle";
+      state.editNoteModalStatus = false;
+      state.noteToEdit = null;
+      state.updateNoteStatus = "idle";
+      state.deleteNoteStatus = "idle";
+      state.searchTitle = "";
+      state.updateNoteError = null;
     },
   },
 
@@ -322,5 +340,6 @@ export const {
   setChosenLabelComponent,
   setUpLabelsInEditComponent,
   searchNotes,
+  resetNotes,
 } = notesSlice.actions;
 export default notesSlice.reducer;

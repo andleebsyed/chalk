@@ -5,7 +5,6 @@ import {
   UPDATE_ACCOUNT,
   UPDATE_PASSWORD,
 } from "../../services/api";
-
 export const fetchAccount = createAsyncThunk(
   "/user/account",
   async (thunkAPI) => {
@@ -51,7 +50,16 @@ export const userSlice = createSlice({
     updateAccountError: null,
     updatePasswordStatus: null,
   },
-  reducers: {},
+  reducers: {
+    resetUser: (state) => {
+      state.accountStatus = "idle";
+      state.account = null;
+      state.updateAccountStatus = "idle";
+      state.error = null;
+      state.updateAccountError = null;
+      state.updatePasswordStatus = null;
+    },
+  },
   extraReducers: {
     [fetchAccount.pending]: (state) => {
       state.accountStatus = "loading";
@@ -89,5 +97,5 @@ export const userSlice = createSlice({
     },
   },
 });
-
+export const { resetUser } = userSlice.actions;
 export default userSlice.reducer;
