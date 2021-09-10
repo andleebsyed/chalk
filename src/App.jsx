@@ -60,7 +60,7 @@ const App = () => {
         <Route path="/" element={authorized ? <Homepage /> : <Landing />} />
         <Route path="/home" element={<Homepage />} />
         <Redirector path="/login" element={<Login />} />
-        <Redirector path="/signup" element={<Signup />} />
+        <Route path="/signup" element={authorized ? <Homepage /> : <Signup />} />
         <Route path="/account" element={<Account />} />
         <Route path="/label/:labelId" element={<SingleLabelNotes />} />
         <Route path="/*" element={<PageNotFound />} />
