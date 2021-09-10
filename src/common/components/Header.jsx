@@ -12,7 +12,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(colorTheme)}
-      className="outline-none self-center"
+      className="ml-1 outline-none self-center"
     >
       {colorTheme === "dark" ? (
         <IoMoonOutline size={28} />
