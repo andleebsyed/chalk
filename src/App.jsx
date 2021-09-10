@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { Header, ThemeToggle } from "./common/components/Header";
+import { Header } from "./common/components/Header";
 import { Homepage } from "./common/components/Homepage";
 import { Landing } from "./common/components/Landing";
 import { PageNotFound } from "./common/components/PageNotFound";
+import { ThemeToggle } from "./common/components/ThemeToggle";
 import { setAuthSetup } from "./features/auth/authSlice";
 import { Login } from "./features/auth/login/Login";
 import { Signup } from "./features/auth/signup/Signup";

@@ -1,27 +1,11 @@
 import React from "react";
-import { HiOutlineLightBulb } from "react-icons/hi";
 import { FiSearch } from "react-icons/fi";
-import { IoMoonOutline } from "react-icons/io5";
-import { useTheme } from "../hooks/useTheme";
 import { Navbar } from "./Navbar/Navbar";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { searchNotes } from "../../features/notes/notesSlice";
-export function ThemeToggle() {
-  const [colorTheme, setTheme] = useTheme();
-  return (
-    <button
-      onClick={() => setTheme(colorTheme)}
-      className="ml-1 outline-none self-center"
-    >
-      {colorTheme === "dark" ? (
-        <IoMoonOutline size={28} />
-      ) : (
-        <HiOutlineLightBulb size={28} />
-      )}
-    </button>
-  );
-}
+import { ThemeToggle } from "./ThemeToggle";
+
 export function Header() {
   const dispatch = useDispatch()
   function searchHandler(e) {
