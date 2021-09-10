@@ -33,7 +33,7 @@ export function Header() {
       <div className="flex justify-between">
         <Navbar />
         <Link to="/home" className="self-center">
-          <p className="m-1 self-center text-blue font-bold text-xl">
+          <p className="m-1 self-center text-yellow-main font-bold text-xl">
             Chalk
           </p>
         </Link>
