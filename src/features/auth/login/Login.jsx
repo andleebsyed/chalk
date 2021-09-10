@@ -34,7 +34,6 @@ export function Login() {
     <div className="flex-col">
       <div className="flex-col">
         <div className=" flex justify-center ">
-          {/* insert border if you want to */}
           <main className="flex flex-col p-4 justify-between  mt-4 flex-1 max-w-sm  border-selected-navitem-light dark:border-selected-navitem-dark rounded">
             <h1 className="font-extrabold text-2xl ">Login to Chalk</h1>
             <form

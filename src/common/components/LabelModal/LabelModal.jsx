@@ -35,22 +35,12 @@ export function LabelModal() {
     }
 
     function checkboxHandler({ checked, clickedLabel }) {
-
-        // if (chosenLabelComponent !== "editNote") {
-        //     dispatch(setChosenLabelComponent({ component: "createNote" }))
-        // }
-        // else {
-        //     dispatch(setChosenLabelComponent({ component: "editNote" }))
-        // }
         if (checked) {
             dispatch(addToChosenLabels({ newChosenLabel: clickedLabel }))
         }
         else {
             dispatch(removeFromChosenLabels({ removedLabel: clickedLabel }))
         }
-
-
-
     }
 
     function checkIfLabelChecked(label) {

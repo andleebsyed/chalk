@@ -22,27 +22,6 @@ const App = () => {
     dispatch(setAuthSetup());
   }, [dispatch, navigate]);
 
-  function Redirector(props) {
-    if (authorized) {
-      return (
-        <Route
-          {...props}
-          element={
-            <Homepage />
-          }
-        />
-      );
-    } else {
-      return (
-        <Route
-          {...props}
-          element={
-            <Login />
-          }
-        />
-      );
-    }
-  }
   return (
     <main className="text-black dark:text-white">
       {!authorized ? (
@@ -59,7 +38,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={authorized ? <Homepage /> : <Landing />} />
         <Route path="/home" element={<Homepage />} />
-        <Redirector path="/login" element={<Login />} />
+        <Route path="/login" element={authorized ? <Homepage /> : <Login />} />
         <Route path="/signup" element={authorized ? <Homepage /> : <Signup />} />
         <Route path="/account" element={<Account />} />
         <Route path="/label/:labelId" element={<SingleLabelNotes />} />

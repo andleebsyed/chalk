@@ -143,9 +143,6 @@ export function CreateNote() {
 
 
                 </section>
-                {/* {status === "success" && <p className="text-blue font-bold">Note saved successfully</p>}
-
-                {status === "pending" && <p className="text-palette-yellow font-bold">Please wait while we save your note...</p>} */}
 
                 <div className="flex">
                     {status === "success" && <p className="text-blue font-bold">Note saved successfully</p>}

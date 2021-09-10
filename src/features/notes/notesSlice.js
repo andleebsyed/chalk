@@ -42,8 +42,6 @@ export const addNote = createAsyncThunk(
           "Content-Type": "multipart/form-data",
         },
       });
-
-      console.log("on adding a note ", { response });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -55,7 +53,6 @@ export const removeFromPinned = createAsyncThunk(
   async (noteId, thunkAPI) => {
     try {
       const response = await axios.post(REMOVE_FROM_PINNED, noteId);
-      console.log({ response }, " pin was removed");
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -68,7 +65,6 @@ export const addToPinned = createAsyncThunk(
   async (noteId, thunkAPI) => {
     try {
       const response = await axios.post(ADD_TO_PINNED, noteId);
-      console.log({ response }, " pin was added");
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -84,8 +80,6 @@ export const updateNote = createAsyncThunk(
           "Content-Type": "multipart/form-data",
         },
       });
-
-      console.log("on updating a note ", { response });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -98,7 +92,6 @@ export const deleteNote = createAsyncThunk(
     try {
       console.log(noteId);
       const response = await axios.post(DELETE_NOTE, noteId);
-      console.log({ response }, " on deleting a note");
       return { data: response.data, noteId };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -111,11 +104,9 @@ export const removeLabel = createAsyncThunk(
   async (labelId, thunkAPI) => {
     try {
       console.log({ labelId }, "in thunk before op");
-      const response = await axios.post(REMOVE_LABEL, labelId);
-      console.log({ response }, "on removing label");
+      await axios.post(REMOVE_LABEL, labelId);
       return { labelId };
     } catch (error) {
-      console.log({ error });
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -164,7 +155,6 @@ export const notesSlice = createSlice({
       state.chosenLabels.push(action.payload.newChosenLabel);
     },
     removeFromChosenLabels: (state, action) => {
-      console.log("is it coming here");
       state.chosenLabels = state.chosenLabels.filter(
         (label) => label._id !== action.payload.removedLabel._id
       );
@@ -297,7 +287,6 @@ export const notesSlice = createSlice({
     },
     [deleteNote.fulfilled]: (state, action) => {
       state.deleteNoteStatus = "success";
-      console.log(action.payload);
       const noteId = action.payload.noteId.noteId;
       state.allNotes = state.allNotes.filter((note) => note._id !== noteId);
       state.allNotesBackup = state.allNotes;
@@ -311,8 +300,6 @@ export const notesSlice = createSlice({
     },
     [removeLabel.fulfilled]: (state, action) => {
       const { labelId } = action.payload.labelId;
-      console.log(action.payload, " whole payload");
-      console.log({ labelId }, " fulfilled");
       state.removeLabelStatus = "success";
 
       state.labels = state.labels.filter((label) => label._id !== labelId);
@@ -324,7 +311,6 @@ export const notesSlice = createSlice({
       });
     },
     [removeLabel.rejected]: (state, action) => {
-      console.log("is error occuring");
       state.removeLabelStatus = "failed";
       state.error = action.payload;
     },

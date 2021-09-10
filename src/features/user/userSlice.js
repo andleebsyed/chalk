@@ -20,7 +20,6 @@ export const updateAccount = createAsyncThunk(
   "/user/update",
   async (newAccountDetails, thunkAPI) => {
     try {
-      console.log(newAccountDetails);
       const response = await axios.post(UPDATE_ACCOUNT, newAccountDetails);
       return response.data;
     } catch (error) {
@@ -33,7 +32,6 @@ export const updatePassword = createAsyncThunk(
   async (passwords, thunkAPI) => {
     try {
       const response = await axios.post(UPDATE_PASSWORD, passwords);
-      console.log({ response });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);

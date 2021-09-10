@@ -118,13 +118,11 @@ export function EditNote() {
                         <button className="relative top-11 left-1 bg-red-600 bg-opacity-40 rounded p-2 " onClick={(e) => { e.preventDefault(); setImageData({ url: null, showStatus: "hidden" }); setNoteData({ ...noteData, image: null }) }}> <GiCancel size={26} /></button>
 
                         <img
-                            // ref={imageRef}
                             alt="selected file"
                             src={imageData.url}
                             className={`${imageData.showStatus}  self-center mb-4`}
                         />
                     </div>
-                    {/* {imageData && <div className="overflow-y-scroll max-h-[30rem]" ><img src={imageData.url} /></div>} */}
                     <div className="flex flex-wrap">
                         {chosenLabelsComponent === "editNote" && chosenLabels?.map(chosenLabel => <div key={chosenLabel?._id} className="text-sm p-1 pt-1 flex rounded-lg m-1 bg-selected-navitem-light dark:bg-selected-navitem-dark">
                             <span className="self-center">{chosenLabel.labelName}</span>
