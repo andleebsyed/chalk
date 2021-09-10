@@ -1,4 +1,5 @@
-export const BASE_URL = "http://localhost:9000";
+// export const BASE_URL = "http://localhost:9000";
+export const BASE_URL = "https://chalk-be.andydev7.repl.co";
 export const FETCH_ACCOUNT = `${BASE_URL}/user/account`;
 export const UPDATE_ACCOUNT = `${BASE_URL}/user/update`;
 export const UPDATE_PASSWORD = `${BASE_URL}/user/updatepassword`;
