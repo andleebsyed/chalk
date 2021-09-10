@@ -59,12 +59,11 @@ export function LabelModal() {
 
     }
     return (
-        <div className="flex flex-col">
-            <button title="Add Label" onClick={(e) => { e.preventDefault(); setModalStatus(!modalStatus) }} className="self - center">
+        <div className="flex flex-col items-center">
+            <button title="Add Label" onClick={(e) => { e.preventDefault(); setModalStatus(!modalStatus) }} className="self-start">
                 < MdLabel size={22} />
             </button >
-            {/* ${chosenLabelsComponent === "editNote" ? 'top-[28rem]' : 'top-[16rem]'} */}
-            < section className={` absolute   bg-white dark:bg-dark-1 min-h-[13rem] p-2 box-shadow-light dark:box-shadow-dark ${modalStatus ? "block" : "hidden"} `
+            < section className={` relative top-4 bg-white dark:bg-dark-1 min-h-[13rem] p-2 box-shadow-light dark:box-shadow-dark ${modalStatus ? "block" : "hidden"} `
             }>
                 <div className="relative flex min-w-[14rem] mb-1 overflow-y-auto">
                     <div className="flex flex-col">
