@@ -141,7 +141,6 @@ export const notesSlice = createSlice({
       state.chosenLabels = [];
     },
     disableEditModal: (state) => {
-      console.log("coming to diable n=moal");
       state.editNoteModalStatus = false;
       state.noteToEdit = null;
       state.chosenLabelsComponent = "createNote";
