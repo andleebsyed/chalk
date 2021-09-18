@@ -90,7 +90,6 @@ export const deleteNote = createAsyncThunk(
   "/note/delete",
   async (noteId, thunkAPI) => {
     try {
-      console.log(noteId);
       const response = await axios.post(DELETE_NOTE, noteId);
       return { data: response.data, noteId };
     } catch (error) {
@@ -103,7 +102,6 @@ export const removeLabel = createAsyncThunk(
   "/label/remove",
   async (labelId, thunkAPI) => {
     try {
-      console.log({ labelId }, "in thunk before op");
       await axios.post(REMOVE_LABEL, labelId);
       return { labelId };
     } catch (error) {

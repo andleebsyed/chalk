@@ -51,7 +51,6 @@ export function Signup() {
       const response = await UserSignUp(userDetails);
       setUpAuthHeaderForServiceCalls(response.token);
       setButtonText("Sign Up");
-      dispatch(setAuth());
       if (response.status) {
         setUpAuthHeaderForServiceCalls(response.token);
         localStorage.setItem("token", response.token);
@@ -69,7 +68,6 @@ export function Signup() {
   }
   return (
     <div className=" flex justify-center ">
-      {/* insert border if u want to  */}
       <main className="flex flex-col p-4 justify-between  mt-4 flex-1 max-w-sm  border-selected-navitem-light dark:border-selected-navitem-dark rounded">
         <h1 className="font-extrabold text-2xl ">Create your account</h1>
         <p className={`${error.status} text-red-600 text-l font-bold`}>{error.message}</p>
