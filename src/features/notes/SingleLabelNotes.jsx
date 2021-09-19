@@ -36,7 +36,7 @@ export function SingleLabelNotes() {
                 {label &&
                     <div className="flex my-2">
                         <p className="m-2 self-start text-lg font-medium p-2 rounded bg-selected-navitem-light dark:bg-selected-navitem-dark">{label.labelName}</p>
-                        <button onClick={deleteLabelHandler} className="ml-auto mr-2 p-2 rounded bg-red-600 font-medium">Delete Label</button>
+                        <button onClick={deleteLabelHandler} className="ml-auto mr-2 p-2 text-white rounded bg-red-600 font-medium">Delete Label</button>
 
                     </div>
                 }
