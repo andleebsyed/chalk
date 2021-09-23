@@ -41,6 +41,19 @@
   display: none;
 }
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  /* background: #e5e7eb;
+  background-opacity: 0.5; */
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #9ca3af;
+  border-radius: 20px;
 }

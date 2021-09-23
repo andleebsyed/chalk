@@ -36,7 +36,7 @@ export function ShowNote({ note }) {
 
                 </section>
                 {note.image && note.image !== "undefined" && <img src={note.image} />}
-                <input type="text" placeholder="Take a note..." className={`h-[57px] p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} value={note?.content} readOnly
+                <textarea type="text" placeholder="Take a note..." className={`scrollbar h-[57px] p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} value={note?.content} readOnly
                     required />
                 <div className="flex flex-wrap">
                     {note?.labels?.map(chosenLabel => <div key={chosenLabel?._id} className="text-sm p-1 pt-1 flex rounded-lg m-1 bg-selected-navitem-light dark:bg-selected-navitem-dark">

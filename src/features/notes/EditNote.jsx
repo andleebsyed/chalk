@@ -104,7 +104,7 @@ export function EditNote() {
 
                     <section className="flex mb-1">
                         <input type="text" placeholder="Title" className={`h-[36px] w-full p-2 outline-none bg-white dark:bg-dark-1`} value={noteData.title} onChange={(e) => setNoteData({ ...noteData, title: e.target.value })} required />
-                        <button className="ml-auto" onClick={(e) => { e.preventDefault(); setNoteData({ ...noteData, pinned: !noteData.pinned }) }}>
+                        <button type="button" className="ml-auto" onClick={(e) => { e.preventDefault(); setNoteData({ ...noteData, pinned: !noteData.pinned }) }}>
                             {noteData.pinned ?
                                 <RiPushpin2Fill size={28} />
                                 :
@@ -112,7 +112,7 @@ export function EditNote() {
                             }
                         </button>
                     </section>
-                    <input type="text" placeholder="Take a note..." className={`h-[57px] p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} value={noteData.content} onChange={(e) => setNoteData({ ...noteData, content: e.target.value })} required />
+                    <textarea placeholder="Take a note..." className={`scrollbar h-full  p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} value={noteData.content} onChange={(e) => setNoteData({ ...noteData, content: e.target.value })} required />
 
                     <div className={`${imageData.showStatus} `}>
                         <button className="relative top-11 left-1 bg-red-600 bg-opacity-40 rounded p-2 " onClick={(e) => { e.preventDefault(); setImageData({ url: null, showStatus: "hidden" }); setNoteData({ ...noteData, image: null }) }}> <GiCancel size={26} /></button>

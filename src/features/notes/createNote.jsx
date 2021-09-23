@@ -80,7 +80,7 @@ export function CreateNote() {
             <form ref={formRef} className="flex flex-col p-2 outline-none  " onSubmit={(e) => submitNote(e)}>
                 <section className="flex mb-1">
                     <input type="text" placeholder="Title" className={`h-[36px] w-full p-2 outline-none bg-white dark:bg-dark-1`} onChange={(e) => setNoteData({ ...noteData, title: e.target.value })} required />
-                    <button className="ml-auto" onClick={(e) => { e.preventDefault(); setPinned(!pinned) }}>
+                    <button type="button" className="ml-auto" onClick={() => setPinned(!pinned)}>
                         {pinned ?
                             <RiPushpin2Fill size={28} />
                             :
@@ -88,7 +88,7 @@ export function CreateNote() {
                         }
                     </button>
                 </section>
-                <input type="text" placeholder="Take a note..." className={`h-[57px] p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} onChange={(e) => setNoteData({ ...noteData, content: e.target.value })} required />
+                <textarea type="text" placeholder="Take a note..." className={`scrollbar  p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} onChange={(e) => setNoteData({ ...noteData, content: e.target.value })} required />
 
 
                 <div className={`${imageData.showStatus} `}>
