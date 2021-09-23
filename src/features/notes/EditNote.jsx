@@ -112,7 +112,7 @@ export function EditNote() {
                             }
                         </button>
                     </section>
-                    <textarea placeholder="Take a note..." className={`scrollbar h-full  p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} value={noteData.content} onChange={(e) => setNoteData({ ...noteData, content: e.target.value })} required />
+                    <textarea placeholder="Take a note..." className={`scrollbar leading-[60px]  p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} value={noteData.content} onChange={(e) => setNoteData({ ...noteData, content: e.target.value })} required />
 
                     <div className={`${imageData.showStatus} `}>
                         <button className="relative top-11 left-1 bg-red-600 bg-opacity-40 rounded p-2 " onClick={(e) => { e.preventDefault(); setImageData({ url: null, showStatus: "hidden" }); setNoteData({ ...noteData, image: null }) }}> <GiCancel size={26} /></button>

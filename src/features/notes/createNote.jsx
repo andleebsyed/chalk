@@ -88,7 +88,7 @@ export function CreateNote() {
                         }
                     </button>
                 </section>
-                <textarea type="text" placeholder="Take a note..." className={`scrollbar  p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} onChange={(e) => setNoteData({ ...noteData, content: e.target.value })} required />
+                <textarea type="text" placeholder="Take a note..." className={`scrollbar leading-[40px] p-2 outline-none  bg-white dark:bg-dark-1 dark:text-white `} onChange={(e) => setNoteData({ ...noteData, content: e.target.value })} required />
 
 
                 <div className={`${imageData.showStatus} `}>
