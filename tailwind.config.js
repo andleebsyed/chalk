@@ -21,6 +21,7 @@ module.exports = {
         blue: "#1d4ed8",
         "shadow-color": "#6b7280",
         "off-white": "#f6f6f6",
+        "success-green": "#10B981",
       },
       animation: {
         "spin-slow": "spin 3s linear infinite",

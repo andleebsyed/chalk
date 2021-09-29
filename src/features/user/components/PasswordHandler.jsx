@@ -57,7 +57,7 @@ export function PasswordHandler() {
                 <p className={`${passwordsError.status} text-red-600 font-bold`}>{passwordsError.message}</p>
                 {error ?
                     <p className="text-red-600 font-bold">{error}</p> :
-                    <p className="text-blue font-bold">{updatePasswordStatus}</p>
+                    <p className="text-success-green font-bold">{updatePasswordStatus}</p>
                 }
 
                 <div className=" ">

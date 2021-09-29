@@ -24,7 +24,7 @@ export function ProfileData({ account }) {
 
                 <div className="border-4 p-2 theme-color-border flex flex-col justify-between m-4 sm:m-8 breakpoint-acc:m-4  breakpoint-acc:w-[40vw] rounded  breakpoint-acc:my-8">
                     <p className="font-bold text-left text-lg">Account</p>
-                    {updateAccountStatus !== "idle" && <p className="font-bold text-blue ">{updateAccountStatus}</p>}
+                    {updateAccountStatus !== "idle" && <p className="font-bold text-success-green ">{updateAccountStatus}</p>}
                     {<p className="font-bold text-red-600">{updateAccountError}</p>}
                     <section className="flex flex-col ">
                         <label className="text-left font-bold" htmlFor="name">

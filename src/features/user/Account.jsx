@@ -27,7 +27,7 @@ export function Account() {
                 <SpinLoader />
             </div> :
             <div>
-                <h1 className="text-blue text-2xl font-bold m-2">{account.name}</h1>
+                <h1 className="text-palette-yellow text-2xl font-bold m-2">{account.name}</h1>
                 <div className="flex flex-col breakpoint-acc:flex-row justify-around  ">
                     <ProfileData account={account} />
                     <PasswordHandler />

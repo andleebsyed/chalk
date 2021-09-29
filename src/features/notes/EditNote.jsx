@@ -164,7 +164,7 @@ export function EditNote() {
 
                     </section>
                     <div className="flex">
-                        {updateNoteStatus === "success" && <p className="text-blue font-bold">Updated successfully</p>}
+                        {updateNoteStatus === "success" && <p className="text-success-green font-bold">Updated successfully</p>}
 
                         {updateNoteStatus === "pending" && <p className="text-palette-yellow font-bold">Updating your note...</p>}
                         <input type="submit" value="Edit Note" className="ml-auto bg-selected-navitem-light dark:bg-selected-navitem-dark rounded p-2 cursor-pointer" />

@@ -145,7 +145,7 @@ export function CreateNote() {
                 </section>
 
                 <div className="flex">
-                    {status === "success" && <p className="text-blue font-bold">Note saved successfully</p>}
+                    {status === "success" && <p className="text-success-green font-bold">Note saved successfully</p>}
 
                     {status === "pending" && <p className="text-palette-yellow font-bold">Please wait while we save your note...</p>}
                     <input type="submit" value="Add Note" className="ml-auto bg-selected-navitem-light dark:bg-selected-navitem-dark rounded p-2 cursor-pointer" />
