@@ -17,8 +17,7 @@
 .nav-item {
   cursor: pointer;
   margin: 10px;
+  margin-left: 0px;
   padding: 1rem;
-  padding-left: 4rem;
-  padding-right: 4rem;
-  border-radius: 10rem;
+  border-radius: 0px 10rem 10rem 0px;
 }

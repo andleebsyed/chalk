@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "../Navbar/Navbar.css";
 import { FiMenu } from "react-icons/fi";
+import { AiOutlineHome } from 'react-icons/ai'
 import { ImCancelCircle } from "react-icons/im";
+import { VscAccount } from 'react-icons/vsc'
+import { BiLogOut } from 'react-icons/bi'
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeAuth } from "../../../features/auth/authSlice";
@@ -31,7 +34,7 @@ export function Navbar() {
         className={`overflow-y-auto nav-menu bg-white dark:bg-dark-1 border-r border-selected-navitem-light dark:border-selected-navitem-dark fixed no-scrollbar ${navbar ? "active" : ""}`}
       >
         <ul
-          className="w-full flex flex-col items-center"
+          className="w-full flex flex-col "
           onClick={() => setNavbar(!navbar)}
         >
           <li className="rounded-full  hover:bg-navitem-hover dark:hover:bg-opacity-5 self-end  m-2">
@@ -45,15 +48,19 @@ export function Navbar() {
             className="nav-item nav-item-theme"
             activeClassName="selected"
           >
-            <li>Home</li>
+            <li className="flex">
+              <AiOutlineHome size={22} />
+              <p className="ml-2">Home</p>
+            </li>
+
           </NavLink>
           {labels?.map(label =>
             <NavLink to={`/label/${label._id}`} key={label._id}
-              className="nav-item nav-item-theme"
+              className="nav-item nav-item-theme  "
               activeClassName="label-selected">
-              <div className="flex items-start">
+              <div className="flex  ">
                 < MdLabelOutline size={22} />
-                <p className="ml-2 text-center">{label.labelName}</p>
+                <p className="  truncate ml-2 text-center">{label.labelName}</p>
               </div>
 
 
@@ -62,10 +69,18 @@ export function Navbar() {
           )}
           <NavLink to="/account" className="nav-item nav-item-theme"
             activeClassName="selected">
-            <li>Account</li>
+            <li className="flex">
+              <VscAccount size={22} />
+              <p className="ml-2">Account</p>
+            </li>
           </NavLink>
 
-          {authorized && <li className="nav-item nav-item-theme" onClick={() => logoutHandler()}>Logout</li>}
+          {authorized && <li className="nav-item nav-item-theme flex" onClick={() => logoutHandler()}>
+            <BiLogOut size={22} />
+            <p className="ml-2">
+              Logout
+            </p>
+          </li>}
         </ul>
       </nav>
     </div>
