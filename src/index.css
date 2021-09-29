@@ -49,11 +49,15 @@
 }
 
 .scrollbar::-webkit-scrollbar-track {
-  /* background: #e5e7eb;
-  background-opacity: 0.5; */
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
   background-color: #9ca3af;
   border-radius: 20px;
+}
+.note-focus {
+  transition: transform 0.2s;
+}
+.note-focus:hover {
+  transform: scale(1.01);
 }
