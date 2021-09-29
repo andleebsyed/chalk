@@ -9,11 +9,13 @@ import { ThemeToggle } from "./common/components/ThemeToggle";
 import { setAuthSetup } from "./features/auth/authSlice";
 import { Login } from "./features/auth/login/Login";
 import { Signup } from "./features/auth/signup/Signup";
+import { disableNavbar } from "./features/notes/notesSlice";
 import { SingleLabelNotes } from "./features/notes/SingleLabelNotes";
 import { Account } from "./features/user/Account";
 import { setupAuthExceptionHandler, setUpAuthHeaderForServiceCalls } from "./services/users";
 const App = () => {
   const { authorized } = useSelector(state => state.auth)
+  const { navbar } = useSelector(state => state.notes)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   useEffect(() => {
@@ -23,7 +25,9 @@ const App = () => {
   }, [dispatch, navigate]);
 
   return (
-    <main className="text-black dark:text-white">
+    <main className="text-black dark:text-white min-h-screen" onClick={() => {
+      if (navbar) dispatch(disableNavbar())
+    }}>
       {!authorized ? (
         <div className="p-2  flex min-w-screen h-9">
           <div className="ml-auto">

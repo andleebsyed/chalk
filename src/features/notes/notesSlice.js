@@ -130,6 +130,7 @@ export const notesSlice = createSlice({
     deleteNoteStatus: "idle",
     searchTitle: "",
     updateNoteError: null,
+    navbar: false,
   },
   reducers: {
     enableEditModal: (state, action) => {
@@ -167,6 +168,16 @@ export const notesSlice = createSlice({
       state.allNotes = state.allNotesBackup.filter((notes) =>
         notes.title.toLowerCase().includes(searchTitle.toLowerCase())
       );
+    },
+    enableNavbar: (state) => {
+      state.navbar = true;
+    },
+    disableNavbar: (state) => {
+      state.navbar = false;
+    },
+    navbarStatus: (state, action) => {
+      const { navbar } = action.payload;
+      state.navbar = !navbar;
     },
     resetNotes: (state) => {
       state.notesFetchstatus = "idle";
@@ -324,5 +335,8 @@ export const {
   setUpLabelsInEditComponent,
   searchNotes,
   resetNotes,
+  enableNavbar,
+  disableNavbar,
+  navbarStatus,
 } = notesSlice.actions;
 export default notesSlice.reducer;

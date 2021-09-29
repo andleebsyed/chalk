@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../Navbar/Navbar.css";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineHome } from 'react-icons/ai'
@@ -9,12 +9,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { removeAuth } from "../../../features/auth/authSlice";
 import { MdLabelOutline } from "react-icons/md";
-import { resetNotes } from "../../../features/notes/notesSlice";
+import { disableNavbar, navbarStatus, resetNotes } from "../../../features/notes/notesSlice";
 import { resetUser } from "../../../features/user/userSlice";
 export function Navbar() {
-  const [navbar, setNavbar] = useState(false);
   const { authorized } = useSelector(state => state.auth)
-  const { labels } = useSelector(state => state.notes)
+  const { labels, navbar } = useSelector(state => state.notes)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   async function logoutHandler() {
@@ -27,7 +26,7 @@ export function Navbar() {
   }
   return (
     <div className="self-center mt-2">
-      <button onClick={() => setNavbar(!navbar)}>
+      <button onClick={() => dispatch(navbarStatus({ navbar }))}>
         <FiMenu size={28} />
       </button>
       <nav
@@ -35,11 +34,11 @@ export function Navbar() {
       >
         <ul
           className="w-full flex flex-col "
-          onClick={() => setNavbar(!navbar)}
+        // onClick={() => dispatch(navbarStatus({ navbar }))}
         >
           <li className="rounded-full  hover:bg-navitem-hover dark:hover:bg-opacity-5 self-end  m-2">
             {" "}
-            <button onClick={() => setNavbar(!navbar)} className="m-2 p-2 ">
+            <button onClick={() => dispatch(disableNavbar())} className="m-2 p-2 ">
               <ImCancelCircle size={18} />
             </button>
           </li>
@@ -58,9 +57,9 @@ export function Navbar() {
             <NavLink to={`/label/${label._id}`} key={label._id}
               className="nav-item nav-item-theme  "
               activeClassName="label-selected">
-              <div className="flex  ">
+              <div className="flex">
                 < MdLabelOutline size={22} />
-                <p className="  truncate ml-2 text-center">{label.labelName}</p>
+                <p className="truncate ml-2">{label.labelName}</p>
               </div>
 
 
