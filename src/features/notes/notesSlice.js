@@ -179,6 +179,9 @@ export const notesSlice = createSlice({
       const { navbar } = action.payload;
       state.navbar = !navbar;
     },
+    resetStatus: (state) => {
+      state.status = "idle";
+    },
     resetNotes: (state) => {
       state.notesFetchstatus = "idle";
       state.allNotes = null;
@@ -339,5 +342,6 @@ export const {
   enableNavbar,
   disableNavbar,
   navbarStatus,
+  resetStatus,
 } = notesSlice.actions;
 export default notesSlice.reducer;

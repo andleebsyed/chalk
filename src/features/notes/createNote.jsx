@@ -5,7 +5,7 @@ import { BiImageAlt } from 'react-icons/bi'
 import { RiPushpin2Fill } from 'react-icons/ri'
 import { LabelModal } from "../../common/components/LabelModal/LabelModal"
 import { useDispatch, useSelector } from "react-redux"
-import { addNote, removeFromChosenLabels, resetChosenLabels } from "./notesSlice"
+import { addNote, removeFromChosenLabels, resetChosenLabels, resetStatus } from "./notesSlice"
 import { GiCancel } from "react-icons/gi"
 // export function ColorPallate() {
 //     const noteColors = ["white", "palette-yellow", "palette-blue", "palette-red", "palette-purple"]
@@ -57,6 +57,11 @@ export function CreateNote() {
             setImage(null)
             setPinned(false)
             dispatch(resetChosenLabels())
+        }
+    }, [status])
+    useEffect(() => {
+        if (status === "success") {
+            setTimeout(() => dispatch(resetStatus()), 3000)
         }
     }, [status])
     function fileUploadHandler(e) {
