@@ -211,6 +211,7 @@ export const notesSlice = createSlice({
       state.labels = state.labels
         ?.slice()
         .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+      state.chosenLabels.push(action.payload.newLabel);
     },
     [addLabel.rejected]: (state, action) => {
       state.addLabelStatus = "";
