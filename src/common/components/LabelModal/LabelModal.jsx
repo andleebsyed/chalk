@@ -73,7 +73,7 @@ export function LabelModal() {
                                 onChange={(e) => checkboxHandler({ checked: e.target.checked, clickedLabel: label })}
 
                             />
-                            <label>{label.labelName}</label>
+                            <label className="ml-2">{label.labelName}</label>
                         </div>
                     ))}
                 </div>

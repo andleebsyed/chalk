@@ -22,7 +22,7 @@ export function Header() {
           </p>
         </Link>
       </div>
-      <div className="self-center rounded-lg flex p-1  bg-white border dark:border-opacity-0 border-black">
+      <div className="self-center rounded-lg flex p-1 items-center bg-white border dark:border-opacity-0 border-black">
         <div>
           <FiSearch size={28} className=" hidden sm:inline mr-2 dark:text-black  " />
         </div>
